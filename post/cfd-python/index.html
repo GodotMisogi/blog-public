@@ -10,7 +10,8 @@
 <meta property='og:url' content='https://godot-bloggy.xyz/post/cfd-python/'>
 <meta property='og:site_name' content='｢ALL FICTION｣'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2018-05-05T16:54:58&#43;05:30'/><meta property='article:modified_time' content='2018-05-05T16:54:58&#43;05:30'/><meta property='og:image' content='https://godot-bloggy.xyz/post/cfd-python/images/2DPoissonSurfStud.svg' />
-<meta name="twitter:site" content="GodotMisogi"><meta name="twitter:title" content="Computational Fluid Dynamics — CFDPython">
+<meta name="twitter:site" content="@GodotMisogi">
+    <meta name="twitter:creator" content="@GodotMisogi"><meta name="twitter:title" content="Computational Fluid Dynamics — CFDPython">
 <meta name="twitter:description" content="I have problems with fluids and snakes."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://godot-bloggy.xyz/post/cfd-python/images/2DPoissonSurfStud.svg' />
     <link rel="shortcut icon" href="/punpun1.jpg" />
@@ -18,16 +19,20 @@
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	ga('create', 'UA-89998292-1', 'auto');
 	
 	ga('send', 'pageview');
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
     </head>
-    <body class="">
+    <body class="
+    article-page 
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -44,13 +49,19 @@ if (!doNotTrack) {
         if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
 
-            document.body.dataset.scheme = 'dark';
+            document.documentElement.dataset.scheme = 'dark';
         } else {
-            document.body.dataset.scheme = 'light';
+            document.documentElement.dataset.scheme = 'light';
         }
     })();
-</script><div class="container main-container flex on-phone--column compact article-page with-toolbar">
-            <aside class="sidebar left-sidebar sticky">
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column compact
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -59,6 +70,7 @@ if (!doNotTrack) {
 
     <header class="site-info">
         
+            
             <figure class="site-avatar">
                 
                     
@@ -74,6 +86,7 @@ if (!doNotTrack) {
                     <span class="emoji">🎓</span>
                 
             </figure>
+            
         
         <h1 class="site-name"><a href="https://godot-bloggy.xyz/">｢ALL FICTION｣</a></h1>
         <h2 class="site-description">Arjit Seth</h2>
@@ -85,7 +98,7 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='/'>
+            <a href='/' >
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -104,7 +117,7 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='/about'>
+            <a href='/about' >
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -122,7 +135,7 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='/project'>
+            <a href='/project' >
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -138,7 +151,7 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='/music'>
+            <a href='/music' >
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-headphones" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -154,7 +167,7 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='/cv'>
+            <a href='/cv' >
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -172,7 +185,7 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='https://github.com/GodotMisogi'>
+            <a href='https://github.com/GodotMisogi' >
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -208,20 +221,8 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-            <main class="main full-width">
-    <div id="article-toolbar">
-        <a href="https://godot-bloggy.xyz/" class="back-home">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
-</svg>
-
-
-
-            <span>Back</span>
-        </a>
-    </div>
-
+    
+<main class="main full-width">
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
@@ -260,17 +261,29 @@ if (!doNotTrack) {
     <h3 class="article-subtitle">
         I have problems with fluids and snakes.
     </h3>
+    
+
+    
     <footer class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
 </svg>
+                <time class="article-time--published">May 05, 2018</time>
+            </div>
+        
 
-
-
-        <time class="article-time--published">May 05, 2018</time>
-    </footer></div>
+        
+    </footer>
+    
+</div>
 </header>
 
     <section class="article-content">
@@ -329,8 +342,30 @@ if (!doNotTrack) {
 </code></pre></div><pre><code>[1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 1. 1. 1.
  1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
 </code></pre>
-<p><img src="/post/cfd-python/images/1DConvectionInitProf.svg" alt=""  />
-<img src="/post/cfd-python/images/1DConvectionProf.svg" alt=""  /></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/1DConvectionInitProf.svg" >
+		<img src="/post/cfd-python/images/1DConvectionInitProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure>
+<figure 
+	>
+	<a href="/post/cfd-python/images/1DConvectionProf.svg" >
+		<img src="/post/cfd-python/images/1DConvectionProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student">Student</h4>
 <p>No time to lose. (Down with mutability!)</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">linearConvection</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
@@ -356,7 +391,18 @@ if (!doNotTrack) {
     <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">linearConvection</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
-</code></pre></div><p><img src="/post/cfd-python/images/1DConvectionStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/1DConvectionStud.svg" >
+		<img src="/post/cfd-python/images/1DConvectionStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-2-1d-nonlinear-convection"><strong>Step 2: 1D Nonlinear Convection</strong></h3>
 <h4 id="professor-1">Professor</h4>
 <p>Partial differential equation:</p>
@@ -384,7 +430,18 @@ if (!doNotTrack) {
 
 <span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nx</span><span class="p">),</span> <span class="n">u</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/1DNLConvectionProf.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/1DNLConvectionProf.svg" >
+		<img src="/post/cfd-python/images/1DNLConvectionProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-1">Student</h4>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">nonLinearConvection</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
     <span class="n">dx</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">/</span><span class="n">nx</span>
@@ -412,7 +469,18 @@ if (!doNotTrack) {
 <span class="n">pyplot</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocity (m/s)&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/1DNLConvectionStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/1DNLConvectionStud.svg" >
+		<img src="/post/cfd-python/images/1DNLConvectionStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="investigation-cfl-condition"><strong>Investigation: CFL Condition</strong></h3>
 <h4 id="professor-2">Professor</h4>
 <p>Courant number:</p>
@@ -439,7 +507,18 @@ if (!doNotTrack) {
     <span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nx</span><span class="p">),</span> <span class="n">u</span><span class="p">)</span>
 
 <span class="n">linearconv</span><span class="p">(</span><span class="mi">501</span><span class="p">)</span>
-</code></pre></div><p><img src="/post/cfd-python/images/1DCFLProf.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/1DCFLProf.svg" >
+		<img src="/post/cfd-python/images/1DCFLProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-2">Student</h4>
 <p>This function allows you to input the simulation time and time-step size and provides warnings if the Courant Number is greater than 1 with recommendations.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">linearConvectionCFL</span><span class="p">(</span><span class="n">mesh_size</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
@@ -475,7 +554,18 @@ if (!doNotTrack) {
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div><pre><code>Warning: CFL Number greater than 1. Solver will probably produce incorrect results. Maximum time-step should be 0.02.
 </code></pre>
-<p><img src="/post/cfd-python/images/1DCFLStud.svg" alt=""  /></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/1DCFLStud.svg" >
+		<img src="/post/cfd-python/images/1DCFLStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-3-diffusion-equation-in-1d"><strong>Step 3: Diffusion Equation in 1D</strong></h3>
 <h4 id="professor-3">Professor</h4>
 <p>Partial differential equation:</p>
@@ -509,7 +599,18 @@ if (!doNotTrack) {
 </code></pre></div><pre><code>[1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 1. 1. 1.
  1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
 </code></pre>
-<p><img src="/post/cfd-python/images/1DDiffusionProf.svg" alt=""  /></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/1DDiffusionProf.svg" >
+		<img src="/post/cfd-python/images/1DDiffusionProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-3">Student</h4>
 <p><strong>Analytical Solution of the Diffusion Equation using a Fourier Transform:</strong></p>
 <p>Take the spatial Fourier transform $\mathcal F_x$ of the equation with an initial value problem:</p>
@@ -573,7 +674,18 @@ $$</p>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocity (m/s)&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/1DDiffusionStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/1DDiffusionStud.svg" >
+		<img src="/post/cfd-python/images/1DDiffusionStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-4-burgers-equation"><strong>Step 4: Burgers' Equation</strong></h3>
 <h3 id="professor-4">Professor</h3>
 <p>Partial differential equation:</p>
@@ -627,8 +739,30 @@ $$</p>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/1DBurgerInitProf.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/1DBurgerProf.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/1DBurgerInitProf.svg" >
+		<img src="/post/cfd-python/images/1DBurgerInitProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/1DBurgerProf.svg" >
+		<img src="/post/cfd-python/images/1DBurgerProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-4">Student</h4>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">burgersEquation</span><span class="p">(</span><span class="n">mesh_size</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
     <span class="n">dx</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">mesh_size</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -666,7 +800,18 @@ $$</p>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/1DBurgerStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/1DBurgerStud.svg" >
+		<img src="/post/cfd-python/images/1DBurgerStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="aside-kardarparisizhang-equation"><strong>Aside: Kardar–Parisi–Zhang equation</strong></h3>
 <h4 id="student-5">Student</h4>
 <p>The KPZ equation is a generalisation of Burgers' equation to multiple dimensions. Write Burgers' equation in the form:</p>
@@ -748,8 +893,30 @@ $$</p>
 </code></pre></div><pre><code>Array operations took 0.009733499959111214 seconds
 For loops took 4.577128199976869 seconds
 </code></pre>
-<p><img src="/post/cfd-python/images/2DLinearConvectionInitProf.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DLinearConvectionProf.svg" alt=""  /></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DLinearConvectionInitProf.svg" >
+		<img src="/post/cfd-python/images/2DLinearConvectionInitProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DLinearConvectionProf.svg" >
+		<img src="/post/cfd-python/images/2DLinearConvectionProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-6">Student</h4>
 <p>This function takes the mesh size in each direction as separate inputs and also the required simulation time. It minimises the time-step based on the smaller grid distance between <code>x</code> and <code>y</code> for accuracy (at the cost of speed!).</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">linearConvection2D</span><span class="p">(</span><span class="n">mesh_size_x</span><span class="p">,</span> <span class="n">mesh_size_y</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
@@ -790,8 +957,30 @@ For loops took 4.577128199976869 seconds
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">)</span>
 <span class="n">surf2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">vel</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DLinearConvectionInitStud.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DLinearConvectionStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DLinearConvectionInitStud.svg" >
+		<img src="/post/cfd-python/images/2DLinearConvectionInitStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DLinearConvectionStud.svg" >
+		<img src="/post/cfd-python/images/2DLinearConvectionStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <p>It&rsquo;s interesting how the solution appears to be &ldquo;diffusing&rdquo;. This is due to numerical noise from the algorithm.</p>
 <h3 id="step-6-2d-convection"><strong>Step 6: 2D Convection</strong></h3>
 <h4 id="professor-6">Professor</h4>
@@ -859,8 +1048,30 @@ For loops took 4.577128199976869 seconds
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DNLConvectionInitProf.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DNLConvectionProf.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DNLConvectionInitProf.svg" >
+		<img src="/post/cfd-python/images/2DNLConvectionInitProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DNLConvectionProf.svg" >
+		<img src="/post/cfd-python/images/2DNLConvectionProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-7">Student</h4>
 <p>These PDEs can be written concisely in tensor notation using Einstein&rsquo;s summation convention:</p>
 <p>$$ \partial_t V^{\alpha} + cV^{\mu}\partial_{\mu}V^{\alpha} = 0 $$</p>
@@ -921,8 +1132,30 @@ For loops took 4.577128199976869 seconds
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DNLConvectionInitStud.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DNLConvectionStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DNLConvectionInitStud.svg" >
+		<img src="/post/cfd-python/images/2DNLConvectionInitStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DNLConvectionStud.svg" >
+		<img src="/post/cfd-python/images/2DNLConvectionStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-7-2d-diffusion"><strong>Step 7: 2D Diffusion</strong></h3>
 <h4 id="professor-7">Professor</h4>
 <p>Partial differential equation:</p>
@@ -983,8 +1216,30 @@ For loops took 4.577128199976869 seconds
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
     
 <span class="n">diffuse</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DDiffusionInitProf.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DDiffusionProf.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DDiffusionInitProf.svg" >
+		<img src="/post/cfd-python/images/2DDiffusionInitProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DDiffusionProf.svg" >
+		<img src="/post/cfd-python/images/2DDiffusionProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-8">Student</h4>
 <p>The current setup is also symmetric, so computing the second component of the velocity is redundant, since $u = v$ and they&rsquo;re decoupled. I also prefer the rainbow colour map.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">diffusion2D</span><span class="p">(</span><span class="n">mesh_size_x</span><span class="p">,</span> <span class="n">mesh_size_y</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
@@ -1036,8 +1291,30 @@ For loops took 4.577128199976869 seconds
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DDiffusionInitStud.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DDiffusionStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DDiffusionInitStud.svg" >
+		<img src="/post/cfd-python/images/2DDiffusionInitStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DDiffusionStud.svg" >
+		<img src="/post/cfd-python/images/2DDiffusionStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-8-burgers-equation-in-2d"><strong>Step 8: Burgers' Equation in 2D</strong></h3>
 <h4 id="professor-8">Professor</h4>
 <p>Partial differential equations:</p>
@@ -1128,8 +1405,30 @@ $$</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DBurgerInitProf.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DBurgerProf.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DBurgerInitProf.svg" >
+		<img src="/post/cfd-python/images/2DBurgerInitProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DBurgerProf.svg" >
+		<img src="/post/cfd-python/images/2DBurgerProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-9">Student</h4>
 <p>Contour plots look better than surface plots.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">burgers2D</span><span class="p">(</span><span class="n">mesh_size_x</span><span class="p">,</span> <span class="n">mesh_size_y</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
@@ -1201,8 +1500,30 @@ $$</p>
 <span class="n">cbar</span> <span class="o">=</span> <span class="n">pyplot</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$u\_{\mathrm{final}}$&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DBurgerInitStud.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DBurgerStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DBurgerInitStud.svg" >
+		<img src="/post/cfd-python/images/2DBurgerInitStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DBurgerStud.svg" >
+		<img src="/post/cfd-python/images/2DBurgerStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-9-2d-laplace-equation"><strong>Step 9: 2D Laplace Equation</strong></h3>
 <h4 id="professor-9">Professor</h4>
 <p>Partial differential equation:</p>
@@ -1284,8 +1605,30 @@ $$</p>
                     
 <span class="n">contour</span> <span class="o">=</span> <span class="n">plotContour2D</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Student&#39;</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="s1">&#39;$p$&#39;</span><span class="p">)</span>
 <span class="n">surf</span> <span class="o">=</span> <span class="n">plotSurface2D</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="s1">&#39;$p$&#39;</span><span class="p">)</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DLaplaceContStud.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DLaplaceSurfStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DLaplaceContStud.svg" >
+		<img src="/post/cfd-python/images/2DLaplaceContStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DLaplaceSurfStud.svg" >
+		<img src="/post/cfd-python/images/2DLaplaceSurfStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-10-2d-poisson-equation"><strong>Step 10: 2D Poisson Equation</strong></h3>
 <h4 id="professor-10">Professor</h4>
 <p>Partial differential equation:</p>
@@ -1349,7 +1692,18 @@ $$</p>
     
 <span class="n">surf</span> <span class="o">=</span> <span class="n">plot2D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Professor&#39;</span><span class="p">)</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DPoissonProf.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DPoissonProf.svg" >
+		<img src="/post/cfd-python/images/2DPoissonProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-11">Student</h4>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">poisson2D</span><span class="p">(</span><span class="n">mesh_size_x</span><span class="p">,</span> <span class="n">mesh_size_y</span><span class="p">,</span> <span class="nb">xrange</span><span class="p">,</span> <span class="n">yrange</span><span class="p">,</span> <span class="n">residual</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">500</span><span class="p">):</span>
     <span class="n">dx</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">xrange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="nb">xrange</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">mesh_size_x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
@@ -1388,8 +1742,30 @@ $$</p>
                     
 <span class="n">contour</span> <span class="o">=</span> <span class="n">plotContour2D</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Student&#39;</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="s1">&#39;$p$&#39;</span><span class="p">)</span>
 <span class="n">surf</span> <span class="o">=</span> <span class="n">plotSurface2D</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="s1">&#39;$p$&#39;</span><span class="p">)</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DPoissonContStud.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DPoissonSurfStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DPoissonContStud.svg" >
+		<img src="/post/cfd-python/images/2DPoissonContStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DPoissonSurfStud.svg" >
+		<img src="/post/cfd-python/images/2DPoissonSurfStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-11-cavity-flow-with-navier-stokes"><strong>Step 11: Cavity Flow with Navier-Stokes</strong></h3>
 <h4 id="professor-11">Professor</h4>
 <p>Partial differential equations:</p>
@@ -1541,8 +1917,30 @@ $$</p>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">);</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DCavityProf.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DCavityStreamProf.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DCavityProf.svg" >
+		<img src="/post/cfd-python/images/2DCavityProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DCavityStreamProf.svg" >
+		<img src="/post/cfd-python/images/2DCavityStreamProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-12">Student</h4>
 <p>No noticeable improvements to be made, except the usual boundary condition computation out of the loop and recording time-evolution.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">pressureSource</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
@@ -1641,8 +2039,30 @@ $$</p>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DCavityStud.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DCavityStreamStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DCavityStud.svg" >
+		<img src="/post/cfd-python/images/2DCavityStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DCavityStreamStud.svg" >
+		<img src="/post/cfd-python/images/2DCavityStreamStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h3 id="step-12-channel-flow-with-navier-stokes">Step 12: Channel Flow with Navier-Stokes</h3>
 <h4 id="professor-12">Professor</h4>
 <p>Partial differential equations:</p>
@@ -1862,8 +2282,30 @@ $$</p>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
 </code></pre></div><pre><code>499
 </code></pre>
-<p><img src="/post/cfd-python/images/2DChannelInitProf.svg" alt=""  /></p>
-<p><img src="/post/cfd-python/images/2DChannelProf.svg" alt=""  /></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DChannelInitProf.svg" >
+		<img src="/post/cfd-python/images/2DChannelInitProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/post/cfd-python/images/2DChannelProf.svg" >
+		<img src="/post/cfd-python/images/2DChannelProf.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <h4 id="student-13">Student</h4>
 <p>Most of the cavity flow code can be reused here, with some changes for the boundary conditions and the source term.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">pressureSource</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
@@ -1994,7 +2436,18 @@ $$</p>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">X</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">],</span> <span class="n">Y</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]))</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Student&#39;</span><span class="p">)</span>
-</code></pre></div><p><img src="/post/cfd-python/images/2DChannelStud.svg" alt=""  /></p>
+</code></pre></div><p><figure 
+	>
+	<a href="/post/cfd-python/images/2DChannelStud.svg" >
+		<img src="/post/cfd-python/images/2DChannelStud.svg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <p>I&rsquo;m cured, let&rsquo;s celebrate! 🍺</p>
 <p><code>*hic*</code> I&rsquo;m singin' in the rain. <code>*hic*</code></p>
 <p><code>*hic*</code> Just singin' in the rain. <code>*hic*</code></p>
@@ -2023,16 +2476,17 @@ $$</p>
     </section>
     </footer>
 
+
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script>
@@ -2143,8 +2597,8 @@ $$</p>
     
 </aside>
 
-
-    
+     
+     
         
     <div class="disqus-container">
     <div id="disqus_thread"></div>
@@ -2201,9 +2655,12 @@ $$</p>
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
+
+
+    
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
     
@@ -2280,7 +2737,10 @@ $$</p>
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
             >
+
             </main>
+    
+
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
