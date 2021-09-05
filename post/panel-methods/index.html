@@ -343,7 +343,7 @@ $$ \nabla^2 \phi = \nabla^2\left(\Phi + \Phi_\infty\right) = 0 $$</p>
 <p>Discretise the equation for a foil, in which $N$ panels are assigned to the foil, and $N_w$ panels are assigned to the wake.</p>
 <p>Assigning each panel on the foil a constant doublet strength $\phi$, and assign all panels constant source strengths $\sigma$, giving the following:</p>
 <p>$$ \Phi_{\infty}(x,y) + \sum_{j = 1}^N \left(\frac{\sigma}{\pi}\int_{\text{panel}}\ln r \ dS\right)_j - \sum_{j = 1}^N \left(\frac{\phi}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\right)_j = \phi_p(x,y) $$</p>
-<p>Let: 
+<p>Let:
 $$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|_j, \quad A_j \equiv -\frac{1}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\bigg|_j$$</p>
 <p>For foil panels, we get the following system of equations:</p>
 <p>$$ A \phi + \vec\Phi^{*} = \vec\Phi_{\infty} - B\sigma $$</p>
@@ -366,34 +366,34 @@ $$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|_j, \quad A_j \equ
 <h2 id="real-viscous-flow">Real Viscous Flow</h2>
 <h3 id="doublet-expressions">Doublet Expressions</h3>
 <p>For viscous modelling, we deal with the first case using the wall transpiration model on the EIF. First, we express the edge velocities over the panels, which are the tangential derivatives of the exterior potential, expressed as sum of the internal potential and the potential &lsquo;jump&rsquo; across the singularity distribution: $\Phi^{*}_\text{ext} = \Phi^{*}_\text{int} - \phi$. In case 1: $\Phi^{*}_\text{int} = c \in \mathbb R$, and $\phi = \Phi_{\infty} +???$.</p>
-<p>$$ 
-\begin{aligned} 
-\vec u_e = 
-\begin{cases} 
-\vec U_s^f - \dfrac{d\phi}{ds} &amp; \text{Airfoil} \\ 
-&amp; \\ 
-\vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp; \text{Wake} 
-\end{cases} 
-\end{aligned} 
+<p>$$
+\begin{aligned}
+\vec u_e =
+\begin{cases}
+\vec U_s^f - \dfrac{d\phi}{ds} &amp; \text{Airfoil} \\
+&amp; \\
+\vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp; \text{Wake}
+\end{cases}
+\end{aligned}
 $$</p>
 <p>Substituting the solution for $\phi$ from case 1, we obtain the following matrix expression:</p>
 <p>$$
 \begin{aligned}
-\vec u_e &amp; = \vec U_s - \frac{d}{ds} 
-\begin{bmatrix} P \\ 
+\vec u_e &amp; = \vec U_s - \frac{d}{ds}
+\begin{bmatrix} P \\
 \hline A^w P + B^w
-\end{bmatrix} 
+\end{bmatrix}
 \vec\sigma
 \end{aligned}
 $$</p>
 <p>Now express the sources in terms of the mass defect $m = u_e\delta^*$:</p>
 <p>$$
 \begin{aligned}
-\sigma_j &amp; = \left(\frac{dm}{ds}\right)_j \\ 
+\sigma_j &amp; = \left(\frac{dm}{ds}\right)_j \\
 \vec u_e &amp; = \vec U_s - \frac{d}{ds}
 \begin{bmatrix}
-P \\ 
-\hline A^wP + B 
+P \\
+\hline A^wP + B
 \end{bmatrix}
 \frac{d\vec m}{ds}
 \end{aligned}
@@ -401,33 +401,33 @@ $$</p>
 <p>This gives a differential equation for $\vec u_e$.</p>
 <h3 id="difference-operators">Difference Operators</h3>
 <p>Define the following operator $\Delta^+\colon \mathbb R^n \to \mathbb R^{n-1}, n \in \mathbb N^+$ to evaluate forward differences:</p>
-<p>$$ 
-\Delta^+ \equiv 
-\begin{bmatrix} 
--1 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\ 
-0 &amp; -1 &amp; 1 &amp; \ldots &amp; 0 \\ 
-\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\ 
-0 &amp; \ldots &amp; -1 &amp; 1 &amp; 0 \\ 
-0 &amp; \ldots &amp; 0 &amp; -1 &amp; 1 
-\end{bmatrix} 
+<p>$$
+\Delta^+ \equiv
+\begin{bmatrix}
+-1 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; -1 &amp; 1 &amp; \ldots &amp; 0 \\
+\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+0 &amp; \ldots &amp; -1 &amp; 1 &amp; 0 \\
+0 &amp; \ldots &amp; 0 &amp; -1 &amp; 1
+\end{bmatrix}
 $$</p>
 <p>Difference operators can be used to generically compute $n$th order differences up to desired accuracy.</p>
 <p>The following operator $\Delta^C\colon \mathbb R^n \to \mathbb R^n$ constructs central differences with forward and backward differencing at the endpoints:</p>
 <p>$$
 \Delta^c \equiv
 \begin{bmatrix}
--1 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\ 
--1/2 &amp; 0 &amp; 1/2 &amp; \ldots &amp; 0 \\ 
-\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\ 
-0 &amp; \ldots &amp; -1/2 &amp; 0 &amp; 1/2 \\ 
+-1 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\
+-1/2 &amp; 0 &amp; 1/2 &amp; \ldots &amp; 0 \\
+\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+0 &amp; \ldots &amp; -1/2 &amp; 0 &amp; 1/2 \\
 0 &amp; \ldots &amp; 0 &amp; -1 &amp; 1
 \end{bmatrix}
 $$</p>
 <h2 id="boundary-layer-equations">Boundary Layer Equations</h2>
 <p>The boundary layer equations are obtained via the defect formulation and the thin shear approximations of the Navier-Stokes equations.</p>
-<p>$$ 
-\begin{aligned} 
-\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp; = 0 \quad (\textsf{Momentum}) \\ 
+<p>$$
+\begin{aligned}
+\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp; = 0 \quad (\textsf{Momentum}) \\
 \frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp; = 0 \quad (\textsf{Kinetic Energy})
 \end{aligned}
 $$</p>
@@ -442,8 +442,8 @@ $$</p>
 <p>The following functional dependencies are used to close the system:</p>
 <p>$$
 \begin{aligned}
-H^* &amp; = H^*(H) \\ 
-C_f &amp; = C_f(H, Re_\theta) \\ 
+H^* &amp; = H^*(H) \\
+C_f &amp; = C_f(H, Re_\theta) \\
 C_\mathcal D &amp; = C_\mathcal D(H, Re_\theta)
 \end{aligned}
 $$</p>
@@ -461,28 +461,28 @@ $$</p>
 <p>Resulting in the following discrete BL equations:</p>
 <p>$$
 \begin{aligned}
-\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^*}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp; = 0 \\ 
+\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^*}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp; = 0 \\
 \frac{\Delta H^*}{\Delta s} + H_a^*(1 - H_a)\frac{\theta_a}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - 2c_{\mathcal{D}_a} + H_a^*\frac{c_{f_a}}{2} &amp; = 0
 \end{aligned}
 $$</p>
 <h2 id="residual-equations">Residual Equations</h2>
-<p>$$ 
+<p>$$
 \begin{aligned}
-\nabla^2 \phi &amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\ 
-\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp; = 0 \\ 
+\nabla^2 \phi &amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\
+\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp; = 0 \\
 \frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp; = 0
 \end{aligned}
 $$</p>
 <h3 id="discretisation-2">Discretisation</h3>
 <p>The discretised inviscid and viscous equations form the following system of equations to be solved for $m,~\theta,~\tilde n$.</p>
 <p>$$
-\begin{aligned} 
+\begin{aligned}
 \mathbf u_e - \mathbf U_s + \frac{d}{ds}
-\begin{bmatrix} 
-P \\ 
-\hline A^wP + B 
-\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^*)}{\Delta s} &amp; = \mathcal R_1(\mathbf m) \\ 
-\frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\ 
+\begin{bmatrix}
+P \\
+\hline A^wP + B
+\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^*)}{\Delta s} &amp; = \mathcal R_1(\mathbf m) \\
+\frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\
 \frac{\Delta H^*}{H^*_a} + \left(1 - H\right)\frac{\Delta u_e}{u_{e}} + \left(\frac{c_{f}}{2} - \frac{2C_{\mathcal D}}{H^*} \right) \frac{\Delta s}{\theta} &amp; = \mathcal R_3(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
 \end{aligned}
 $$</p>

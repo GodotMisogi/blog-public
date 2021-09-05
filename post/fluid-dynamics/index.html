@@ -302,13 +302,13 @@ if (!doNotTrack) {
 <p>$$ \frac{DN}{Dt} = \iiint_{\mathcal V} \frac{\partial \eta}{\partial t}\ d\mathcal{V} + \iint_{\mathcal S} \eta \vec V \cdot d\vec{\mathcal S} $$</p>
 <p>The surface integral can usually be converted into a differential form over the volume via Gauss' theorem.</p>
 <h4 id="fluid--dynamics">Fluid  Dynamics</h4>
-<p>A <strong>fluid</strong> is defined as a continuum of particles such that its microscopic properties average into macroscopic properties that approximate its behaviour as a single element, a behaviour characterised by negligibly resistive non-retention of shape when deformed.</p>
+<p>A <strong>fluid</strong> is defined as a continuum of particles such that its microscopic properties average into macroscopic properties that approximate its behaviour as a single element, a behaviour characterised by negligibly resistive non-retention of shape when deformed. This continuum approximation is applicable when analysing flows over length scales much larger (say a ratio of $10^{3}$ at least?) than the molecular mean free path of the fluid.</p>
 <p>The definitions of circulation and the material derivative are sufficient to derive <strong>Kelvin&rsquo;s circulation theorem</strong> for velocity fields $\vec V$ along a fluid curve $C$, defined as a curve which always passes through the same fluid elements:</p>
 <p>$$ \frac{D\Gamma}{Dt} = \frac{D}{Dt}\oint_C \vec V \cdot d\vec l = \oint_C \frac{D\vec V}{Dt} \cdot d\vec l + \oint_C \vec V \cdot \frac{D}{dt} d\vec l$$</p>
 <p>$$ \implies \frac{D\Gamma}{Dt} = \oint_C \vec a \cdot d\vec l, \quad \because \frac{D\vec V}{Dt} = \vec a,\quad \oint_C \vec V \cdot d\vec V = 0 $$</p>
-<p>The differential form of the <strong>continuity equation</strong> representing the conservation of mass $M$, with a macroscopic property called the <strong>density</strong> $\rho$, via the Reynolds' transport theorem is:</p>
+<p>The differential form of the expression of <strong>continuity</strong> representing the conservation of mass $M$, with a macroscopic property called the <strong>density</strong> $\rho$, via the Reynolds' transport theorem is:</p>
 <p>$$ \frac{DM}{Dt} = \frac{\partial \rho}{\partial t} + \nabla\cdot (\rho \vec V) $$</p>
-<p>For a control volume with no time-varying source or sink of mass, $dM/dt = 0$, which gives the usual continuity equation analysed in fluid mechanics. An <strong>incompressible flow</strong> is defined as a flow in which the changes in density with respect to space and time are negligible.</p>
+<p>For a control volume with no space-time-varying source or sink of mass, $dM/dt = 0$, which gives the usual continuity equation analysed in fluid mechanics. An <strong>incompressible flow</strong> is defined as a flow in which the changes in density with respect to space and time are negligible.</p>
 <p>The differential form of the <strong>incompressible Navier-Stokes equations</strong> in an external time-independent gravitational field $\vec g$ with non-conservative body forces $\vec f$ is:</p>
 <p>$$ \nabla \cdot \vec V = 0 $$</p>
 <p>$$ \rho \frac{D\vec V}{Dt} = -\nabla p + \rho \vec g + \nabla \cdot \hat \tau + \rho\vec f$$</p>
@@ -319,7 +319,7 @@ if (!doNotTrack) {
 <p>$$\hat \tau = \mu\left[\nabla \otimes \vec V +  \left(\nabla \otimes \vec V\right)^T  - \frac{2\nu}{3} \hat I\right]$$</p>
 <p>where $\nu \equiv \nabla \cdot \vec V$, called the <strong>dilatation strain rate</strong>.</p>
 <p>Non-dimensionalisation schemes are important in fluid dynamics because they remove the dependence of the equations on intrinsic fluid properties, such as $\rho,\ \mu$ and reference length scales such as $L$ and $|\vec V|$ for flow over objects.</p>
-<p>If the flow is inviscid, the time derivatives and the stress terms drop out, giving the <strong>incompressible Euler equations</strong>:</p>
+<p>If the flow is steady and inviscid, the time derivatives and the stress terms drop out, giving the <strong>incompressible Euler equations</strong>:</p>
 <p>$$ \nabla \cdot \vec V = 0 $$</p>
 <p>$$ \rho(\vec V \cdot \nabla \vec V) = -\nabla p + \rho\vec g + \vec f$$</p>
 <p>Assume that the external gravitational field is conservative, and hence is expressible as a scalar potential $\vec g = -\nabla \xi$, as is usually done in physics. Assuming no non-conservative body forces, Kelvin&rsquo;s circulation theorem provides the following statement of angular momentum conservation:</p>
@@ -345,10 +345,10 @@ if (!doNotTrack) {
 <p>This can be solved via the method of Green functions:</p>
 <p>$$
 \begin{aligned}
-\nabla_N^2 G(\vec x, \vec x_0) &amp; = \delta(\vec x - \vec x_0) \\ 
-\int_{-\infty}^{\infty} \left[\nabla_N^2 G(\vec x, \vec x_0)\right]  e^{i\vec k \cdot \vec x}\ d\vec x &amp; = \int_{-\infty}^{\infty} \delta(\vec x - \vec x_0) e^{i\vec k \cdot \vec x}\ d\vec x \\ 
-|\vec k|^2 G(\vec k, \vec x_0) &amp; = e^{i \vec k \cdot \vec x_0} \\ 
-\implies G(\vec x, \vec x_0) &amp; = \frac{1}{(2\pi)^N}\int_{-\infty}^{\infty} \frac{e^{-i \vec k \cdot (\vec x -\vec x_0)}}{|\vec k|^2} \ d\vec k 
+\nabla_N^2 G(\vec x, \vec x_0) &amp; = \delta(\vec x - \vec x_0) \\
+\int_{-\infty}^{\infty} \left[\nabla_N^2 G(\vec x, \vec x_0)\right]  e^{i\vec k \cdot \vec x}\ d\vec x &amp; = \int_{-\infty}^{\infty} \delta(\vec x - \vec x_0) e^{i\vec k \cdot \vec x}\ d\vec x \\
+|\vec k|^2 G(\vec k, \vec x_0) &amp; = e^{i \vec k \cdot \vec x_0} \\
+\implies G(\vec x, \vec x_0) &amp; = \frac{1}{(2\pi)^N}\int_{-\infty}^{\infty} \frac{e^{-i \vec k \cdot (\vec x -\vec x_0)}}{|\vec k|^2} \ d\vec k
 \end{aligned}
 $$</p>
 <p>Laplace&rsquo;s equation is spherically symmetric in $N$ dimensions (evident from the $|\vec k|^2$ term), so expressing the integral in a $N$-spherical polar coordinate system will be more convenient. This is singular with multiple poles at $\vec k = \vec 0$, so the contour must be deformed in the complex plane.</p>
