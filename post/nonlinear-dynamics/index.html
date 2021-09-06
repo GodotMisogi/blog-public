@@ -278,20 +278,20 @@ if (!doNotTrack) {
 <h3 id="introduction">Introduction</h3>
 <p>The Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment.</p>
 <p>Consider $x$ as the number of rabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations.</p>
-<p>$$
-\begin{aligned}
-\dot x &amp; = \alpha x - \eta yx, &amp; \alpha, \eta &gt; 0 \\
-\dot y &amp; = -\beta y + \lambda xy, &amp; \beta, \lambda &gt; 0 \\
+<p>$$ 
+\begin{aligned} 
+\dot x &amp; = \alpha x - \eta yx, &amp; \alpha, \eta &gt; 0 \\ 
+\dot y &amp; = -\beta y + \lambda xy, &amp; \beta, \lambda &gt; 0 \\ 
 \end{aligned}
 $$</p>
 <p>Physically, these equations can be read off in the following manner: The change in the population of rabbits depends on a rate $\alpha$ proportional to the current population, and decreases at a rate $\eta$ proportional to the populations of foxes and rabbits, and similarly for the change in the population of foxes.</p>
 <h3 id="critical-points">Critical Points</h3>
 <p>The critical points of the system are the points at which the right-hand-sides are simultaneously zero. In this case, it&rsquo;s simple to evaluate by hand.</p>
-<p>$$
-\begin{aligned}
-x(\alpha - \eta y) &amp; = 0 \\
+<p>$$ 
+\begin{aligned} 
+x(\alpha - \eta y) &amp; = 0 \\ 
 y(\lambda x - \beta) &amp; = 0
-\end{aligned} \\
+\end{aligned} \\ 
 \implies (x_c, y_c) = \left\{ (0, 0), \left(\frac{\beta}{\lambda}, \frac{\alpha}{\eta}\right) \right\}
 $$</p>
 <h4 id="stability">Stability</h4>
@@ -299,8 +299,8 @@ $$</p>
 <p>At $(x_c, y_c) = \left(\dfrac{\beta}{\lambda}, \dfrac{\alpha}{\eta}\right)$, we must evaluate the system by linearisation.</p>
 <h3 id="computation">Computation</h3>
 <p>Let&rsquo;s do it <del>to</del> in Julia.</p>
-<div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="n">f1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">η</span><span class="p">)</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="n">η</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
-<span class="n">f2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">β</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">λ</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+<div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="n">f1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">η</span><span class="p">)</span> <span class="o">=</span>  <span class="n">α</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="n">η</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">x</span>
+<span class="n">f2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">β</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">λ</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
 </code></pre></div><p>The <code>DifferentialEquations</code> package in Julia makes this very easy to evaluate. As this is an initial value problem, the following functions show the required setup:</p>
 <div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="k">function</span> <span class="n">volterra!</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ps</span><span class="p">)</span>
     <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">f1</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">xs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
@@ -322,10 +322,25 @@ $$</p>
 </code></pre></div><p>Very short code!</p>
 <p>(<em>My second personality</em>: But probably not shorter than the Haskell equivalent.)</p>
 <p>(<em>My third personality to the second</em>: Weird flex, but ok.)</p>
+<center>
+
+  
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+
+<div id="/post/nonlinear-dynamics/images/wabbitsfoxes.json" class="plotly" style="width:100%"></div>
+<script>
+Plotly.d3.json("/post/nonlinear-dynamics/images/wabbitsfoxes.json", function(err, fig) {
+    Plotly.plot('\/post\/nonlinear-dynamics\/images\/wabbitsfoxes.json', fig.data, fig.layout, {responsive: true});
+});
+</script>
+</center>
+<p>Notice how, after the maximum population of rabbits in a period, the population of foxes increases while the population of rabbits decreases to a local minimum. The foxes then quickly die off to a minimum and the population of rabbits increases, repeating the cycle.</p>
 <h2 id="falkner-skan-boundary-layer-equations">Falkner-Skan Boundary Layer Equations</h2>
 <p>The Falkner-Skan transformation of the thin shear layer equations governing boundary layers is given by the following third-order differential equation:</p>
 <p>$$ f''' + \left(\frac{1 + a}{2}\right) f f'' + a\left[1 - (f')^2\right] = 0 $$</p>
-<p>with boundary conditions $f(0) = f'(0) = 0, ~ f'(\eta) = 1$, where $\eta$ is some specified upper bound. This can be expressed in terms of an autonomous system of first-order differential equations: $\dot{\mathbf x} = \mathbf f(\mathbf x, \mathbf p, η)$. First, we define the function for the governing ODE:</p>
+<p>with boundary conditions $f(0) = f'(0) = 0, ~ f'(\eta) = 1$, where $\eta$ is some specified upper bound. This can be expressed in terms of an autonomous system of first-order differential equations: $\dot{\mathbf x} = \mathbf f(\mathbf x, \mathbf p, η)$ by setting each derivative as an independent variable. So we define the function for the governing ODE:</p>
 <div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="k">function</span> <span class="n">falkner_skan_ODE!</span><span class="p">(</span><span class="n">du</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">η</span><span class="p">)</span>
     <span class="n">F</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">x</span>
     <span class="n">a</span>       <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -335,7 +350,7 @@ $$</p>
 
     <span class="nb">nothing</span>
 <span class="k">end</span>
-</code></pre></div><p>As this is a boundary value problem, in contrast to the previous initial value problem, another function is required to specify the boundary conditions. Note that the distinction between initial value and boundary value problems is &ldquo;superficial&rdquo;, and the mathematical treatment is generally identical as the formulation of space curves passing through specified points.</p>
+</code></pre></div><p>As this is a boundary value problem, in contrast to the previous initial value problem, another function is required to specify the boundary conditions. Note that the distinction between initial value and boundary value problems is &ldquo;superficial&rdquo;, and the mathematical treatment is generally identical as the formulation of &lsquo;space&rsquo; curves passing through specified points.</p>
 <div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="k">function</span> <span class="n">falkner_skan_BC!</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">η</span><span class="p">)</span>
     <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>              <span class="c"># η = 0, F = 0</span>
     <span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>              <span class="c"># η = 0, F&#39; = 0</span>
@@ -343,14 +358,14 @@ $$</p>
 
     <span class="nb">nothing</span>
 <span class="k">end</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="n">ηs</span>    <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div><p>Now we feed the functions to <code>DifferentialEquations</code>, using a Mono-Implicit Runge-Kutta integration scheme to solve the discretised equations as a fully implicit system.</p>
+<div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="n">ηs</span>    <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">x0</span>    <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span> 
-<span class="n">a</span>     <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
-<span class="n">prob</span>  <span class="o">=</span> <span class="n">BVProblem</span><span class="p">(</span><span class="n">falkner_skan_ODE!</span><span class="p">,</span> <span class="n">falkner_skan_BC!</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">ηs</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<span class="n">sol</span>   <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">GeneralMIRK4</span><span class="p">(),</span> <span class="n">dt</span> <span class="o">=</span> <span class="mf">1e-1</span><span class="p">)</span>
-</code></pre></div><p>
-  
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<span class="n">as</span>    <span class="o">=</span> <span class="n">range</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">prob</span>  <span class="o">=</span> <span class="n">BVProblem</span><span class="o">.</span><span class="p">(</span><span class="kt">Ref</span><span class="p">(</span><span class="n">falkner_skan_ODE!</span><span class="p">),</span> <span class="kt">Ref</span><span class="p">(</span><span class="n">falkner_skan_BC!</span><span class="p">),</span> <span class="kt">Ref</span><span class="p">(</span><span class="n">x0</span><span class="p">),</span> <span class="kt">Ref</span><span class="p">(</span><span class="n">ηs</span><span class="p">),</span> <span class="n">as</span><span class="p">,</span> <span class="n">syms</span> <span class="o">=</span> <span class="kt">Ref</span><span class="p">([</span><span class="o">:</span><span class="n">y</span><span class="p">,</span> <span class="o">:</span><span class="n">δ</span><span class="p">]))</span>
+<span class="n">sol</span>   <span class="o">=</span> <span class="n">solve</span><span class="o">.</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="kt">Ref</span><span class="p">(</span><span class="n">GeneralMIRK4</span><span class="p">()),</span> <span class="n">dt</span> <span class="o">=</span> <span class="mf">2e-1</span><span class="p">)</span>
+</code></pre></div><center>
 
 
 
@@ -359,7 +374,9 @@ $$</p>
 Plotly.d3.json("/post/nonlinear-dynamics/images/lol.json", function(err, fig) {
     Plotly.plot('\/post\/nonlinear-dynamics\/images\/lol.json', fig.data, fig.layout, {responsive: true});
 });
-</script></p>
+</script>
+</center>
+<p>Here we can observe an inflection point at some specific value of $U/U_e$. Can we figure this out analytically?</p>
 
 </section>
 
