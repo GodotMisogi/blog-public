@@ -278,20 +278,20 @@ if (!doNotTrack) {
 <h3 id="introduction">Introduction</h3>
 <p>The Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment.</p>
 <p>Consider $x$ as the number of rabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations.</p>
-<p>$$ 
-\begin{aligned} 
-\dot x &amp; = \alpha x - \eta yx, &amp; \alpha, \eta &gt; 0 \\ 
-\dot y &amp; = -\beta y + \lambda xy, &amp; \beta, \lambda &gt; 0 \\ 
+<p>$$
+\begin{aligned}
+\dot x &amp; = \alpha x - \eta yx, &amp; \alpha, \eta &gt; 0 \\
+\dot y &amp; = -\beta y + \lambda xy, &amp; \beta, \lambda &gt; 0 \\
 \end{aligned}
 $$</p>
 <p>Physically, these equations can be read off in the following manner: The change in the population of rabbits depends on a rate $\alpha$ proportional to the current population, and decreases at a rate $\eta$ proportional to the populations of foxes and rabbits, and similarly for the change in the population of foxes.</p>
 <h3 id="critical-points">Critical Points</h3>
 <p>The critical points of the system are the points at which the right-hand-sides are simultaneously zero. In this case, it&rsquo;s simple to evaluate by hand.</p>
-<p>$$ 
-\begin{aligned} 
-x(\alpha - \eta y) &amp; = 0 \\ 
+<p>$$
+\begin{aligned}
+x(\alpha - \eta y) &amp; = 0 \\
 y(\lambda x - \beta) &amp; = 0
-\end{aligned} \\ 
+\end{aligned} \\
 \implies (x_c, y_c) = \left\{ (0, 0), \left(\frac{\beta}{\lambda}, \frac{\alpha}{\eta}\right) \right\}
 $$</p>
 <h4 id="stability">Stability</h4>
@@ -449,7 +449,7 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/lol.json", function(err, fig) {
         
 
         <div class="article-details">
-            <h2 class="article-title">Aerodynamics — Viscous-Inviscid Panel Methods (In Progress)</h2>
+            <h2 class="article-title">Aerodynamics — Viscous-Inviscid Interacting Panel Methods (In Progress)</h2>
         </div>
     </a>
 </article>

@@ -19,7 +19,7 @@ $$ \begin{aligned} \dot x &amp;amp; = \alpha x - \eta yx, &amp;amp; \alpha, \eta
     </item>
     
     <item>
-      <title>Aerodynamics — Viscous-Inviscid Panel Methods (In Progress)</title>
+      <title>Aerodynamics — Viscous-Inviscid Interacting Panel Methods (In Progress)</title>
       <link>https://godot-bloggy.xyz/post/panel-methods/</link>
       <pubDate>Wed, 24 Feb 2021 22:55:27 +0800</pubDate>
       
