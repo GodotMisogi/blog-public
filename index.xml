@@ -16,20 +16,20 @@
 &lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;The Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment.&lt;/p&gt;
 &lt;p&gt;Consider $x$ as the number of rabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\dot x &amp;amp; = \alpha x - \eta yx, &amp;amp; \alpha, \eta &amp;gt; 0 \\
-\dot y &amp;amp; = -\beta y + \lambda xy, &amp;amp; \beta, \lambda &amp;gt; 0 \\
+&lt;p&gt;$$ 
+\begin{aligned} 
+\dot x &amp;amp; = \alpha x - \eta yx, &amp;amp; \alpha, \eta &amp;gt; 0 \\ 
+\dot y &amp;amp; = -\beta y + \lambda xy, &amp;amp; \beta, \lambda &amp;gt; 0 \\ 
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;Physically, these equations can be read off in the following manner: The change in the population of rabbits depends on a rate $\alpha$ proportional to the current population, and decreases at a rate $\eta$ proportional to the populations of foxes and rabbits, and similarly for the change in the population of foxes.&lt;/p&gt;
 &lt;h3 id=&#34;critical-points&#34;&gt;Critical Points&lt;/h3&gt;
 &lt;p&gt;The critical points of the system are the points at which the right-hand-sides are simultaneously zero. In this case, it&amp;rsquo;s simple to evaluate by hand.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-x(\alpha - \eta y) &amp;amp; = 0 \\
+&lt;p&gt;$$ 
+\begin{aligned} 
+x(\alpha - \eta y) &amp;amp; = 0 \\ 
 y(\lambda x - \beta) &amp;amp; = 0
-\end{aligned} \\
+\end{aligned} \\ 
 \implies (x_c, y_c) = \left\{ (0, 0), \left(\frac{\beta}{\lambda}, \frac{\alpha}{\eta}\right) \right\}
 $$&lt;/p&gt;
 &lt;h4 id=&#34;stability&#34;&gt;Stability&lt;/h4&gt;
@@ -171,7 +171,7 @@ $$ \nabla^2 \phi = \nabla^2\left(\Phi + \Phi_\infty\right) = 0 $$&lt;/p&gt;
 &lt;p&gt;Discretise the equation for a foil, in which $N$ panels are assigned to the foil, and $N_w$ panels are assigned to the wake.&lt;/p&gt;
 &lt;p&gt;Assigning each panel on the foil a constant doublet strength $\phi$, and assign all panels constant source strengths $\sigma$, giving the following:&lt;/p&gt;
 &lt;p&gt;$$ \Phi_{\infty}(x,y) + \sum_{j = 1}^N \left(\frac{\sigma}{\pi}\int_{\text{panel}}\ln r \ dS\right)_j - \sum_{j = 1}^N \left(\frac{\phi}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\right)_j = \phi_p(x,y) $$&lt;/p&gt;
-&lt;p&gt;Let:
+&lt;p&gt;Let: 
 $$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|_j, \quad A_j \equiv -\frac{1}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\bigg|_j$$&lt;/p&gt;
 &lt;p&gt;For foil panels, we get the following system of equations:&lt;/p&gt;
 &lt;p&gt;$$ A \phi + \vec\Phi^{*} = \vec\Phi_{\infty} - B\sigma $$&lt;/p&gt;
@@ -194,34 +194,34 @@ $$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|_j, \quad A_j \equ
 &lt;h2 id=&#34;real-viscous-flow&#34;&gt;Real Viscous Flow&lt;/h2&gt;
 &lt;h3 id=&#34;doublet-expressions&#34;&gt;Doublet Expressions&lt;/h3&gt;
 &lt;p&gt;For viscous modelling, we deal with the first case using the wall transpiration model on the EIF. First, we express the edge velocities over the panels, which are the tangential derivatives of the exterior potential, expressed as sum of the internal potential and the potential &amp;lsquo;jump&amp;rsquo; across the singularity distribution: $\Phi^{*}_\text{ext} = \Phi^{*}_\text{int} - \phi$. In case 1: $\Phi^{*}_\text{int} = c \in \mathbb R$, and $\phi = \Phi_{\infty} +???$.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\vec u_e =
-\begin{cases}
-\vec U_s^f - \dfrac{d\phi}{ds} &amp;amp; \text{Airfoil} \\
-&amp;amp; \\
-\vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp;amp; \text{Wake}
-\end{cases}
-\end{aligned}
+&lt;p&gt;$$ 
+\begin{aligned} 
+\vec u_e = 
+\begin{cases} 
+\vec U_s^f - \dfrac{d\phi}{ds} &amp;amp; \text{Airfoil} \\ 
+&amp;amp; \\ 
+\vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp;amp; \text{Wake} 
+\end{cases} 
+\end{aligned} 
 $$&lt;/p&gt;
 &lt;p&gt;Substituting the solution for $\phi$ from case 1, we obtain the following matrix expression:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\vec u_e &amp;amp; = \vec U_s - \frac{d}{ds}
-\begin{bmatrix} P \\
+\vec u_e &amp;amp; = \vec U_s - \frac{d}{ds} 
+\begin{bmatrix} P \\ 
 \hline A^w P + B^w
-\end{bmatrix}
+\end{bmatrix} 
 \vec\sigma
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;Now express the sources in terms of the mass defect $m = u_e\delta^*$:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\sigma_j &amp;amp; = \left(\frac{dm}{ds}\right)_j \\
+\sigma_j &amp;amp; = \left(\frac{dm}{ds}\right)_j \\ 
 \vec u_e &amp;amp; = \vec U_s - \frac{d}{ds}
 \begin{bmatrix}
-P \\
-\hline A^wP + B
+P \\ 
+\hline A^wP + B 
 \end{bmatrix}
 \frac{d\vec m}{ds}
 \end{aligned}
@@ -229,33 +229,33 @@ $$&lt;/p&gt;
 &lt;p&gt;This gives a differential equation for $\vec u_e$.&lt;/p&gt;
 &lt;h3 id=&#34;difference-operators&#34;&gt;Difference Operators&lt;/h3&gt;
 &lt;p&gt;Define the following operator $\Delta^+\colon \mathbb R^n \to \mathbb R^{n-1}, n \in \mathbb N^+$ to evaluate forward differences with matrix representation:&lt;/p&gt;
-&lt;p&gt;$$
-\Delta^+ \equiv
-\begin{bmatrix}
--1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\
-0 &amp;amp; -1 &amp;amp; 1 &amp;amp; \ldots &amp;amp; 0 \\
-\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\
-0 &amp;amp; \ldots &amp;amp; -1 &amp;amp; 1 &amp;amp; 0 \\
-0 &amp;amp; \ldots &amp;amp; 0 &amp;amp; -1 &amp;amp; 1
-\end{bmatrix}
+&lt;p&gt;$$ 
+\Delta^+ \equiv 
+\begin{bmatrix} 
+-1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\ 
+0 &amp;amp; -1 &amp;amp; 1 &amp;amp; \ldots &amp;amp; 0 \\ 
+\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\ 
+0 &amp;amp; \ldots &amp;amp; -1 &amp;amp; 1 &amp;amp; 0 \\ 
+0 &amp;amp; \ldots &amp;amp; 0 &amp;amp; -1 &amp;amp; 1 
+\end{bmatrix} 
 $$&lt;/p&gt;
 &lt;p&gt;Difference operators can be used to generically compute $n$th order differences up to desired accuracy.&lt;/p&gt;
 &lt;p&gt;The following operator $\Delta^C\colon \mathbb R^n \to \mathbb R^n$ constructs central differences with forward and backward differencing at the endpoints:&lt;/p&gt;
 &lt;p&gt;$$
 \Delta^c \equiv
 \begin{bmatrix}
--1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\
--1/2 &amp;amp; 0 &amp;amp; 1/2 &amp;amp; \ldots &amp;amp; 0 \\
-\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\
-0 &amp;amp; \ldots &amp;amp; -1/2 &amp;amp; 0 &amp;amp; 1/2 \\
+-1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\ 
+-1/2 &amp;amp; 0 &amp;amp; 1/2 &amp;amp; \ldots &amp;amp; 0 \\ 
+\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\ 
+0 &amp;amp; \ldots &amp;amp; -1/2 &amp;amp; 0 &amp;amp; 1/2 \\ 
 0 &amp;amp; \ldots &amp;amp; 0 &amp;amp; -1 &amp;amp; 1
 \end{bmatrix}
 $$&lt;/p&gt;
 &lt;h2 id=&#34;boundary-layer-equations&#34;&gt;Boundary Layer Equations&lt;/h2&gt;
 &lt;p&gt;The thin shear boundary layer equations are obtained via the defect formulation and the thin shear approximations of the Navier-Stokes equations.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \quad (\textsf{Momentum}) \\
+&lt;p&gt;$$ 
+\begin{aligned} 
+\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \quad (\textsf{Momentum}) \\ 
 \frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp;amp; = 0 \quad (\textsf{Kinetic Energy})
 \end{aligned}
 $$&lt;/p&gt;
@@ -270,8 +270,8 @@ $$&lt;/p&gt;
 &lt;p&gt;The following functional dependencies are used to close the system:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-H^* &amp;amp; = H^*(H) \\
-C_f &amp;amp; = C_f(H, Re_\theta) \\
+H^* &amp;amp; = H^*(H) \\ 
+C_f &amp;amp; = C_f(H, Re_\theta) \\ 
 C_\mathcal D &amp;amp; = C_\mathcal D(H, Re_\theta)
 \end{aligned}
 $$&lt;/p&gt;
@@ -289,28 +289,28 @@ $$&lt;/p&gt;
 &lt;p&gt;Resulting in the following discrete BL equations:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^*}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp;amp; = 0 \\
+\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^*}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp;amp; = 0 \\ 
 \frac{\Delta H^*}{\Delta s} + H_a^*(1 - H_a)\frac{\theta_a}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - 2c_{\mathcal{D}_a} + H_a^*\frac{c_{f_a}}{2} &amp;amp; = 0
 \end{aligned}
 $$&lt;/p&gt;
 &lt;h2 id=&#34;residual-equations&#34;&gt;Residual Equations&lt;/h2&gt;
-&lt;p&gt;$$
+&lt;p&gt;$$ 
 \begin{aligned}
-\nabla^2 \phi &amp;amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\
-\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \\
+\nabla^2 \phi &amp;amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\ 
+\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \\ 
 \frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp;amp; = 0
 \end{aligned}
 $$&lt;/p&gt;
 &lt;h3 id=&#34;discretisation-2&#34;&gt;Discretisation&lt;/h3&gt;
 &lt;p&gt;The discretised inviscid and viscous equations form the following system of equations to be solved for $m,~\theta,~\tilde n$.&lt;/p&gt;
 &lt;p&gt;$$
-\begin{aligned}
+\begin{aligned} 
 \mathbf u_e - \mathbf U_s + \frac{d}{ds}
-\begin{bmatrix}
-P \\
-\hline A^wP + B
-\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^*)}{\Delta s} &amp;amp; = \mathcal R_1(\mathbf m) \\
-\frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp;amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\
+\begin{bmatrix} 
+P \\ 
+\hline A^wP + B 
+\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^*)}{\Delta s} &amp;amp; = \mathcal R_1(\mathbf m) \\ 
+\frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp;amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\ 
 \frac{\Delta H^*}{H^*_a} + \left(1 - H\right)\frac{\Delta u_e}{u_{e}} + \left(\frac{c_{f}}{2} - \frac{2C_{\mathcal D}}{H^*} \right) \frac{\Delta s}{\theta} &amp;amp; = \mathcal R_3(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
 \end{aligned}
 $$&lt;/p&gt;
@@ -340,80 +340,75 @@ $$&lt;/p&gt;
 &lt;p&gt;assuming the existence of the inverse of the Jacobian $\mathbf J_i$, which is usually the case for physical problems (if not, re-evaluate your setup!). We would like $\mathbf p_{i+1} = 0$ in the fewest number of iterations or at the lowest speed. Hence $\mathbf p_i = \alpha_i\mathbf J_i^{-1} \mathbf R(\mathbf p_i)$. Evaluating the inverse of the Jacobian is impractical, but the required step $d\mathbf p_i$ can be determined by solving the following linear equation instead, which is simply multiplying both sides by $\mathbf J_i$.&lt;/p&gt;
 &lt;p&gt;$$ \beta_i \mathbf J_i d\mathbf p_i = -\mathbf R_i, \quad \text{where} \quad \beta_i = \frac{1}{\alpha_i} $$&lt;/p&gt;
 &lt;p&gt;The dimensionality of the problems could get confusing, so index notation with summation convention comes in handy:&lt;/p&gt;
-&lt;p&gt;$$ \frac{\partial R^{ijk}}{\partial p^{mn}} = \ldots$$&lt;/p&gt;
+&lt;p&gt;$$ \frac{\partial R^{ijk}}{\partial p^{lmn}} = \ldots$$&lt;/p&gt;
 &lt;p&gt;Let us naïvely solve the linear system, by using Julia&amp;rsquo;s &lt;code&gt;\&lt;/code&gt; function from the &lt;code&gt;LinearAlgebra&lt;/code&gt; package.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;c&#34;&gt;# Number of iterations&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;num_iters&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newton_solver!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;num_iters&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;c&#34;&gt;# Array to store errors&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;ε&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;zeros&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num_iters&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 
-&lt;span class=&#34;c&#34;&gt;# Newton step computation&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newton_step&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;jac&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jac&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;\&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; 
-&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+    &lt;span class=&#34;c&#34;&gt;# Newton iteration loop&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num_iters&lt;/span&gt;
+        &lt;span class=&#34;c&#34;&gt;# Compute residuals&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;compute_residuals!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 
-&lt;span class=&#34;c&#34;&gt;# Newton method algorithm&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num_iters&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂T&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;compute_residual_and_grad&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T_truth&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;βs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;q₀&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;ΔT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newton_step&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T_truth&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;ε&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;maximum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;abs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ΔT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-    &lt;span class=&#34;c&#34;&gt;# display(R)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Newton step error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ε&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;T_truth&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;.+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ω&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ΔT&lt;/span&gt;
+        &lt;span class=&#34;c&#34;&gt;# Compute Jacobian&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;∂R∂p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;compute_grad_fwd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+        &lt;span class=&#34;c&#34;&gt;# Compute Newton step&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Δp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;\&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;
+
+        &lt;span class=&#34;c&#34;&gt;# Update state with relaxation factor&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;.=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newton_update!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Δp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+        &lt;span class=&#34;c&#34;&gt;# Error processing&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;ε&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;maximum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;abs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Δp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Newton step error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ε&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ε&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;There are various numerical methods dedicated to solving linear systems, depending on the structure of the matrices. In computational fluid dynamics with structured grids, the matrix is usually regular, banded, and sparse. This is due to the adjacencies between elements being specified up to a given level of &amp;ldquo;depth&amp;rdquo;, which is called a stencil. So certain algorithms speed up the computations by taking advantage of this structure.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;There are various numerical methods dedicated to solving linear systems, depending on the structure of the matrices. Special methods depending on the case can be applied, for example using Jacobian-vector products instead of constructing the matrices directly. In the case of computational fluid dynamics with structured grids, the matrix is usually regular, banded, and sparse. This is due to the adjacencies between elements being specified up to a given level of &amp;ldquo;depth&amp;rdquo;, which is called a stencil. So certain algorithms speed up the computations by taking advantage of this structure.&lt;/p&gt;
 &lt;h2 id=&#34;optimisations&#34;&gt;Optimisations&lt;/h2&gt;
-&lt;p&gt;The objective function for a gradient-based optimisation problem with an equality constraint (read holonomic, &lt;code&gt;bollu&lt;/code&gt;) $\mathbf R(\mathbf x, \mathbf p) = \mathbf 0$ requires evaluation of its total derivative.&lt;/p&gt;
-&lt;p&gt;$$ \frac{d\mathbf f}{d\mathbf x} = \frac{\partial \mathbf f}{\partial \mathbf x} + \frac{\partial \mathbf f}{\partial \mathbf p}\frac{d\mathbf p}{d\mathbf x} $$&lt;/p&gt;
+&lt;p&gt;The objective function for a gradient-based optimisation problem with an equality constraint (read holonomic, &lt;code&gt;bollu&lt;/code&gt;) $\mathbf R(\mathbf x, \mathbf p(\mathbf x)) = \mathbf 0$ requires evaluation of its total derivative. The total derivative can be expanded it in two ways via the chain rule:&lt;/p&gt;
+&lt;p&gt;$$ \frac{d\mathbf f}{d\mathbf x} = \frac{\partial \mathbf f}{\partial \mathbf x} + \frac{\partial \mathbf f}{\partial \mathbf R}\frac{\partial\mathbf R}{\partial\mathbf x} = \frac{\partial \mathbf f}{\partial \mathbf x} + \frac{\partial \mathbf f}{\partial \mathbf p}\frac{d\mathbf p}{d\mathbf x} $$&lt;/p&gt;
 &lt;p&gt;The equality constraint trivially satisfies the following identity:&lt;/p&gt;
 &lt;p&gt;$$ \frac{d\mathbf R}{d\mathbf x} = \frac{\partial \mathbf R}{\partial \mathbf x} + \frac{\partial \mathbf R}{\partial \mathbf p}\frac{d\mathbf p}{d\mathbf x} = 0 $$&lt;/p&gt;
-&lt;p&gt;So you can substitute this into the total derivative expression:&lt;/p&gt;
+&lt;p&gt;So you can substitute this into the second form of the total derivative expression:&lt;/p&gt;
 &lt;p&gt;$$ \frac{d\mathbf f}{d\mathbf x} = \frac{\partial \mathbf f}{\partial \mathbf x} + \frac{\partial \mathbf f}{\partial \mathbf p}\left[-\left(\frac{\partial \mathbf R}{\partial\mathbf p}\right)^{-1} \frac{\partial \mathbf R}{\partial \mathbf x}\right] $$&lt;/p&gt;
-&lt;p&gt;So there are two ways to avoid the problem of computing the inverse of $\partial \mathbf R/\partial \mathbf P$, which are called the &lt;em&gt;direct&lt;/em&gt; and &lt;em&gt;adjoint&lt;/em&gt; methods.&lt;/p&gt;
+&lt;p&gt;So there are two ways to avoid the problem of computing the inverse of $\partial \mathbf R/\partial \mathbf p$, which are called the &lt;em&gt;direct&lt;/em&gt; and &lt;em&gt;adjoint&lt;/em&gt; methods.&lt;/p&gt;
 &lt;h3 id=&#34;direct-method&#34;&gt;Direct Method&lt;/h3&gt;
 &lt;p&gt;Let&lt;/p&gt;
-&lt;p&gt;$$ \boldsymbol\psi = -\left(\frac{\partial \mathbf R}{\partial\mathbf p}\right)^{-1} \frac{\partial \mathbf R}{\partial \mathbf x} $$&lt;/p&gt;
+&lt;p&gt;$$ \boldsymbol\psi = \frac{d \mathbf p}{d\mathbf x} = -\left(\frac{\partial \mathbf R}{\partial\mathbf p}\right)^{-1} \frac{\partial \mathbf R}{\partial \mathbf x} $$&lt;/p&gt;
 &lt;p&gt;The direct method hence solves the following linear system by left multiplication of $\partial \mathbf R / \partial \mathbf p$:
-$$
-\begin{aligned}
-\frac{\partial \mathbf R}{\partial \mathbf p}\boldsymbol \psi = -\frac{\partial \mathbf R}{\partial \mathbf x}, \quad \text{where} \quad \boldsymbol \psi = \frac{d \mathbf p}{d\mathbf x}
-\end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Notice that this expression is almost identical to the Newton step, extended to total derivatives with respect to the design variables. The big Jacobian on the LHS is already computed from the Newton step, and only the RHS needs to be computed. If you have the factorisation of the Jacobian from the Newton step, it could be very efficient to simply reuse the factorisation and back-substitute to solve this equation.&lt;/p&gt;
+$$ \frac{\partial \mathbf R}{\partial \mathbf p}\boldsymbol \psi = -\frac{\partial \mathbf R}{\partial \mathbf x}$$&lt;/p&gt;
+&lt;p&gt;Notice that this expression is almost identical to the Newton step, extended to total derivatives with respect to the design variables. Essentially, the RHS is a matrix whose number of columns increases linearly with the number of design variables. This corresponds to numerous linear equations, one for each column of the RHS corresponding to a design variable. The big Jacobian on the LHS is already computed from the Newton step, and only the RHS needs to be computed. If you have the factorisation of the Jacobian from the Newton step, it could be very efficient to simply reuse the factorisation and back-substitute to solve the numerous equations if the RHS is not very expensive to compute.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;solve_direct&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;∂R∂u_sq&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])))&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hcat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂u_sq&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;\&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eachindex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hence the total derivative is:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hence the total derivative in this form is expressed as:&lt;/p&gt;
 &lt;p&gt;$$ \frac{d\mathbf f}{d\mathbf x} = \frac{\partial \mathbf f}{\partial \mathbf x} + \frac{\partial \mathbf f}{\partial \mathbf p}\boldsymbol\psi $$&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;n&#34;&gt;total_derivative_direct&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ψ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂f∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
     &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂u&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ψ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eachindex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;adjoint-method&#34;&gt;Adjoint Method&lt;/h3&gt;
 &lt;p&gt;Let&lt;/p&gt;
-&lt;p&gt;$$ \boldsymbol\phi^T = \frac{\partial \mathbf f}{\partial \mathbf p}\left(\frac{\partial \mathbf R}{\partial\mathbf p}\right)^{-1} $$&lt;/p&gt;
+&lt;p&gt;$$ \boldsymbol\phi^T = \left(\frac{\partial \mathbf f}{\partial \mathbf R}\right)^T = \frac{\partial \mathbf f}{\partial \mathbf p}\left(\frac{\partial \mathbf R}{\partial\mathbf p}\right)^{-1} $$&lt;/p&gt;
 &lt;p&gt;The adjoint method hence solves the following linear system by right multiplication of $\partial \mathbf R / \partial \mathbf p$:&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\left(\frac{\partial \mathbf R}{\partial \mathbf p}\right)^T \boldsymbol\phi = \left(\frac{\partial \mathbf f}{\partial \mathbf p}\right)^T, \quad \text{where}\quad \boldsymbol \phi = \left(\frac{\partial \mathbf f}{\partial \mathbf R}\right)^T
-\end{aligned}
-$$&lt;/p&gt;
+&lt;p&gt;$$\left(\frac{\partial \mathbf R}{\partial \mathbf p}\right)^T \boldsymbol\phi = \left(\frac{\partial \mathbf f}{\partial \mathbf p}\right)^T $$&lt;/p&gt;
 &lt;p&gt;The transposition operator $-^T\colon (\mathbb R^m \times \mathbb R^n) \to (\mathbb R^n \times \mathbb R^m)$ simply transposes the dimensions of a matrix or vector. Of course, here the linear system has to be square, so $m = n$.&lt;/p&gt;
 &lt;p&gt;Here is where the word &lt;em&gt;adjoint&lt;/em&gt; comes in. When you have a constraint expressed in the form of some nonlinear partial differential equation, the transpose operator is not applicable, and you have to actually apply the concept of adjoints. This concept exists at a much more abstract level in category theory and duality, which is the &amp;ldquo;next-best&amp;rdquo; thing when one is not able to find direct inverses. An example is the adjoint of the differential operator on an infinite-dimensional Hilbert space of functions.&lt;/p&gt;
 &lt;p&gt;In most cases, however, you would be dealing with some discretised version of the PDE, and the above will apply to the discretised equations, which are expressed in the form of a tensor. This setup is called the &lt;em&gt;discrete adjoint&lt;/em&gt; formulation, and is quite a general operation on nonlinear PDEs.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;solve_adjoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dfdu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
-    &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;\&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dfdu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;\&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dfdu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hence the total derivative is:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hence the total derivative in this form is expressed as:&lt;/p&gt;
 &lt;p&gt;$$ \frac{d\mathbf f}{d\mathbf x} = \frac{\partial \mathbf f}{\partial \mathbf x} - \boldsymbol\phi^T\frac{\partial \mathbf R}{\partial \mathbf x} $$&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;n&#34;&gt;total_derivative_adjoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;φ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
-    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;permutedims&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;φ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; 
-                &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; 
-                &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eachindex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;n&#34;&gt;total_derivative_adjoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;φ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 
+    &lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;permutedims&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;φ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; 
+             &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eachindex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂f∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;concept&#34;&gt;Concept&lt;/h3&gt;
-&lt;p&gt;So the main idea is that depending on the number of inputs and outputs, you choose the appropriate method which reduces the dimensionality of the linear system.&lt;/p&gt;
-&lt;p&gt;The complicated parts (read headaches) are actually the evaluations and constructions of the different Jacobians and their reshapings, all of which are needed regardless of whether the direct or adjoint method is used. You picks your linear system and you takes your computational cost.&lt;/p&gt;
-&lt;p&gt;Notice that we didn&amp;rsquo;t specify any restriction on the constraints. You could identically apply the same setup to $$\mathbf R(\mathbf x, \mathbf p_1, \mathbf p_2, \ldots, \mathbf p_n) = \begin{bmatrix} \mathbf R_1(\mathbf x, \mathbf p_1) \\ \mathbf R_2(\mathbf x, \mathbf p_2) \\ \vdots \\ \mathbf R_n(\mathbf x, \mathbf p_n) \end{bmatrix} = \mathbf 0$$&lt;/p&gt;
+&lt;p&gt;So the main idea is that depending on the numbers of inputs and outputs, you choose the appropriate method which reduces the dimensionality of the linear system. When the number of outputs is larger than the number of inputs, use the direct method, and conversely use the adjoint method. The complicated parts (read headaches) are actually the evaluations and constructions of the different Jacobians and their reshapings, all of which are needed regardless of whether the direct or adjoint method is used. You picks your linear system and you takes your computational cost.&lt;/p&gt;
+&lt;p&gt;Notice that we didn&amp;rsquo;t specify any restriction on the constraints. You could identically apply the same setup to a system of nonlinear equations:&lt;/p&gt;
+&lt;p&gt;$$\mathbf R(\mathbf x, \mathbf p_1, \mathbf p_2, \ldots, \mathbf p_n) = \begin{bmatrix} \mathbf R_1(\mathbf x, \mathbf p_1) \\ \mathbf R_2(\mathbf x, \mathbf p_2) \\ \vdots \\ \mathbf R_n(\mathbf x, \mathbf p_n) \end{bmatrix} = \mathbf 0$$&lt;/p&gt;
 &lt;p&gt;This setup is called a &lt;em&gt;coupled&lt;/em&gt; system, and the entire system is solved simultaneously for robustness and efficiency, either using the direct or adjoint methods. The &amp;ldquo;off-diagonal&amp;rdquo; block terms correspond to connections between different residual equations, and usually make the system sparse as many variables are not connected between different residual equations in physical models. The complexity of such systems is much greater, and is better left for another post.&lt;/p&gt;
 &lt;h2 id=&#34;stability&#34;&gt;Stability&lt;/h2&gt;
 &lt;p&gt;Even the order of accuracy of the Jacobians is not as important, as the point of the optimisation is to get a converged optimum, with converged residuals for the constraint. So you could spend less time doing more iterations with a greatly reduced cost for evaluating less accurate Jacobians and solving the linear system, if the residual constraint is the most time-consuming part. However, robustness of the solver for the residual equations becomes problematic.&lt;/p&gt;
@@ -495,10 +490,10 @@ $$ \left(\frac{I}{\Delta t} + 1\right)? \mathbf J_i d\mathbf x_i = -\mathbf f_i 
 &lt;p&gt;This can be solved via the method of Green functions:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\nabla_N^2 G(\vec x, \vec x_0) &amp;amp; = \delta(\vec x - \vec x_0) \\
-\int_{-\infty}^{\infty} \left[\nabla_N^2 G(\vec x, \vec x_0)\right]  e^{i\vec k \cdot \vec x}\ d\vec x &amp;amp; = \int_{-\infty}^{\infty} \delta(\vec x - \vec x_0) e^{i\vec k \cdot \vec x}\ d\vec x \\
-|\vec k|^2 G(\vec k, \vec x_0) &amp;amp; = e^{i \vec k \cdot \vec x_0} \\
-\implies G(\vec x, \vec x_0) &amp;amp; = \frac{1}{(2\pi)^N}\int_{-\infty}^{\infty} \frac{e^{-i \vec k \cdot (\vec x -\vec x_0)}}{|\vec k|^2} \ d\vec k
+\nabla_N^2 G(\vec x, \vec x_0) &amp;amp; = \delta(\vec x - \vec x_0) \\ 
+\int_{-\infty}^{\infty} \left[\nabla_N^2 G(\vec x, \vec x_0)\right]  e^{i\vec k \cdot \vec x}\ d\vec x &amp;amp; = \int_{-\infty}^{\infty} \delta(\vec x - \vec x_0) e^{i\vec k \cdot \vec x}\ d\vec x \\ 
+|\vec k|^2 G(\vec k, \vec x_0) &amp;amp; = e^{i \vec k \cdot \vec x_0} \\ 
+\implies G(\vec x, \vec x_0) &amp;amp; = \frac{1}{(2\pi)^N}\int_{-\infty}^{\infty} \frac{e^{-i \vec k \cdot (\vec x -\vec x_0)}}{|\vec k|^2} \ d\vec k 
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;Laplace&amp;rsquo;s equation is spherically symmetric in $N$ dimensions (evident from the $|\vec k|^2$ term), so expressing the integral in a $N$-spherical polar coordinate system will be more convenient. This is singular with multiple poles at $\vec k = \vec 0$, so the contour must be deformed in the complex plane.&lt;/p&gt;
@@ -850,9 +845,9 @@ $$&lt;/p&gt;
 &lt;p&gt;To find the inverse spatial Fourier transform, we invoke the convolution theorem:&lt;/p&gt;
 &lt;p&gt;$$ u(x,t) = \mathcal F_x^{-1}\left[u_F(k,t)\right] =  \mathcal F_x^{-1}[u(k,0)] * \mathcal F_x^{-1} \left[e^{-\nu k^2 t}\right] = u(x,0) * \mathcal F_x^{-1} \left[e^{-\nu k^2 t}\right] $$&lt;/p&gt;
 &lt;p&gt;The second inverse transform is the Fourier transform of a Gaussian, which is nicely found in the following manner. Let $f(k) = e^{-\nu k^2 t}$ (with $\nu$ and $t$ as parameters), now differentiate and take the Fourier transform:&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-ix \cdot f(x) &amp;amp; = -2\nu t \cdot i f&#39;(x) \\
+&lt;p&gt;$$ 
+\begin{aligned} 
+ix \cdot f(x) &amp;amp; = -2\nu t \cdot i f&#39;(x) \\ 
 \implies f(x) &amp;amp; = \frac{1}{\sqrt{4\pi\nu t}}\exp\left(-\frac{x^2}{4\nu t}\right)
 \end{aligned}
 $$&lt;/p&gt;
@@ -1551,16 +1546,16 @@ For loops took 4.577128199976869 seconds
 &lt;p&gt;$$ \frac{\partial u}{\partial t} + u\frac{\partial u}{\partial x} + v\frac{\partial u}{\partial y} = \nu\left(\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2}\right) $$&lt;/p&gt;
 &lt;p&gt;$$ \frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} = \nu\left(\frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2}\right) $$&lt;/p&gt;
 &lt;p&gt;Discretised:&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\frac{u_{i,j}^{n+1} - u_{i,j}^n}{\Delta t} &amp;amp; + u_{i,j}^n \frac{u_{i,j}^n-u_{i-1,j}^n}{\Delta x} + v_{i,j}^n \frac{u_{i,j}^n - u_{i,j-1}^n}{\Delta y} \cr
-&amp;amp; = \nu \left( \frac{u_{i+1,j}^n - 2u_{i,j}^n+u_{i-1,j}^n}{\Delta x^2} + \frac{u_{i,j+1}^n - 2u_{i,j}^n + u_{i,j-1}^n}{\Delta y^2} \right)
+&lt;p&gt;$$ 
+\begin{aligned} 
+\frac{u_{i,j}^{n+1} - u_{i,j}^n}{\Delta t} &amp;amp; + u_{i,j}^n \frac{u_{i,j}^n-u_{i-1,j}^n}{\Delta x} + v_{i,j}^n \frac{u_{i,j}^n - u_{i,j-1}^n}{\Delta y} \cr 
+&amp;amp; = \nu \left( \frac{u_{i+1,j}^n - 2u_{i,j}^n+u_{i-1,j}^n}{\Delta x^2} + \frac{u_{i,j+1}^n - 2u_{i,j}^n + u_{i,j-1}^n}{\Delta y^2} \right) 
 \end{aligned}
 $$&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\frac{v_{i,j}^{n+1} - v_{i,j}^n}{\Delta t} &amp;amp; + u_{i,j}^n \frac{v_{i,j}^n-v_{i-1,j}^n}{\Delta x} + v_{i,j}^n \frac{v_{i,j}^n - v_{i,j-1}^n}{\Delta y} \cr
-&amp;amp; = \nu \left( \frac{v_{i+1,j}^n - 2v_{i,j}^n+v_{i-1,j}^n}{\Delta x^2} + \frac{v_{i,j+1}^n - 2v_{i,j}^n + v_{i,j-1}^n}{\Delta y^2} \right)
+&lt;p&gt;$$ 
+\begin{aligned} 
+\frac{v_{i,j}^{n+1} - v_{i,j}^n}{\Delta t} &amp;amp; + u_{i,j}^n \frac{v_{i,j}^n-v_{i-1,j}^n}{\Delta x} + v_{i,j}^n \frac{v_{i,j}^n - v_{i,j-1}^n}{\Delta y} \cr 
+&amp;amp; = \nu \left( \frac{v_{i+1,j}^n - 2v_{i,j}^n+v_{i-1,j}^n}{\Delta x^2} + \frac{v_{i,j+1}^n - 2v_{i,j}^n + v_{i,j-1}^n}{\Delta y^2} \right) 
 \end{aligned}
 $$&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;n&#34;&gt;nx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;41&lt;/span&gt;
@@ -2832,7 +2827,7 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Airfoil Selection:&lt;/strong&gt; A new airfoil I&amp;rsquo;ve been researching is the Selig S7075 for its good gliding/soaring characteristics and high efficiency at low Reynolds numbers. It&amp;rsquo;s a cambered airfoil with sharp trailing edge, and a maximum thickness-to-chord ratio of 9%  with the implementation of a boundary layer trip at 57.5% of the chord length. XFOIL analyses predict accurate results in agreement with Dr. Selig&amp;rsquo;s &lt;a class=&#34;link&#34; href=&#34;http://m-selig.ae.illinois.edu/uiuc_lsat/Low-Speed-Airfoil-Data-V3.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;A Summary of Low-Speed Airfoil Data, Vol. 3&lt;/a&gt;.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;Meshing Software:&lt;/strong&gt; I&amp;rsquo;ll be using ANSYS ICEM CFD and its convenient blocking features with its powerful sizing capabilities to generate 2D meshes.
+&lt;p&gt;&lt;strong&gt;Meshing Software:&lt;/strong&gt; I&amp;rsquo;ll be using ANSYS ICEM CFD and its convenient blocking features with its powerful sizing capabilities to generate 2D meshes. 
 The two types of meshes I&amp;rsquo;ll be trying to generate are an O-grid and a C-grid. An O-grid setup is when the body of analysis is enclosed within a curvilinear grid in which completely closed contours are created at offsets from the body. A C-grid setup, by example for an airfoil, is when the surrounding grid forms a &amp;lsquo;C&amp;rsquo; till the trailing edge.  Forums recommend that a C-grid mesh provides better results for airfoils with sharp trailing edges; this is because the grid alignment is along the airfoil shape (hence along the flow streamlines) to capture the flow results more accurately.&lt;/p&gt;
 &lt;p&gt;The blocking process in ICEM CFD used the same aspect ratios for element sizing in both meshing techniques. The operating Reynolds number for the flow is $ Re = 310,000 $ at sea level conditions. The desired $ y^+ = 1.0 $ in accordance with the Spalart-Allmaras model, and the estimated wall distance $ = 2.0 \times 10^{-5}~ m $ to resolve the boundary layer.&lt;/p&gt;
 &lt;hr&gt;
@@ -3110,18 +3105,18 @@ The two types of meshes I&amp;rsquo;ll be trying to generate are an O-grid and a
 &lt;/blockquote&gt;
 &lt;p&gt;X: 1
 T: C Locrian
-M:
-C:
-K:CLoc
+M: 
+C: 
+K:CLoc 
 |:CDEFGAB:|&lt;/p&gt;
 &lt;p&gt;The fundamental structure of a raga is based on the ascending and descending order of notes, referred to as &lt;em&gt;&amp;ldquo;Aaroh-Avroh&amp;rdquo;&lt;/em&gt;. The ornamentation in the instruments is also different: &lt;em&gt;&amp;ldquo;gamaks&amp;rdquo;&lt;/em&gt;, a quick slide between notes; permutations, abseneces and repetition of the notes are important in the definition of a raga. &lt;em&gt;Vyn&lt;/em&gt; from freenode&amp;rsquo;s &lt;code&gt;##math&lt;/code&gt; provided me with a few ragas and their respective interval structures, so I tried correlating some of them with the Gregorian modes. The following are two examples:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;B Phrygian: &lt;code&gt;B C D E F# G A&lt;/code&gt; = Raga Bhairavi&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;X: 1
-T: B Phrygian
-M:
-C:
+T: B Phrygian 
+M: 
+C: 
 K: BPhr
 |:B,CDEFGA:|&lt;/p&gt;
 &lt;blockquote&gt;
@@ -3210,7 +3205,7 @@ K: ADor
 &lt;div style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;DubbyPendy.svg&#34; width=80% /&gt;&lt;/div&gt;
 &lt;p&gt;The Lagrangian of the system is:&lt;/p&gt;
 &lt;p&gt;$$ \mathcal{L} = T - V $$
-$$ T = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2\left[l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)\right]$$
+$$ T = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2\left[l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)\right]$$ 
 $$ V = -(m_1 + m_2)gl_1\cos \theta_1 - m_2gl_2\cos\theta_2 $$&lt;/p&gt;
 &lt;p&gt;After a &lt;a class=&#34;link&#34; href=&#34;http://scienceworld.wolfram.com/physics/DoublePendulum.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;very long derivation&lt;/a&gt;, Hamilton&amp;rsquo;s equations can be obtained:&lt;/p&gt;
@@ -3397,16 +3392,16 @@ $$ \sum^{n-1}_{k = 0} z_k = 0 $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The roots of unity can be factorised into the following irreducible form over the field of real numbers:
-$$ z^n - 1 = (z-1)\sum^{n-1}_{i = 0} z^i $$
+$$ z^n - 1 = (z-1)\sum^{n-1}_{i = 0} z^i $$ 
 and can be factorised over the complex field as:
 $$ z^n - 1 = \prod_{k=0}^{n-1}(z-z_k) = (z-1)\prod_{k=1}^{n-1}(z-z_k) $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;A conjecture based on trial and error is:
-$$ \prod_{k=1}^{n-1}|z_k - z_0| = \prod_{k=1}^{n-1}|1-z_k| = n$$
+$$ \prod_{k=1}^{n-1}|z_k - z_0| = \prod_{k=1}^{n-1}|1-z_k| = n$$ 
 This states that the product of the distances between each root from a selected root is equal to the number of roots. To prove this, notice that:
-$$\sum^{n-1}_{i = 0} z^i = \prod_{k=1}^{n-1}(z-z_k) = \frac{z^n - 1}{z-1}$$
-For the equalities to be sensible at $z=1$, one must perform analytic continuation:
+$$\sum^{n-1}_{i = 0} z^i = \prod_{k=1}^{n-1}(z-z_k) = \frac{z^n - 1}{z-1}$$ 
+For the equalities to be sensible at $z=1$, one must perform analytic continuation: 
 $$\sum^{n-1}_{i = 0} 1^i = \prod_{k=1}^{n-1}|1-z_k| = \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1}$$
 The first equality proves the conjecture. The last equality is evaluated using L&amp;rsquo;Hôpital&amp;rsquo;s rule, also  proving the conjecture:
 $$ \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1} = \lim_{z\rightarrow 1} nz^{n-1} = n $$&lt;/p&gt;
