@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en-uk">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Category theory is a progressive scam for re-studying arithmetic, algebra, calculus, and category theory.'><title>Category Theory — Back to School</title>
+
+<link rel='canonical' href='https://godot-bloggy.xyz/post/category-theory/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Category Theory — Back to School'>
+<meta property='og:description' content='Category theory is a progressive scam for re-studying arithmetic, algebra, calculus, and category theory.'>
+<meta property='og:url' content='https://godot-bloggy.xyz/post/category-theory/'>
+<meta property='og:site_name' content='｢ALL FICTION｣'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-09-03T12:54:58&#43;08:00'/><meta property='article:modified_time' content='2021-09-03T12:54:58&#43;08:00'/>
+<meta name="twitter:site" content="@GodotMisogi">
+    <meta name="twitter:creator" content="@GodotMisogi"><meta name="twitter:title" content="Category Theory — Back to School">
+<meta name="twitter:description" content="Category theory is a progressive scam for re-studying arithmetic, algebra, calculus, and category theory.">
+    <link rel="shortcut icon" href="/punpun1.jpg" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-89998292-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    </head>
+    <body class="
+    article-page 
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column compact
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/punpun1_huab25ab071e0e366f9d0ed5a1d3b49099_44920_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🎓</span>
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://godot-bloggy.xyz/">｢ALL FICTION｣</a></h1>
+        <h2 class="site-description">Arjit Seth</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/project' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M15 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" />
+  <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />
+</svg>
+                
+                <span>Projects</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/music' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-headphones" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="13" rx="2" width="5" height="7" />
+  <rect x="15" y="13" rx="2" width="5" height="7" />
+  <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
+</svg>
+                
+                <span>Music</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/cv' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Curriculum Vitae</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='https://github.com/GodotMisogi' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+                
+                <span>GitHub</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/mathematics/" >
+                Mathematics
+            </a>
+        
+            <a href="/categories/programming/" >
+                Programming
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/post/category-theory/">Category Theory — Back to School</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        Category theory is a progressive scam for re-studying arithmetic, algebra, calculus, and category theory.
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 03, 2021</time>
+            </div>
+        
+
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="introduction">Introduction</h2>
+<p>I studied category theory with <code>Vyn</code> from Bartosz Milewski&rsquo;s book/blog <em>Category Theory For Programmers</em> in 2020, after a brief introduction from my course in <em>Advanced Algebra</em> at HKUST. Eventually we realised it&rsquo;s just a scam to study mathematical concepts starting from primary school to itself. I list the concepts from memory which I usually find difficult to recall here, with attempted proofs without reference. The concepts are presented in the temporal sequence of standard mathematical education.</p>
+<p>Some notation:</p>
+<ol>
+<li>Categories will be notated using bold with a capital, e.g. $\textbf{Mon}$ for the category of monoids.</li>
+<li>Objects and morphisms of a category $\mathbf C$ will be denoted as $\mathrm{Obj}(\mathbf C),~\mathrm{Mor}(\mathbf C)$ respectively.</li>
+<li>Functor $\mathcal F$-mappings of objects $A \in \mathrm{Obj}(\mathbf C)$ will be denoted with curly brackets, $\mathcal F(A)$, and of morphisms $f \in \mathrm{Mor}(\mathbf C)$ with square brackets, $\mathcal F[f]$.</li>
+<li>The category of functors between two categories will be notated in brackets, e.g. $[\mathbf{Grp},\mathbf{Set}]$ for the category of functors from the category of groups to the category of sets.</li>
+</ol>
+<p>Milewski provides a nice programmatic interpretation of functors as, to paraphrase, &ldquo;contextual wrappers&rdquo; around morphisms between objects. Haskell examples are useful for illustrative purposes, and have been presented whenever appropriate to elucidate this idea.</p>
+<h2 id="arithmetic">Arithmetic</h2>
+<h3 id="yoneda-lemma">Yoneda Lemma</h3>
+<p>Every preschooler has learnt the Yoneda lemma in kindergarten. Here we recall the general concepts and proofs.</p>
+<p><strong>Definition.</strong> A locally small category is a category in which the morphisms between any two objects form a set.</p>
+<p>Let $\mathbf C$ be a locally small category. Let $A \in \mathrm{Obj}(\mathbf C)$, $B \in \mathrm{Obj}(\mathbf{Set})$.</p>
+<p>Denote the set-valued hom-functor as $\mathbf C(A, -)\colon \mathbf C \to \mathbf{Set}$ and let $\mathcal F\colon \mathbf C \to \mathbf{Set}$ be a covariant functor.</p>
+<p>A natural transformation between the two functors $\alpha \colon \mathbf C(A,-) \to \mathbf{Set}$ is expressed as a set of maps $\alpha_A, \alpha_B$ for all $A \in \mathrm{Obj}(\mathbf{C}), B \in \mathrm{Obj}(\mathbf{Set})$.</p>
+<p><em>Lemma</em>. (Yoneda) The set of natural transformations $\alpha$ is in one-to-one correspondence with $\mathcal F(A)$. Similarly for contravariant $\mathcal G\colon \mathbf C \to \mathbf{Set}$.</p>
+<p><em>Proof</em>. The following commmutative diagram is evaluated on points.</p>
+<!-- $$\begin{CD} \mathcal C(A, A) @>{\alpha_A}>> \mathcal C(A, B)\end{CD}$$ -->
+<pre><code>Hom(A, A) —Hom(A, f)→ Hom(A, B)
+    |                     |
+   α_A                   α_B
+    ↓                     ↓
+   C(A)   ----C(f)--→    C(B)
+</code></pre><p><strong>Example.</strong></p>
+<h3 id="universal-properties">Universal Properties</h3>
+<p>The formal definition of a universal property is usually provided in terms of a comma category, or shape categories and diagram functors (shown later). Here we look at some special definitions which are &ldquo;arithmetic&rdquo; in nature.</p>
+<h4 id="products-and-coproducts-sums">Products and Coproducts (Sums)</h4>
+<p>A product is defined by the following diagram:</p>
+<p><strong>Example.</strong> (Product) Cartesian product of two sets?</p>
+<p>A product is defined by the following diagram, which applies a complicated technique called <em>dualisation</em> to the product diagram, viz. flipping the arrows:</p>
+<p><strong>Example.</strong> (Coproduct) Disjoint union of two sets?</p>
+<p>In Haskell, the coproduct is represented as a sum type with the &ldquo;divider&rdquo; syntax <code>|</code>, for example with the <code>Maybe</code> and <code>Either</code> types:</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Maybe</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Just</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Nothing</span>
+<span class="kr">data</span> <span class="kt">Either</span> <span class="n">a</span> <span class="n">b</span> <span class="ow">=</span> <span class="kt">Left</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Right</span> <span class="n">b</span>
+</code></pre></div><blockquote>
+<p><strong>Hence we have been scammed to re-learn arithmetic.</strong></p>
+</blockquote>
+<h2 id="algebra">Algebra</h2>
+<h3 id="monoidal-categories">Monoidal Categories</h3>
+<p>In algebra, a monoid is defined by an associative multiplication $\mu$ and a unit map $\eta$. A monoidal category defines a unit map over a monoidal product (canonically denoted using the tensor product symbol $\otimes$), and assumes the existence of a special object $I \in \mathbf C$ such that a unit map $\eta \colon I \to A$ is defined for any object $A \in \mathrm{Obj}(\mathbf C)$. The multiplication, unit, and associators are encoded in the following commutative diagrams:</p>
+<h3 id="monads">Monads</h3>
+<p>In the words of Saunders Mac Lane: &ldquo;A monad is just a monoid in the category of endofunctors&rdquo;. This (intentionally obfuscating) definition is ubiquitous for scaring programmers, and perhaps anyone unfamiliar with category theory. Here we attack the problem directly using the definitions.</p>
+<p><strong>Example.</strong> (List monad)</p>
+<p><code>List</code> is the canonical example of a monad as a polymorphic recursive sum type.</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Nil</span> <span class="o">|</span> <span class="kt">Cons</span> <span class="n">a</span> <span class="p">(</span><span class="kt">List</span> <span class="n">a</span><span class="p">)</span>
+</code></pre></div><p>First we define the functor-mapping rules:</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Functor</span> <span class="kt">List</span> <span class="kr">where</span>
+    <span class="n">fmap</span> <span class="n">f</span> <span class="kt">Nil</span>         <span class="ow">=</span> <span class="kt">Nil</span>
+    <span class="n">fmap</span> <span class="n">f</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">y</span> <span class="n">ys</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Cons</span> <span class="p">(</span><span class="n">f</span> <span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">fmap</span> <span class="n">f</span> <span class="n">ys</span><span class="p">)</span> 
+</code></pre></div><p>And now we define the monoidal laws for appending two lists by recursion:</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Monoid</span> <span class="kt">List</span> <span class="kr">where</span>
+    <span class="n">mappend</span> <span class="ow">::</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span>
+    <span class="n">mappend</span> <span class="n">ys</span> <span class="kt">Nil</span>         <span class="ow">=</span> <span class="n">ys</span>
+    <span class="n">mappend</span> <span class="kt">Nil</span> <span class="n">zs</span>         <span class="ow">=</span> <span class="n">zs</span>
+    <span class="n">mappend</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">y</span> <span class="n">ys</span><span class="p">)</span> <span class="n">zs</span> <span class="ow">=</span> <span class="kt">Cons</span> <span class="n">y</span> <span class="p">(</span><span class="n">mappend</span> <span class="n">ys</span> <span class="n">zs</span><span class="p">)</span>
+    
+    <span class="n">mempty</span> <span class="ow">::</span> <span class="kt">List</span> <span class="n">a</span>
+    <span class="n">mempty</span> <span class="ow">=</span> <span class="kt">Nil</span>
+</code></pre></div><p>The monoidal multiplication $M \otimes M \to M \in \mathrm{Mor}(\mathbf C)$. Now consider the category of endofunctors $[\mathbf C, \mathbf C]$ as a monoidal category, in which the monoidal product is composition of the endofunctors $\mathcal T \circ \mathcal T \to \mathcal T \in \mathrm{Mor}([\mathbf C, \mathbf C])$.</p>
+<p>The multiplication map is list concatenation, and the unit map is creation of a single-element list from the argument. To define the monad, we just need to use the monoidal laws with composition and recursion.</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Monad</span> <span class="kt">List</span> <span class="kr">where</span>
+    <span class="n">join</span> <span class="ow">::</span> <span class="kt">List</span> <span class="p">(</span><span class="kt">List</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span>
+    <span class="n">join</span> <span class="kt">Nil</span>           <span class="ow">=</span> <span class="n">mempty</span>
+    <span class="n">join</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">ys</span> <span class="n">zss</span><span class="p">)</span> <span class="ow">=</span> <span class="n">mappend</span> <span class="n">ys</span> <span class="p">(</span><span class="n">join</span> <span class="n">zss</span><span class="p">)</span>
+
+    <span class="n">return</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span>
+    <span class="n">return</span> <span class="n">y</span> <span class="ow">=</span> <span class="kt">Cons</span> <span class="n">y</span> <span class="n">mempty</span>
+</code></pre></div><p>It is conceptually simpler to understand the use of a monad in terms of a Kleisli category $\mathbf C^{\mathcal T}$ which is constructed using an endofunctor $\mathcal T \in [\mathbf C, \mathbf C]$, where the objects are $\mathrm{Obj}(\mathbf C^\mathcal T) = \mathrm{Obj}(\mathbf C)$ and morphisms are $A \to \mathcal T(B) \in \mathrm{Mor}(\mathbf C^\mathcal T)$ for $A,B \in \mathrm{Obj}(\mathbf C)$.</p>
+<p>Monads are extremely useful for separating pure computation from impure work (such as logging or any other operations involving side-effects). Following this style in any language is very useful for debugging and writing error-free code.</p>
+<p><strong>Example.</strong> (State monad?)</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">State</span> <span class="n">s</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">State</span> <span class="p">(</span><span class="n">s</span> <span class="ow">-&gt;</span> <span class="n">a</span><span class="p">)</span> <span class="n">s</span>
+</code></pre></div><h3 id="equivalence-of-adjunctions-and-unit-counit-pairs">Equivalence of Adjunctions and Unit-Counit Pairs</h3>
+<p>Two functors $\mathcal L\colon \mathbf C \to \mathbf D, \mathcal R \colon \mathbf D \to \mathbf C$ are called <em>adjoint</em> if they satisfy the following relations on hom-functors:</p>
+<p>$$\mathbf D(\mathcal L~A, B) \cong \mathbf C(A, \mathcal R~B)$$</p>
+<p>Specifically, $\mathcal L$ is <em>left-adjoint</em> to $\mathcal R$ and $\mathcal R$ is <em>right-adjoint</em> to $\mathcal L$. The pair $(\mathcal L, \mathcal R)$ is called an <em>adjunction</em>.</p>
+<p>A <em>unit</em> is defined as a natural transformation $\eta \colon \Delta_I \to \mathcal{I}$ with $\mathcal L \circ \mathcal R \circ \mathcal L \to \mathcal I$ and a <em>counit</em> is a natural transformation $\varepsilon\colon \mathcal I \to \mathcal R \circ \mathcal L \circ \mathcal R$.</p>
+<p><strong>Example.</strong> (Free-forgetful adjunction?)</p>
+<h3 id="algebras-and-coalgebras">Algebras and Coalgebras</h3>
+<p>Algebras and coalgebras are special categories defined using monads, with definitions as maps $\mathcal T(a) \to a$ and $a \to \mathcal T(a)$ respectfully. Certain categories are defined by using the following diagrams for objects and morphisms:</p>
+<p><strong>Example.</strong> (Fold catamorphism for list monad)</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">foldl</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span>
+<span class="nf">foldl</span> <span class="n">f</span> <span class="n">x</span> <span class="kt">Nil</span> <span class="ow">=</span> <span class="n">x</span>
+<span class="nf">foldl</span> <span class="n">f</span> <span class="n">x</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">y</span> <span class="n">ys</span><span class="p">)</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="n">ys</span>
+</code></pre></div><p>Using this, the definition of the monadic law <code>join</code> for <code>List</code> reduces to a special case of applying the monoidal laws to <code>foldl</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">join</span> <span class="ow">::</span> <span class="kt">List</span> <span class="p">(</span><span class="kt">List</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span>
+<span class="nf">join</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">mappend</span> <span class="n">mempty</span>
+</code></pre></div><blockquote>
+<p><strong>Hence we have been scammed to re-learn algebra.</strong></p>
+</blockquote>
+<h2 id="calculus">Calculus</h2>
+<h3 id="limits-and-colimits">Limits and Colimits</h3>
+<p>Let $\mathbf J$ be a category (with some arbitrary construction, usually referred to as a shape category), and $\mathbf C$ be a category (to be focused on). Then one defines a <em>diagram functor</em> $\mathcal D\colon \mathbf J \to \mathbf C$. This allows the construction of universal properties such as (co)products.</p>
+<h3 id="profunctors">Profunctors</h3>
+<p>Profunctors are special cases of bifunctors, which are set-valued functors defined on a product category $\mathbf D \times \mathbf C$, such that they are necessarily contravariant on the first argument (by convention). Hence a profunctor $\mathcal F \colon \mathbf D^{\mathrm{op}} \times \mathbf C \to \mathbf{Set}$. Wedges describe morphism mappings of profunctors?</p>
+<p><strong>Example.</strong> (Hom-profunctor)</p>
+<h3 id="ends-and-coends">Ends and Coends</h3>
+<p>The end is a terminal wedge, and the coend is an initial cowedge? These are denoted using integrals:</p>
+<p>$$\begin{aligned} \mathrm{End_\mathbf C} &amp; = \int_{A \in \mathrm{Obj}(\mathbf C)} \mathcal F (A, A) \\ \mathrm{Coend_\mathbf C} &amp; = \int^{A \in \mathrm{Obj}(\mathbf C)} \mathcal F (A, A)
+\end{aligned}$$</p>
+<p>These may look complicated, but they are basically the equivalents of integrals, viz. the limit of a product or a sum.</p>
+<p>(Surprisingly, a very interesting concept called a <em>Kan extension</em> can be defined in terms of an end.)</p>
+<blockquote>
+<p><strong>Hence we have been scammed to re-learn calculus.</strong></p>
+</blockquote>
+<!-- 
+## Number Theory
+
+### Lawvere Theories
+
+> **Hence we have been scammed to re-learn number theory.** -->
+<h2 id="category-theory">Category Theory</h2>
+<h3 id="2-categories">2-Categories</h3>
+<p>A $2$-category is a generalisation of a category, which is defined by the following axioms:</p>
+<ol>
+<li>Existence of $0$-morphisms (analogous to objects of a category).</li>
+<li>Existence of $1$-morphisms between $0$-morphisms (analogous to morphisms of a category).</li>
+<li>Existence of $2$-morphisms between $1$-morphisms (no analogous construction in a category).</li>
+</ol>
+<blockquote>
+<p><strong>Hence we have been scammed to re-learn category theory.</strong></p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/post/nonlinear-dynamics/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Nonlinear Dynamics — A Game of Computation (In Progress)</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/post/panel-methods/">
+        
+        
+            <div class="article-image">
+                <img src="/post/panel-methods/images/aeropython.ef8537f0e4805c93f164a1b955fe5faf_hu9407da34f33fa1ef28ea754b1f43ea28_133965_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="panel-methods" 
+                        data-hash="md5-74U38OSAXJPxZKG5Vf5frw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Aerodynamics — Viscous-Inviscid Interacting Panel Methods (In Progress)</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/post/opt-problems/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/opt-problems/XDSM.svg" loading="lazy" data-key="opt-problems" data-hash="/post/opt-problems/XDSM.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Gradient-Based Optimisation — Discrete Direct and Adjoint Methods (In Progress)</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/post/cfd-python/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/cfd-python/images/2DPoissonSurfStud.svg" loading="lazy" data-key="cfd-python" data-hash="/post/cfd-python/images/2DPoissonSurfStud.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computational Fluid Dynamics — CFDPython</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/post/fluid-dynamics/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Fluid Dynamics — A Flurry of Theory (In Progress)</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "godotmisogi" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2016 - 
+        
+        2021 ｢ALL FICTION｣
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -6,7 +6,16 @@
     <description>Recent content in Mathematics on ｢ALL FICTION｣</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Tue, 06 Apr 2021 21:53:06 +0530</lastBuildDate><atom:link href="https://godot-bloggy.xyz/categories/mathematics/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Sep 2021 12:54:58 +0800</lastBuildDate><atom:link href="https://godot-bloggy.xyz/categories/mathematics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Category Theory — Back to School</title>
+      <link>https://godot-bloggy.xyz/post/category-theory/</link>
+      <pubDate>Fri, 03 Sep 2021 12:54:58 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/post/category-theory/</guid>
+      <description>Introduction I studied category theory with Vyn from Bartosz Milewski&amp;rsquo;s book/blog Category Theory For Programmers in 2020, after a brief introduction from my course in Advanced Algebra at HKUST. Eventually we realised it&amp;rsquo;s just a scam to study mathematical concepts starting from primary school to itself. I list the concepts from memory which I usually find difficult to recall here, with attempted proofs without reference. The concepts are presented in the temporal sequence of standard mathematical education.</description>
+    </item>
+    
     <item>
       <title>Nonlinear Dynamics — A Game of Computation (In Progress)</title>
       <link>https://godot-bloggy.xyz/post/nonlinear-dynamics/</link>
