@@ -23,7 +23,17 @@
 &lt;/ol&gt;
 &lt;p&gt;Milewski provides a nice programmatic interpretation of functors as, to paraphrase, &amp;ldquo;contextual wrappers&amp;rdquo; around morphisms between objects. Haskell examples are useful for illustrative purposes, and have been presented whenever appropriate to elucidate this idea.&lt;/p&gt;
 &lt;h2 id=&#34;arithmetic&#34;&gt;Arithmetic&lt;/h2&gt;
-&lt;h3 id=&#34;yoneda-lemma&#34;&gt;Yoneda Lemma&lt;/h3&gt;
+&lt;h3 id=&#34;universal-properties&#34;&gt;Universal Properties&lt;/h3&gt;
+&lt;p&gt;The formal definition of a universal property is usually provided in terms of a comma category, or shape categories and diagram functors (shown later). Here we look at some special definitions which are &amp;ldquo;arithmetic&amp;rdquo; in nature.&lt;/p&gt;
+&lt;h4 id=&#34;products-and-coproducts-sums&#34;&gt;Products and Coproducts (Sums)&lt;/h4&gt;
+&lt;p&gt;A product is defined by the following diagram:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (Product) Cartesian product of two sets?&lt;/p&gt;
+&lt;p&gt;A product is defined by the following diagram, which applies a complicated technique called &lt;em&gt;dualisation&lt;/em&gt; to the product diagram, viz. flipping the arrows:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (Coproduct) Disjoint union of two sets?&lt;/p&gt;
+&lt;p&gt;In Haskell, the coproduct is represented as a sum type with the &amp;ldquo;divider&amp;rdquo; syntax &lt;code&gt;|&lt;/code&gt;, for example with the &lt;code&gt;Maybe&lt;/code&gt; and &lt;code&gt;Either&lt;/code&gt; types:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span class=&#34;kr&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Maybe&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Just&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Nothing&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Either&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Left&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Right&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;yoneda-lemma&#34;&gt;Yoneda Lemma&lt;/h3&gt;
 &lt;p&gt;Every preschooler has learnt the Yoneda lemma in kindergarten. Here we recall the general concepts and proofs.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition.&lt;/strong&gt; A locally small category is a category in which the morphisms between any two objects form a set.&lt;/p&gt;
 &lt;p&gt;Let $\mathbf C$ be a locally small category. Let $A \in \mathrm{Obj}(\mathbf C)$, $B \in \mathrm{Obj}(\mathbf{Set})$.&lt;/p&gt;
@@ -37,18 +47,9 @@
    α_A                   α_B
     ↓                     ↓
    C(A)   ----C(f)--→    C(B)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;universal-properties&#34;&gt;Universal Properties&lt;/h3&gt;
-&lt;p&gt;The formal definition of a universal property is usually provided in terms of a comma category, or shape categories and diagram functors (shown later). Here we look at some special definitions which are &amp;ldquo;arithmetic&amp;rdquo; in nature.&lt;/p&gt;
-&lt;h4 id=&#34;products-and-coproducts-sums&#34;&gt;Products and Coproducts (Sums)&lt;/h4&gt;
-&lt;p&gt;A product is defined by the following diagram:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (Product) Cartesian product of two sets?&lt;/p&gt;
-&lt;p&gt;A product is defined by the following diagram, which applies a complicated technique called &lt;em&gt;dualisation&lt;/em&gt; to the product diagram, viz. flipping the arrows:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (Coproduct) Disjoint union of two sets?&lt;/p&gt;
-&lt;p&gt;In Haskell, the coproduct is represented as a sum type with the &amp;ldquo;divider&amp;rdquo; syntax &lt;code&gt;|&lt;/code&gt;, for example with the &lt;code&gt;Maybe&lt;/code&gt; and &lt;code&gt;Either&lt;/code&gt; types:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span class=&#34;kr&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Maybe&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Just&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Nothing&lt;/span&gt;
-&lt;span class=&#34;kr&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Either&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Left&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Right&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;representable-functors&#34;&gt;Representable Functors&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (Forgetful functor.)&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Hence we have been scammed to re-learn arithmetic.&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;algebra&#34;&gt;Algebra&lt;/h2&gt;
@@ -56,14 +57,15 @@
 &lt;p&gt;In algebra, a monoid is defined by an associative multiplication $\mu$ and a unit map $\eta$. A monoidal category defines a unit map over a monoidal product (canonically denoted using the tensor product symbol $\otimes$), and assumes the existence of a special object $I \in \mathbf C$ such that a unit map $\eta \colon I \to A$ is defined for any object $A \in \mathrm{Obj}(\mathbf C)$. The multiplication, unit, and associators are encoded in the following commutative diagrams:&lt;/p&gt;
 &lt;h3 id=&#34;monads&#34;&gt;Monads&lt;/h3&gt;
 &lt;p&gt;In the words of Saunders Mac Lane: &amp;ldquo;A monad is just a monoid in the category of endofunctors&amp;rdquo;. This (intentionally obfuscating) definition is ubiquitous for scaring programmers, and perhaps anyone unfamiliar with category theory. Here we attack the problem directly using the definitions.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (List monad)&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;List&lt;/code&gt; is the canonical example of a monad as a polymorphic recursive sum type.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (List monad.)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;List&lt;/code&gt; is the canonical example of a monad as a polymorphic recursive sum type. First we define its type.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span class=&#34;kr&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Nil&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Cons&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;First we define the functor-mapping rules:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now we define it as a functor, with functor-mapping rules such that any morphism &lt;code&gt;f: a -&amp;gt; b&lt;/code&gt; is mapped onto every element of the list.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span class=&#34;kr&#34;&gt;instance&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Functor&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;where&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;fmap&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;::&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;fmap&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Nil&lt;/span&gt;         &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Nil&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;fmap&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;Cons&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ys&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Cons&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fmap&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ys&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now we define the monoidal laws for appending two lists by recursion:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now we define the monoidal laws for appending two lists by recursion.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span class=&#34;kr&#34;&gt;instance&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Monoid&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;where&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;mappend&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;::&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;mappend&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ys&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Nil&lt;/span&gt;         &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ys&lt;/span&gt;
@@ -88,12 +90,13 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;equivalence-of-adjunctions-and-unit-counit-pairs&#34;&gt;Equivalence of Adjunctions and Unit-Counit Pairs&lt;/h3&gt;
 &lt;p&gt;Two functors $\mathcal L\colon \mathbf C \to \mathbf D, \mathcal R \colon \mathbf D \to \mathbf C$ are called &lt;em&gt;adjoint&lt;/em&gt; if they satisfy the following relations on hom-functors:&lt;/p&gt;
 &lt;p&gt;$$\mathbf D(\mathcal L~A, B) \cong \mathbf C(A, \mathcal R~B)$$&lt;/p&gt;
-&lt;p&gt;Specifically, $\mathcal L$ is &lt;em&gt;left-adjoint&lt;/em&gt; to $\mathcal R$ and $\mathcal R$ is &lt;em&gt;right-adjoint&lt;/em&gt; to $\mathcal L$. The pair $(\mathcal L, \mathcal R)$ is called an &lt;em&gt;adjunction&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;A &lt;em&gt;unit&lt;/em&gt; is defined as a natural transformation $\eta \colon \Delta_I \to \mathcal{I}$ with $\mathcal L \circ \mathcal R \circ \mathcal L \to \mathcal I$ and a &lt;em&gt;counit&lt;/em&gt; is a natural transformation $\varepsilon\colon \mathcal I \to \mathcal R \circ \mathcal L \circ \mathcal R$.&lt;/p&gt;
+&lt;p&gt;Specifically, $\mathcal L$ is &lt;em&gt;left-adjoint&lt;/em&gt; to $\mathcal R$ and $\mathcal R$ is &lt;em&gt;right-adjoint&lt;/em&gt; to $\mathcal L$. The pair $(\mathcal L, \mathcal R)$ is called an &lt;em&gt;adjunction&lt;/em&gt;. Composing these functors with each other give endofunctors of the respective category depending on the order.&lt;/p&gt;
+&lt;p&gt;A &lt;em&gt;unit&lt;/em&gt; is defined from an adjunction as a natural transformation $\eta\colon \mathcal I_{\mathbf D} \to \mathcal R \circ \mathcal L$.&lt;/p&gt;
+&lt;p&gt;A &lt;em&gt;counit&lt;/em&gt; is a natural transformation $\varepsilon\colon \mathcal L \circ \mathcal R \to \mathcal I_{\mathbf C}$.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (Free-forgetful adjunction?)&lt;/p&gt;
 &lt;h3 id=&#34;algebras-and-coalgebras&#34;&gt;Algebras and Coalgebras&lt;/h3&gt;
 &lt;p&gt;Algebras and coalgebras are special categories defined using monads, with definitions as maps $\mathcal T(a) \to a$ and $a \to \mathcal T(a)$ respectfully. Certain categories are defined by using the following diagrams for objects and morphisms:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (Fold catamorphism for list monad)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; (Fold catamorphism for list monad.)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span class=&#34;nf&#34;&gt;foldl&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;::&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;List&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;
 &lt;span class=&#34;nf&#34;&gt;foldl&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Nil&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
 &lt;span class=&#34;nf&#34;&gt;foldl&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;Cons&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ys&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;foldl&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ys&lt;/span&gt;
@@ -143,54 +146,49 @@
         <pubDate>Tue, 06 Apr 2021 21:53:06 +0530</pubDate>
         
         <guid>https://godot-bloggy.xyz/post/nonlinear-dynamics/</guid>
-        <description>&lt;h2 id=&#34;volterra-equation&#34;&gt;Volterra Equation&lt;/h2&gt;
+        <description>&lt;img src="https://godot-bloggy.xyz/post/nonlinear-dynamics/images/wabbitsfoxes.svg" alt="Featured image of post Nonlinear Dynamics — A Game of Computation (In Progress)" /&gt;&lt;h2 id=&#34;lotka-volterra-equation&#34;&gt;Lotka-Volterra Equation&lt;/h2&gt;
 &lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
-&lt;p&gt;The Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment.&lt;/p&gt;
-&lt;p&gt;Consider $x$ as the number of rabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\dot x &amp;amp; = \alpha x - \eta yx, &amp;amp; \alpha, \eta &amp;gt; 0 \\
-\dot y &amp;amp; = -\beta y + \lambda xy, &amp;amp; \beta, \lambda &amp;gt; 0 \\
-\end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Physically, these equations can be read off in the following manner: The change in the population of rabbits depends on a rate $\alpha$ proportional to the current population, and decreases at a rate $\eta$ proportional to the populations of foxes and rabbits, and similarly for the change in the population of foxes.&lt;/p&gt;
+&lt;p&gt;The Lotka-Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment. Here we will play with the populations of wabbits and foxes. Consider $x$ as the number of wabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations.&lt;/p&gt;
+&lt;p&gt;$$ \begin{aligned} 
+\dot x &amp;amp; = \alpha x - \eta yx, &amp;amp; \alpha, \eta &amp;gt; 0 \\ 
+\dot y &amp;amp; = -\beta y + \lambda xy, &amp;amp; \beta, \lambda &amp;gt; 0 \\ 
+\end{aligned} $$&lt;/p&gt;
+&lt;p&gt;Physically, these equations can be read off in the following manner: The change in the population of wabbits depends on a rate $\alpha$ proportional to the current population, and decreases at a rate $\eta$ proportional to the populations of foxes and wabbits, and similarly for the change in the population of foxes.&lt;/p&gt;
 &lt;h3 id=&#34;critical-points&#34;&gt;Critical Points&lt;/h3&gt;
-&lt;p&gt;The critical points of the system are the points at which the right-hand-sides are simultaneously zero. In this case, it&amp;rsquo;s simple to evaluate by hand.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-x(\alpha - \eta y) &amp;amp; = 0 \\
+&lt;p&gt;The critical points of the system $(x_c, y_c)$ are the points at which the right-hand-sides are simultaneously zero. In this case, it&amp;rsquo;s simple to evaluate by hand.&lt;/p&gt;
+&lt;p&gt;$$ \begin{aligned} 
+x(\alpha - \eta y) &amp;amp; = 0 \\ 
 y(\lambda x - \beta) &amp;amp; = 0
-\end{aligned} \\
-\implies (x_c, y_c) = \left\{ (0, 0), \left(\frac{\beta}{\lambda}, \frac{\alpha}{\eta}\right) \right\}
-$$&lt;/p&gt;
+\end{aligned} \\ 
+\implies (x_c, y_c) = \left\{ (0, 0), \left(\frac{\beta}{\lambda}, \frac{\alpha}{\eta}\right) \right\} $$&lt;/p&gt;
 &lt;h4 id=&#34;stability&#34;&gt;Stability&lt;/h4&gt;
-&lt;p&gt;At $(x_c, y_c) = (0, 0)$, any perturbation in $x$ while keeping $y$ fixed results in an increase in $\dot x$, hence it is unstable in this direction, and vice versa for $y$ and $\dot y$. This results in the following phase? plot.&lt;/p&gt;
+&lt;p&gt;At $(x_c, y_c) = (0, 0)$, any perturbation in $x$ while keeping $y$ fixed results in an increase in $\dot x$, hence it is unstable in this direction, and vice versa for $y$ and $\dot y$.&lt;/p&gt;
 &lt;p&gt;At $(x_c, y_c) = \left(\dfrac{\beta}{\lambda}, \dfrac{\alpha}{\eta}\right)$, we must evaluate the system by linearisation.&lt;/p&gt;
 &lt;h3 id=&#34;computation&#34;&gt;Computation&lt;/h3&gt;
-&lt;p&gt;Let&amp;rsquo;s do it &lt;del&gt;to&lt;/del&gt; in Julia.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;n&#34;&gt;f1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;f2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;β&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;β&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;DifferentialEquations&lt;/code&gt; package in Julia makes this very easy to evaluate. As this is an initial value problem, the following functions show the required setup:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;volterra!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
-
-    &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-
-&lt;span class=&#34;n&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;β&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; 
-       &lt;span class=&#34;n&#34;&gt;β&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;x0&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;β&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;η&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We now set up a problem in the format of &lt;code&gt;DifferentialEquations&lt;/code&gt; and evaluate it:&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s do it &lt;del&gt;to&lt;/del&gt; in Julia. The &lt;a class=&#34;link&#34; href=&#34;https://diffeq.sciml.ai/stable/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;code&gt;DifferentialEquations.jl&lt;/code&gt;&lt;/a&gt; package in Julia makes the setup and integration of this system very easy. The syntax of the code using the &lt;code&gt;@ode_def&lt;/code&gt; macro from &lt;a class=&#34;link&#34; href=&#34;https://github.com/SciML/ParameterizedFunctions.jl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;code&gt;ParametrizedFunctions.jl&lt;/code&gt;&lt;/a&gt; looks very similar to the mathematical presentation of the system of first-order ODEs.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DifferentialEquations&lt;/span&gt;
 
-&lt;span class=&#34;n&#34;&gt;tspan&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;500.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;prob&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ODEProblem&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;volterra!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tspan&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;sol&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;solve&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prob&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;maxiters&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;500&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Very short code!&lt;/p&gt;
-&lt;p&gt;(&lt;em&gt;My second personality&lt;/em&gt;: But probably not shorter than the Haskell equivalent.)&lt;/p&gt;
-&lt;p&gt;(&lt;em&gt;My third personality to the second&lt;/em&gt;: Weird flex, but ok.)&lt;/p&gt;
+&lt;span class=&#34;c&#34;&gt;## ODE definition&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;lotka_volterra&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nd&#34;&gt;@ode_def&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LotkaVolterra&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;dx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;    &lt;span class=&#34;c&#34;&gt;# Wabbit growth/decay&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;dy&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;β&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;    &lt;span class=&#34;c&#34;&gt;# Fox growth/decay&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;β&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As this is an initial value problem, we specify the initial conditions, parameters, and the timespan for evaluation. Let&amp;rsquo;s start with $5$ wabbits and $1$ fox. The growth of wabbits is set to $2$ wabbits per second and the decay of foxes is set to $1$ fox per second. The decay of wabbits due to the fox population and the growth of foxes due to the rabbit population are both set to $1$ animal per second. Let&amp;rsquo;s evaluate the evolution of this system for $1$ minute.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;c&#34;&gt;## Inputs and parameters&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;β&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;     &lt;span class=&#34;c&#34;&gt;# Growth/decay parameters&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;η&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;     &lt;span class=&#34;c&#34;&gt;# Coupling parameters&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  
+          &lt;span class=&#34;n&#34;&gt;β&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;x0&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;tspan&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;60.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now we prepare an &lt;code&gt;ODEProblem&lt;/code&gt; and call &lt;code&gt;solve&lt;/code&gt; to begin the integration of the differential equations.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;c&#34;&gt;## ODEProblem and solution&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;run&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ODEFunction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lotka_volterra&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;syms&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Wabbits&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Foxes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;prob&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ODEProblem&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tspan&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;sol&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;solve&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prob&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This setup is sufficient to run the problem. Very short code!  (&lt;em&gt;My second personality&lt;/em&gt;: But probably not shorter than the Haskell equivalent.) (&lt;em&gt;My third personality to the second&lt;/em&gt;: Weird flex, but ok.) Let&amp;rsquo;s plot the results.&lt;/p&gt;
 &lt;center&gt;
 
   
@@ -205,32 +203,57 @@ Plotly.d3.json(&#34;/post/nonlinear-dynamics/images/wabbitsfoxes.json&#34;, func
 });
 &lt;/script&gt;
 &lt;/center&gt;
-&lt;p&gt;Notice how, after the maximum population of rabbits in a period, the population of foxes increases while the population of rabbits decreases to a local minimum. The foxes then quickly die off to a minimum and the population of rabbits increases, repeating the cycle.&lt;/p&gt;
+&lt;p&gt;Notice how, after the maximum population of wabbits in a period, the population of foxes increases while the population of wabbits decreases to a local minimum. The foxes then quickly die off to a minimum and the population of wabbits increases, repeating the periodic cycle.&lt;/p&gt;
+&lt;p&gt;Now let&amp;rsquo;s observe the behaviour near the second critical point. As this point is stable, it is expected that the population dynamics will not vary much until the numbers reach the other critical point, so let&amp;rsquo;s run it for a longer time of about $3$ minutes.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;c&#34;&gt;## Near stable critical point&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;x0&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;β&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;λ&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.01&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;α&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.01&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;tspan&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;180.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;center&gt;
+
+
+
+&lt;div id=&#34;/post/nonlinear-dynamics/images/wabbitsfoxes-critical.json&#34; class=&#34;plotly&#34; style=&#34;width:100%&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+Plotly.d3.json(&#34;/post/nonlinear-dynamics/images/wabbitsfoxes-critical.json&#34;, function(err, fig) {
+    Plotly.plot(&#39;\/post\/nonlinear-dynamics\/images\/wabbitsfoxes-critical.json&#39;, fig.data, fig.layout, {responsive: true});
+});
+&lt;/script&gt;
+&lt;/center&gt;
+&lt;p&gt;Here we observe a periodic solution with low amplitude which appears to be slowly diverging as expected.&lt;/p&gt;
 &lt;h2 id=&#34;falkner-skan-boundary-layer-equations&#34;&gt;Falkner-Skan Boundary Layer Equations&lt;/h2&gt;
 &lt;p&gt;The Falkner-Skan transformation of the thin shear layer equations governing boundary layers is given by the following third-order differential equation:&lt;/p&gt;
-&lt;p&gt;$$ f&#39;&#39;&#39; + \left(\frac{1 + a}{2}\right) f f&#39;&#39; + a\left[1 - (f&#39;)^2\right] = 0 $$&lt;/p&gt;
-&lt;p&gt;with boundary conditions $f(0) = f&#39;(0) = 0, ~ f&#39;(\eta) = 1$, where $\eta$ is some specified upper bound. This can be expressed in terms of an autonomous system of first-order differential equations: $\dot{\mathbf x} = \mathbf f(\mathbf x, \mathbf p, η)$ by setting each derivative as an independent variable. So we define the function for the governing ODE:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;falkner_skan_ODE!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;du&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;U&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;       &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;du&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;U&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;du&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt;             
-    &lt;span class=&#34;n&#34;&gt;du&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;F&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;U&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;^&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-
-    &lt;span class=&#34;nb&#34;&gt;nothing&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;p&gt;$$ F&#39;&#39;&#39; + \left(\frac{1 + a}{2}\right) F F&#39;&#39; + a\left[1 - (F&#39;)^2\right] = 0 $$&lt;/p&gt;
+&lt;p&gt;with boundary conditions $F(0) = F&#39;(0) = 0, ~ F&#39;(\eta) = 1$, where $\eta$ is some specified upper bound. This can be expressed in terms of an autonomous system of first-order differential equations: $\dot{\mathbf x} = \mathbf f(\mathbf x, \mathbf p, η)$ by setting each derivative as an independent variable.&lt;/p&gt;
+&lt;p&gt;$$ \frac{d}{dt} 
+\begin{bmatrix} 
+F \\ 
+U \\ 
+S 
+\end{bmatrix} = 
+\begin{bmatrix} 
+U \\ 
+S \\ 
+-\left(\frac{1 + a}{2}\right) FS - a \left(1 - U^2\right)
+\end{bmatrix} $$&lt;/p&gt;
+&lt;h3 id=&#34;computation-1&#34;&gt;Computation&lt;/h3&gt;
+&lt;p&gt;So we define the function for the governing ODE:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;n&#34;&gt;falkner_skan&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nd&#34;&gt;@ode_def&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FalknerSkan&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;dF&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;U&lt;/span&gt;                                   
+    &lt;span class=&#34;n&#34;&gt;dU&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt;                                   
+    &lt;span class=&#34;n&#34;&gt;dS&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;F&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;U&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;^&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As this is a boundary value problem, in contrast to the previous initial value problem, another function is required to specify the boundary conditions. Note that the distinction between initial value and boundary value problems is &amp;ldquo;superficial&amp;rdquo;, and the mathematical treatment is generally identical as the formulation of &amp;lsquo;space&amp;rsquo; curves passing through specified points.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;falkner_skan_BC!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;              &lt;span class=&#34;c&#34;&gt;# η = 0, F = 0&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;              &lt;span class=&#34;c&#34;&gt;# η = 0, F&amp;#39; = 0&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;        &lt;span class=&#34;c&#34;&gt;# η = ηₑ, F&amp;#39; = 1&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;falkner_skan_BC!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bcs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;η&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;bcs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;        &lt;span class=&#34;c&#34;&gt;# η = 0,  F  = 0&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;bcs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;        &lt;span class=&#34;c&#34;&gt;# η = 0,  F&amp;#39; = 0&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;bcs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;  &lt;span class=&#34;c&#34;&gt;# η = ηₑ, F&amp;#39; = 1&lt;/span&gt;
 
     &lt;span class=&#34;nb&#34;&gt;nothing&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now we feed the functions to &lt;code&gt;DifferentialEquations&lt;/code&gt;, using a Mono-Implicit Runge-Kutta integration scheme to solve the discretised equations as a fully implicit system.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;n&#34;&gt;ηs&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;10.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now we feed the functions as a &lt;code&gt;BVProblem&lt;/code&gt; with the ODE and the boundary conditions, using a Mono-Implicit Runge-Kutta integration scheme to solve the discretised equations as a fully implicit system for stable integration.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;n&#34;&gt;ηs&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;12.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;n&#34;&gt;x0&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;5.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; 
-&lt;span class=&#34;n&#34;&gt;as&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;as&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.092&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
 
 &lt;span class=&#34;n&#34;&gt;prob&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BVProblem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;Ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;falkner_skan_ODE!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;falkner_skan_BC!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ηs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;syms&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;δ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]))&lt;/span&gt;
 &lt;span class=&#34;n&#34;&gt;sol&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;solve&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prob&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GeneralMIRK4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2e-1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -238,14 +261,14 @@ Plotly.d3.json(&#34;/post/nonlinear-dynamics/images/wabbitsfoxes.json&#34;, func
 
 
 
-&lt;div id=&#34;/post/nonlinear-dynamics/images/lol.json&#34; class=&#34;plotly&#34; style=&#34;width:100%&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;/post/nonlinear-dynamics/images/falknerskan.json&#34; class=&#34;plotly&#34; style=&#34;width:100%&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
-Plotly.d3.json(&#34;/post/nonlinear-dynamics/images/lol.json&#34;, function(err, fig) {
-    Plotly.plot(&#39;\/post\/nonlinear-dynamics\/images\/lol.json&#39;, fig.data, fig.layout, {responsive: true});
+Plotly.d3.json(&#34;/post/nonlinear-dynamics/images/falknerskan.json&#34;, function(err, fig) {
+    Plotly.plot(&#39;\/post\/nonlinear-dynamics\/images\/falknerskan.json&#39;, fig.data, fig.layout, {responsive: true});
 });
 &lt;/script&gt;
 &lt;/center&gt;
-&lt;p&gt;Here we can observe an inflection point at some specific value of $U/U_e$. Can we figure this out analytically?&lt;/p&gt;
+&lt;p&gt;Here we can observe the incepient separation point at a specific value of $a \approx -0.0904$. Can this be figured out analytically?&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -302,7 +325,7 @@ $$ \nabla^2 \phi = \nabla^2\left(\Phi + \Phi_\infty\right) = 0 $$&lt;/p&gt;
 &lt;p&gt;Discretise the equation for a foil, in which $N$ panels are assigned to the foil, and $N_w$ panels are assigned to the wake.&lt;/p&gt;
 &lt;p&gt;Assigning each panel on the foil a constant doublet strength $\phi$, and assign all panels constant source strengths $\sigma$, giving the following:&lt;/p&gt;
 &lt;p&gt;$$ \Phi_{\infty}(x,y) + \sum_{j = 1}^N \left(\frac{\sigma}{\pi}\int_{\text{panel}}\ln r \ dS\right)_j - \sum_{j = 1}^N \left(\frac{\phi}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\right)_j = \phi_p(x,y) $$&lt;/p&gt;
-&lt;p&gt;Let:
+&lt;p&gt;Let: 
 $$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|_j, \quad A_j \equiv -\frac{1}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\bigg|_j$$&lt;/p&gt;
 &lt;p&gt;For foil panels, we get the following system of equations:&lt;/p&gt;
 &lt;p&gt;$$ A \phi + \vec\Phi^{*} = \vec\Phi_{\infty} - B\sigma $$&lt;/p&gt;
@@ -325,34 +348,34 @@ $$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|_j, \quad A_j \equ
 &lt;h2 id=&#34;real-viscous-flow&#34;&gt;Real Viscous Flow&lt;/h2&gt;
 &lt;h3 id=&#34;doublet-expressions&#34;&gt;Doublet Expressions&lt;/h3&gt;
 &lt;p&gt;For viscous modelling, we deal with the first case using the wall transpiration model on the EIF. First, we express the edge velocities over the panels, which are the tangential derivatives of the exterior potential, expressed as sum of the internal potential and the potential &amp;lsquo;jump&amp;rsquo; across the singularity distribution: $\Phi^{*}_\text{ext} = \Phi^{*}_\text{int} - \phi$. In case 1: $\Phi^{*}_\text{int} = c \in \mathbb R$, and $\phi = \Phi_{\infty} +???$.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\vec u_e =
-\begin{cases}
-\vec U_s^f - \dfrac{d\phi}{ds} &amp;amp; \text{Airfoil} \\
-&amp;amp; \\
-\vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp;amp; \text{Wake}
-\end{cases}
-\end{aligned}
+&lt;p&gt;$$ 
+\begin{aligned} 
+\vec u_e = 
+\begin{cases} 
+\vec U_s^f - \dfrac{d\phi}{ds} &amp;amp; \text{Airfoil} \\ 
+&amp;amp; \\ 
+\vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp;amp; \text{Wake} 
+\end{cases} 
+\end{aligned} 
 $$&lt;/p&gt;
 &lt;p&gt;Substituting the solution for $\phi$ from case 1, we obtain the following matrix expression:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\vec u_e &amp;amp; = \vec U_s - \frac{d}{ds}
-\begin{bmatrix} P \\
+\vec u_e &amp;amp; = \vec U_s - \frac{d}{ds} 
+\begin{bmatrix} P \\ 
 \hline A^w P + B^w
-\end{bmatrix}
+\end{bmatrix} 
 \vec\sigma
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;Now express the sources in terms of the mass defect $m = u_e\delta^*$:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\sigma_j &amp;amp; = \left(\frac{dm}{ds}\right)_j \\
+\sigma_j &amp;amp; = \left(\frac{dm}{ds}\right)_j \\ 
 \vec u_e &amp;amp; = \vec U_s - \frac{d}{ds}
 \begin{bmatrix}
-P \\
-\hline A^wP + B
+P \\ 
+\hline A^wP + B 
 \end{bmatrix}
 \frac{d\vec m}{ds}
 \end{aligned}
@@ -360,33 +383,33 @@ $$&lt;/p&gt;
 &lt;p&gt;This gives a differential equation for $\vec u_e$.&lt;/p&gt;
 &lt;h3 id=&#34;difference-operators&#34;&gt;Difference Operators&lt;/h3&gt;
 &lt;p&gt;Define the following operator $\Delta^+\colon \mathbb R^n \to \mathbb R^{n-1}, n \in \mathbb N^+$ to evaluate forward differences with matrix representation:&lt;/p&gt;
-&lt;p&gt;$$
-\Delta^+ \equiv
-\begin{bmatrix}
--1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\
-0 &amp;amp; -1 &amp;amp; 1 &amp;amp; \ldots &amp;amp; 0 \\
-\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\
-0 &amp;amp; \ldots &amp;amp; -1 &amp;amp; 1 &amp;amp; 0 \\
-0 &amp;amp; \ldots &amp;amp; 0 &amp;amp; -1 &amp;amp; 1
-\end{bmatrix}
+&lt;p&gt;$$ 
+\Delta^+ \equiv 
+\begin{bmatrix} 
+-1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\ 
+0 &amp;amp; -1 &amp;amp; 1 &amp;amp; \ldots &amp;amp; 0 \\ 
+\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\ 
+0 &amp;amp; \ldots &amp;amp; -1 &amp;amp; 1 &amp;amp; 0 \\ 
+0 &amp;amp; \ldots &amp;amp; 0 &amp;amp; -1 &amp;amp; 1 
+\end{bmatrix} 
 $$&lt;/p&gt;
 &lt;p&gt;Difference operators can be used to generically compute $n$th order differences up to desired accuracy.&lt;/p&gt;
 &lt;p&gt;The following operator $\Delta^C\colon \mathbb R^n \to \mathbb R^n$ constructs central differences with forward and backward differencing at the endpoints:&lt;/p&gt;
 &lt;p&gt;$$
 \Delta^c \equiv
 \begin{bmatrix}
--1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\
--1/2 &amp;amp; 0 &amp;amp; 1/2 &amp;amp; \ldots &amp;amp; 0 \\
-\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\
-0 &amp;amp; \ldots &amp;amp; -1/2 &amp;amp; 0 &amp;amp; 1/2 \\
+-1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\ 
+-1/2 &amp;amp; 0 &amp;amp; 1/2 &amp;amp; \ldots &amp;amp; 0 \\ 
+\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\ 
+0 &amp;amp; \ldots &amp;amp; -1/2 &amp;amp; 0 &amp;amp; 1/2 \\ 
 0 &amp;amp; \ldots &amp;amp; 0 &amp;amp; -1 &amp;amp; 1
 \end{bmatrix}
 $$&lt;/p&gt;
 &lt;h2 id=&#34;boundary-layer-equations&#34;&gt;Boundary Layer Equations&lt;/h2&gt;
 &lt;p&gt;The thin shear boundary layer equations are obtained via the defect formulation and the thin shear approximations of the Navier-Stokes equations.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \quad (\textsf{Momentum}) \\
+&lt;p&gt;$$ 
+\begin{aligned} 
+\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \quad (\textsf{Momentum}) \\ 
 \frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp;amp; = 0 \quad (\textsf{Kinetic Energy})
 \end{aligned}
 $$&lt;/p&gt;
@@ -401,8 +424,8 @@ $$&lt;/p&gt;
 &lt;p&gt;The following functional dependencies are used to close the system:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-H^* &amp;amp; = H^*(H) \\
-C_f &amp;amp; = C_f(H, Re_\theta) \\
+H^* &amp;amp; = H^*(H) \\ 
+C_f &amp;amp; = C_f(H, Re_\theta) \\ 
 C_\mathcal D &amp;amp; = C_\mathcal D(H, Re_\theta)
 \end{aligned}
 $$&lt;/p&gt;
@@ -420,28 +443,28 @@ $$&lt;/p&gt;
 &lt;p&gt;Resulting in the following discrete BL equations:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^*}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp;amp; = 0 \\
+\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^*}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp;amp; = 0 \\ 
 \frac{\Delta H^*}{\Delta s} + H_a^*(1 - H_a)\frac{\theta_a}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - 2c_{\mathcal{D}_a} + H_a^*\frac{c_{f_a}}{2} &amp;amp; = 0
 \end{aligned}
 $$&lt;/p&gt;
 &lt;h2 id=&#34;residual-equations&#34;&gt;Residual Equations&lt;/h2&gt;
-&lt;p&gt;$$
+&lt;p&gt;$$ 
 \begin{aligned}
-\nabla^2 \phi &amp;amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\
-\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \\
+\nabla^2 \phi &amp;amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\ 
+\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \\ 
 \frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp;amp; = 0
 \end{aligned}
 $$&lt;/p&gt;
 &lt;h3 id=&#34;discretisation-2&#34;&gt;Discretisation&lt;/h3&gt;
 &lt;p&gt;The discretised inviscid and viscous equations form the following system of equations to be solved for $m,~\theta,~\tilde n$.&lt;/p&gt;
 &lt;p&gt;$$
-\begin{aligned}
+\begin{aligned} 
 \mathbf u_e - \mathbf U_s + \frac{d}{ds}
-\begin{bmatrix}
-P \\
-\hline A^wP + B
-\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^*)}{\Delta s} &amp;amp; = \mathcal R_1(\mathbf m) \\
-\frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp;amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\
+\begin{bmatrix} 
+P \\ 
+\hline A^wP + B 
+\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^*)}{\Delta s} &amp;amp; = \mathcal R_1(\mathbf m) \\ 
+\frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp;amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\ 
 \frac{\Delta H^*}{H^*_a} + \left(1 - H\right)\frac{\Delta u_e}{u_{e}} + \left(\frac{c_{f}}{2} - \frac{2C_{\mathcal D}}{H^*} \right) \frac{\Delta s}{\theta} &amp;amp; = \mathcal R_3(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
 \end{aligned}
 $$&lt;/p&gt;
@@ -511,7 +534,7 @@ $$&lt;/p&gt;
 &lt;p&gt;$$ \boldsymbol\psi = \frac{d \mathbf p}{d\mathbf x} = -\left(\frac{\partial \mathbf R}{\partial\mathbf p}\right)^{-1} \frac{\partial \mathbf R}{\partial \mathbf x} $$&lt;/p&gt;
 &lt;p&gt;The direct method hence solves the following linear system by left multiplication of $\partial \mathbf R / \partial \mathbf p$:
 $$ \frac{\partial \mathbf R}{\partial \mathbf p}\boldsymbol \psi = -\frac{\partial \mathbf R}{\partial \mathbf x}$$&lt;/p&gt;
-&lt;p&gt;Notice that this expression is almost identical to the Newton step, extended to total derivatives with respect to the design variables. Essentially, the RHS is a matrix whose number of columns increases linearly with the number of design variables. This corresponds to numerous linear equations, one for each column of the RHS corresponding to a design variable. The big Jacobian on the LHS is already computed from the Newton step, and only the RHS needs to be computed. If you have the factorisation of the Jacobian from the Newton step, it could be very efficient to simply reuse the factorisation and back-substitute to solve the numerous equations if the RHS is not very expensive to compute.&lt;/p&gt;
+&lt;p&gt;Notice that this expression is almost identical to the Newton step, extended to total derivatives with respect to the design variables. Essentially, the right-hand-side (RHS) is a matrix whose number of columns increases linearly with the number of design variables. This corresponds to numerous linear equations, one for each column of the RHS corresponding to a design variable. The big Jacobian on the left-hand-side is already computed from the Newton step, and only the RHS needs to be computed. If you have the factorisation of the Jacobian from the Newton step, it could be very efficient to simply reuse the factorisation and back-substitute to solve the numerous equations if the RHS is not very expensive to compute.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;solve_direct&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;∂R∂u_sq&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])))&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;reshape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hcat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂u_sq&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;\&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;∂R∂x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eachindex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
@@ -621,10 +644,10 @@ $$ \left(\frac{I}{\Delta t} + 1\right)? \mathbf J_i d\mathbf x_i = -\mathbf f_i 
 &lt;p&gt;This can be solved via the method of Green functions:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\nabla_N^2 G(\vec x, \vec x_0) &amp;amp; = \delta(\vec x - \vec x_0) \\
-\int_{-\infty}^{\infty} \left[\nabla_N^2 G(\vec x, \vec x_0)\right]  e^{i\vec k \cdot \vec x}\ d\vec x &amp;amp; = \int_{-\infty}^{\infty} \delta(\vec x - \vec x_0) e^{i\vec k \cdot \vec x}\ d\vec x \\
-|\vec k|^2 G(\vec k, \vec x_0) &amp;amp; = e^{i \vec k \cdot \vec x_0} \\
-\implies G(\vec x, \vec x_0) &amp;amp; = \frac{1}{(2\pi)^N}\int_{-\infty}^{\infty} \frac{e^{-i \vec k \cdot (\vec x -\vec x_0)}}{|\vec k|^2} \ d\vec k
+\nabla_N^2 G(\vec x, \vec x_0) &amp;amp; = \delta(\vec x - \vec x_0) \\ 
+\int_{-\infty}^{\infty} \left[\nabla_N^2 G(\vec x, \vec x_0)\right]  e^{i\vec k \cdot \vec x}\ d\vec x &amp;amp; = \int_{-\infty}^{\infty} \delta(\vec x - \vec x_0) e^{i\vec k \cdot \vec x}\ d\vec x \\ 
+|\vec k|^2 G(\vec k, \vec x_0) &amp;amp; = e^{i \vec k \cdot \vec x_0} \\ 
+\implies G(\vec x, \vec x_0) &amp;amp; = \frac{1}{(2\pi)^N}\int_{-\infty}^{\infty} \frac{e^{-i \vec k \cdot (\vec x -\vec x_0)}}{|\vec k|^2} \ d\vec k 
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;Laplace&amp;rsquo;s equation is spherically symmetric in $N$ dimensions (evident from the $|\vec k|^2$ term), so expressing the integral in a $N$-spherical polar coordinate system will be more convenient. This is singular with multiple poles at $\vec k = \vec 0$, so the contour must be deformed in the complex plane.&lt;/p&gt;
@@ -976,9 +999,9 @@ $$&lt;/p&gt;
 &lt;p&gt;To find the inverse spatial Fourier transform, we invoke the convolution theorem:&lt;/p&gt;
 &lt;p&gt;$$ u(x,t) = \mathcal F_x^{-1}\left[u_F(k,t)\right] =  \mathcal F_x^{-1}[u(k,0)] * \mathcal F_x^{-1} \left[e^{-\nu k^2 t}\right] = u(x,0) * \mathcal F_x^{-1} \left[e^{-\nu k^2 t}\right] $$&lt;/p&gt;
 &lt;p&gt;The second inverse transform is the Fourier transform of a Gaussian, which is nicely found in the following manner. Let $f(k) = e^{-\nu k^2 t}$ (with $\nu$ and $t$ as parameters), now differentiate and take the Fourier transform:&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-ix \cdot f(x) &amp;amp; = -2\nu t \cdot i f&#39;(x) \\
+&lt;p&gt;$$ 
+\begin{aligned} 
+ix \cdot f(x) &amp;amp; = -2\nu t \cdot i f&#39;(x) \\ 
 \implies f(x) &amp;amp; = \frac{1}{\sqrt{4\pi\nu t}}\exp\left(-\frac{x^2}{4\nu t}\right)
 \end{aligned}
 $$&lt;/p&gt;
@@ -1677,16 +1700,16 @@ For loops took 4.577128199976869 seconds
 &lt;p&gt;$$ \frac{\partial u}{\partial t} + u\frac{\partial u}{\partial x} + v\frac{\partial u}{\partial y} = \nu\left(\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2}\right) $$&lt;/p&gt;
 &lt;p&gt;$$ \frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} = \nu\left(\frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2}\right) $$&lt;/p&gt;
 &lt;p&gt;Discretised:&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\frac{u_{i,j}^{n+1} - u_{i,j}^n}{\Delta t} &amp;amp; + u_{i,j}^n \frac{u_{i,j}^n-u_{i-1,j}^n}{\Delta x} + v_{i,j}^n \frac{u_{i,j}^n - u_{i,j-1}^n}{\Delta y} \cr
-&amp;amp; = \nu \left( \frac{u_{i+1,j}^n - 2u_{i,j}^n+u_{i-1,j}^n}{\Delta x^2} + \frac{u_{i,j+1}^n - 2u_{i,j}^n + u_{i,j-1}^n}{\Delta y^2} \right)
+&lt;p&gt;$$ 
+\begin{aligned} 
+\frac{u_{i,j}^{n+1} - u_{i,j}^n}{\Delta t} &amp;amp; + u_{i,j}^n \frac{u_{i,j}^n-u_{i-1,j}^n}{\Delta x} + v_{i,j}^n \frac{u_{i,j}^n - u_{i,j-1}^n}{\Delta y} \cr 
+&amp;amp; = \nu \left( \frac{u_{i+1,j}^n - 2u_{i,j}^n+u_{i-1,j}^n}{\Delta x^2} + \frac{u_{i,j+1}^n - 2u_{i,j}^n + u_{i,j-1}^n}{\Delta y^2} \right) 
 \end{aligned}
 $$&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\frac{v_{i,j}^{n+1} - v_{i,j}^n}{\Delta t} &amp;amp; + u_{i,j}^n \frac{v_{i,j}^n-v_{i-1,j}^n}{\Delta x} + v_{i,j}^n \frac{v_{i,j}^n - v_{i,j-1}^n}{\Delta y} \cr
-&amp;amp; = \nu \left( \frac{v_{i+1,j}^n - 2v_{i,j}^n+v_{i-1,j}^n}{\Delta x^2} + \frac{v_{i,j+1}^n - 2v_{i,j}^n + v_{i,j-1}^n}{\Delta y^2} \right)
+&lt;p&gt;$$ 
+\begin{aligned} 
+\frac{v_{i,j}^{n+1} - v_{i,j}^n}{\Delta t} &amp;amp; + u_{i,j}^n \frac{v_{i,j}^n-v_{i-1,j}^n}{\Delta x} + v_{i,j}^n \frac{v_{i,j}^n - v_{i,j-1}^n}{\Delta y} \cr 
+&amp;amp; = \nu \left( \frac{v_{i+1,j}^n - 2v_{i,j}^n+v_{i-1,j}^n}{\Delta x^2} + \frac{v_{i,j+1}^n - 2v_{i,j}^n + v_{i,j-1}^n}{\Delta y^2} \right) 
 \end{aligned}
 $$&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;n&#34;&gt;nx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;41&lt;/span&gt;
@@ -2958,7 +2981,7 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Airfoil Selection:&lt;/strong&gt; A new airfoil I&amp;rsquo;ve been researching is the Selig S7075 for its good gliding/soaring characteristics and high efficiency at low Reynolds numbers. It&amp;rsquo;s a cambered airfoil with sharp trailing edge, and a maximum thickness-to-chord ratio of 9%  with the implementation of a boundary layer trip at 57.5% of the chord length. XFOIL analyses predict accurate results in agreement with Dr. Selig&amp;rsquo;s &lt;a class=&#34;link&#34; href=&#34;http://m-selig.ae.illinois.edu/uiuc_lsat/Low-Speed-Airfoil-Data-V3.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;A Summary of Low-Speed Airfoil Data, Vol. 3&lt;/a&gt;.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;Meshing Software:&lt;/strong&gt; I&amp;rsquo;ll be using ANSYS ICEM CFD and its convenient blocking features with its powerful sizing capabilities to generate 2D meshes.
+&lt;p&gt;&lt;strong&gt;Meshing Software:&lt;/strong&gt; I&amp;rsquo;ll be using ANSYS ICEM CFD and its convenient blocking features with its powerful sizing capabilities to generate 2D meshes. 
 The two types of meshes I&amp;rsquo;ll be trying to generate are an O-grid and a C-grid. An O-grid setup is when the body of analysis is enclosed within a curvilinear grid in which completely closed contours are created at offsets from the body. A C-grid setup, by example for an airfoil, is when the surrounding grid forms a &amp;lsquo;C&amp;rsquo; till the trailing edge.  Forums recommend that a C-grid mesh provides better results for airfoils with sharp trailing edges; this is because the grid alignment is along the airfoil shape (hence along the flow streamlines) to capture the flow results more accurately.&lt;/p&gt;
 &lt;p&gt;The blocking process in ICEM CFD used the same aspect ratios for element sizing in both meshing techniques. The operating Reynolds number for the flow is $ Re = 310,000 $ at sea level conditions. The desired $ y^+ = 1.0 $ in accordance with the Spalart-Allmaras model, and the estimated wall distance $ = 2.0 \times 10^{-5}~ m $ to resolve the boundary layer.&lt;/p&gt;
 &lt;hr&gt;
@@ -3236,18 +3259,18 @@ The two types of meshes I&amp;rsquo;ll be trying to generate are an O-grid and a
 &lt;/blockquote&gt;
 &lt;p&gt;X: 1
 T: C Locrian
-M:
-C:
-K:CLoc
+M: 
+C: 
+K:CLoc 
 |:CDEFGAB:|&lt;/p&gt;
 &lt;p&gt;The fundamental structure of a raga is based on the ascending and descending order of notes, referred to as &lt;em&gt;&amp;ldquo;Aaroh-Avroh&amp;rdquo;&lt;/em&gt;. The ornamentation in the instruments is also different: &lt;em&gt;&amp;ldquo;gamaks&amp;rdquo;&lt;/em&gt;, a quick slide between notes; permutations, abseneces and repetition of the notes are important in the definition of a raga. &lt;em&gt;Vyn&lt;/em&gt; from freenode&amp;rsquo;s &lt;code&gt;##math&lt;/code&gt; provided me with a few ragas and their respective interval structures, so I tried correlating some of them with the Gregorian modes. The following are two examples:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;B Phrygian: &lt;code&gt;B C D E F# G A&lt;/code&gt; = Raga Bhairavi&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;X: 1
-T: B Phrygian
-M:
-C:
+T: B Phrygian 
+M: 
+C: 
 K: BPhr
 |:B,CDEFGA:|&lt;/p&gt;
 &lt;blockquote&gt;
@@ -3336,7 +3359,7 @@ K: ADor
 &lt;div style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;DubbyPendy.svg&#34; width=80% /&gt;&lt;/div&gt;
 &lt;p&gt;The Lagrangian of the system is:&lt;/p&gt;
 &lt;p&gt;$$ \mathcal{L} = T - V $$
-$$ T = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2\left[l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)\right]$$
+$$ T = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2\left[l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)\right]$$ 
 $$ V = -(m_1 + m_2)gl_1\cos \theta_1 - m_2gl_2\cos\theta_2 $$&lt;/p&gt;
 &lt;p&gt;After a &lt;a class=&#34;link&#34; href=&#34;http://scienceworld.wolfram.com/physics/DoublePendulum.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;very long derivation&lt;/a&gt;, Hamilton&amp;rsquo;s equations can be obtained:&lt;/p&gt;
@@ -3523,16 +3546,16 @@ $$ \sum^{n-1}_{k = 0} z_k = 0 $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The roots of unity can be factorised into the following irreducible form over the field of real numbers:
-$$ z^n - 1 = (z-1)\sum^{n-1}_{i = 0} z^i $$
+$$ z^n - 1 = (z-1)\sum^{n-1}_{i = 0} z^i $$ 
 and can be factorised over the complex field as:
 $$ z^n - 1 = \prod_{k=0}^{n-1}(z-z_k) = (z-1)\prod_{k=1}^{n-1}(z-z_k) $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;A conjecture based on trial and error is:
-$$ \prod_{k=1}^{n-1}|z_k - z_0| = \prod_{k=1}^{n-1}|1-z_k| = n$$
+$$ \prod_{k=1}^{n-1}|z_k - z_0| = \prod_{k=1}^{n-1}|1-z_k| = n$$ 
 This states that the product of the distances between each root from a selected root is equal to the number of roots. To prove this, notice that:
-$$\sum^{n-1}_{i = 0} z^i = \prod_{k=1}^{n-1}(z-z_k) = \frac{z^n - 1}{z-1}$$
-For the equalities to be sensible at $z=1$, one must perform analytic continuation:
+$$\sum^{n-1}_{i = 0} z^i = \prod_{k=1}^{n-1}(z-z_k) = \frac{z^n - 1}{z-1}$$ 
+For the equalities to be sensible at $z=1$, one must perform analytic continuation: 
 $$\sum^{n-1}_{i = 0} 1^i = \prod_{k=1}^{n-1}|1-z_k| = \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1}$$
 The first equality proves the conjecture. The last equality is evaluated using L&amp;rsquo;Hôpital&amp;rsquo;s rule, also  proving the conjecture:
 $$ \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1} = \lim_{z\rightarrow 1} nz^{n-1} = n $$&lt;/p&gt;

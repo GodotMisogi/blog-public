@@ -22,8 +22,7 @@
       <pubDate>Tue, 06 Apr 2021 21:53:06 +0530</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/nonlinear-dynamics/</guid>
-      <description>Volterra Equation Introduction The Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment.
-Consider $x$ as the number of rabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations.
+      <description>Lotka-Volterra Equation Introduction The Lotka-Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment. Here we will play with the populations of wabbits and foxes. Consider $x$ as the number of wabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations.
 $$ \begin{aligned} \dot x &amp;amp; = \alpha x - \eta yx, &amp;amp; \alpha, \eta &amp;gt; 0 \\ \dot y &amp;amp; = -\beta y + \lambda xy, &amp;amp; \beta, \lambda &amp;gt; 0 \\ \end{aligned} $$</description>
     </item>
     

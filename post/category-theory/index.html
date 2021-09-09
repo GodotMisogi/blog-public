@@ -285,7 +285,17 @@ if (!doNotTrack) {
 </ol>
 <p>Milewski provides a nice programmatic interpretation of functors as, to paraphrase, &ldquo;contextual wrappers&rdquo; around morphisms between objects. Haskell examples are useful for illustrative purposes, and have been presented whenever appropriate to elucidate this idea.</p>
 <h2 id="arithmetic">Arithmetic</h2>
-<h3 id="yoneda-lemma">Yoneda Lemma</h3>
+<h3 id="universal-properties">Universal Properties</h3>
+<p>The formal definition of a universal property is usually provided in terms of a comma category, or shape categories and diagram functors (shown later). Here we look at some special definitions which are &ldquo;arithmetic&rdquo; in nature.</p>
+<h4 id="products-and-coproducts-sums">Products and Coproducts (Sums)</h4>
+<p>A product is defined by the following diagram:</p>
+<p><strong>Example.</strong> (Product) Cartesian product of two sets?</p>
+<p>A product is defined by the following diagram, which applies a complicated technique called <em>dualisation</em> to the product diagram, viz. flipping the arrows:</p>
+<p><strong>Example.</strong> (Coproduct) Disjoint union of two sets?</p>
+<p>In Haskell, the coproduct is represented as a sum type with the &ldquo;divider&rdquo; syntax <code>|</code>, for example with the <code>Maybe</code> and <code>Either</code> types:</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Maybe</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Just</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Nothing</span>
+<span class="kr">data</span> <span class="kt">Either</span> <span class="n">a</span> <span class="n">b</span> <span class="ow">=</span> <span class="kt">Left</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Right</span> <span class="n">b</span>
+</code></pre></div><h3 id="yoneda-lemma">Yoneda Lemma</h3>
 <p>Every preschooler has learnt the Yoneda lemma in kindergarten. Here we recall the general concepts and proofs.</p>
 <p><strong>Definition.</strong> A locally small category is a category in which the morphisms between any two objects form a set.</p>
 <p>Let $\mathbf C$ be a locally small category. Let $A \in \mathrm{Obj}(\mathbf C)$, $B \in \mathrm{Obj}(\mathbf{Set})$.</p>
@@ -299,18 +309,9 @@ if (!doNotTrack) {
    α_A                   α_B
     ↓                     ↓
    C(A)   ----C(f)--→    C(B)
-</code></pre><p><strong>Example.</strong></p>
-<h3 id="universal-properties">Universal Properties</h3>
-<p>The formal definition of a universal property is usually provided in terms of a comma category, or shape categories and diagram functors (shown later). Here we look at some special definitions which are &ldquo;arithmetic&rdquo; in nature.</p>
-<h4 id="products-and-coproducts-sums">Products and Coproducts (Sums)</h4>
-<p>A product is defined by the following diagram:</p>
-<p><strong>Example.</strong> (Product) Cartesian product of two sets?</p>
-<p>A product is defined by the following diagram, which applies a complicated technique called <em>dualisation</em> to the product diagram, viz. flipping the arrows:</p>
-<p><strong>Example.</strong> (Coproduct) Disjoint union of two sets?</p>
-<p>In Haskell, the coproduct is represented as a sum type with the &ldquo;divider&rdquo; syntax <code>|</code>, for example with the <code>Maybe</code> and <code>Either</code> types:</p>
-<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Maybe</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Just</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Nothing</span>
-<span class="kr">data</span> <span class="kt">Either</span> <span class="n">a</span> <span class="n">b</span> <span class="ow">=</span> <span class="kt">Left</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Right</span> <span class="n">b</span>
-</code></pre></div><blockquote>
+</code></pre><h4 id="representable-functors">Representable Functors</h4>
+<p><strong>Example.</strong> (Forgetful functor.)</p>
+<blockquote>
 <p><strong>Hence we have been scammed to re-learn arithmetic.</strong></p>
 </blockquote>
 <h2 id="algebra">Algebra</h2>
@@ -318,14 +319,15 @@ if (!doNotTrack) {
 <p>In algebra, a monoid is defined by an associative multiplication $\mu$ and a unit map $\eta$. A monoidal category defines a unit map over a monoidal product (canonically denoted using the tensor product symbol $\otimes$), and assumes the existence of a special object $I \in \mathbf C$ such that a unit map $\eta \colon I \to A$ is defined for any object $A \in \mathrm{Obj}(\mathbf C)$. The multiplication, unit, and associators are encoded in the following commutative diagrams:</p>
 <h3 id="monads">Monads</h3>
 <p>In the words of Saunders Mac Lane: &ldquo;A monad is just a monoid in the category of endofunctors&rdquo;. This (intentionally obfuscating) definition is ubiquitous for scaring programmers, and perhaps anyone unfamiliar with category theory. Here we attack the problem directly using the definitions.</p>
-<p><strong>Example.</strong> (List monad)</p>
-<p><code>List</code> is the canonical example of a monad as a polymorphic recursive sum type.</p>
+<p><strong>Example.</strong> (List monad.)</p>
+<p><code>List</code> is the canonical example of a monad as a polymorphic recursive sum type. First we define its type.</p>
 <div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Nil</span> <span class="o">|</span> <span class="kt">Cons</span> <span class="n">a</span> <span class="p">(</span><span class="kt">List</span> <span class="n">a</span><span class="p">)</span>
-</code></pre></div><p>First we define the functor-mapping rules:</p>
+</code></pre></div><p>Now we define it as a functor, with functor-mapping rules such that any morphism <code>f: a -&gt; b</code> is mapped onto every element of the list.</p>
 <div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Functor</span> <span class="kt">List</span> <span class="kr">where</span>
+    <span class="n">fmap</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">b</span><span class="p">)</span>
     <span class="n">fmap</span> <span class="n">f</span> <span class="kt">Nil</span>         <span class="ow">=</span> <span class="kt">Nil</span>
     <span class="n">fmap</span> <span class="n">f</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">y</span> <span class="n">ys</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Cons</span> <span class="p">(</span><span class="n">f</span> <span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">fmap</span> <span class="n">f</span> <span class="n">ys</span><span class="p">)</span> 
-</code></pre></div><p>And now we define the monoidal laws for appending two lists by recursion:</p>
+</code></pre></div><p>Now we define the monoidal laws for appending two lists by recursion.</p>
 <div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Monoid</span> <span class="kt">List</span> <span class="kr">where</span>
     <span class="n">mappend</span> <span class="ow">::</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span>
     <span class="n">mappend</span> <span class="n">ys</span> <span class="kt">Nil</span>         <span class="ow">=</span> <span class="n">ys</span>
@@ -350,12 +352,13 @@ if (!doNotTrack) {
 </code></pre></div><h3 id="equivalence-of-adjunctions-and-unit-counit-pairs">Equivalence of Adjunctions and Unit-Counit Pairs</h3>
 <p>Two functors $\mathcal L\colon \mathbf C \to \mathbf D, \mathcal R \colon \mathbf D \to \mathbf C$ are called <em>adjoint</em> if they satisfy the following relations on hom-functors:</p>
 <p>$$\mathbf D(\mathcal L~A, B) \cong \mathbf C(A, \mathcal R~B)$$</p>
-<p>Specifically, $\mathcal L$ is <em>left-adjoint</em> to $\mathcal R$ and $\mathcal R$ is <em>right-adjoint</em> to $\mathcal L$. The pair $(\mathcal L, \mathcal R)$ is called an <em>adjunction</em>.</p>
-<p>A <em>unit</em> is defined as a natural transformation $\eta \colon \Delta_I \to \mathcal{I}$ with $\mathcal L \circ \mathcal R \circ \mathcal L \to \mathcal I$ and a <em>counit</em> is a natural transformation $\varepsilon\colon \mathcal I \to \mathcal R \circ \mathcal L \circ \mathcal R$.</p>
+<p>Specifically, $\mathcal L$ is <em>left-adjoint</em> to $\mathcal R$ and $\mathcal R$ is <em>right-adjoint</em> to $\mathcal L$. The pair $(\mathcal L, \mathcal R)$ is called an <em>adjunction</em>. Composing these functors with each other give endofunctors of the respective category depending on the order.</p>
+<p>A <em>unit</em> is defined from an adjunction as a natural transformation $\eta\colon \mathcal I_{\mathbf D} \to \mathcal R \circ \mathcal L$.</p>
+<p>A <em>counit</em> is a natural transformation $\varepsilon\colon \mathcal L \circ \mathcal R \to \mathcal I_{\mathbf C}$.</p>
 <p><strong>Example.</strong> (Free-forgetful adjunction?)</p>
 <h3 id="algebras-and-coalgebras">Algebras and Coalgebras</h3>
 <p>Algebras and coalgebras are special categories defined using monads, with definitions as maps $\mathcal T(a) \to a$ and $a \to \mathcal T(a)$ respectfully. Certain categories are defined by using the following diagrams for objects and morphisms:</p>
-<p><strong>Example.</strong> (Fold catamorphism for list monad)</p>
+<p><strong>Example.</strong> (Fold catamorphism for list monad.)</p>
 <div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">foldl</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span>
 <span class="nf">foldl</span> <span class="n">f</span> <span class="n">x</span> <span class="kt">Nil</span> <span class="ow">=</span> <span class="n">x</span>
 <span class="nf">foldl</span> <span class="n">f</span> <span class="n">x</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">y</span> <span class="n">ys</span><span class="p">)</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="n">ys</span>
@@ -453,9 +456,15 @@ if (!doNotTrack) {
             <div class="flex article-list--tile">
                 
                     
-<article class="">
+<article class="has-image">
     <a href="/post/nonlinear-dynamics/">
         
+        
+            <div class="article-image">
+                
+                    <img src="/post/nonlinear-dynamics/images/wabbitsfoxes.svg" loading="lazy" data-key="nonlinear-dynamics" data-hash="/post/nonlinear-dynamics/images/wabbitsfoxes.svg"/>
+                
+            </div>
         
 
         <div class="article-details">

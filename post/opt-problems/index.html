@@ -343,7 +343,7 @@ if (!doNotTrack) {
 <p>$$ \boldsymbol\psi = \frac{d \mathbf p}{d\mathbf x} = -\left(\frac{\partial \mathbf R}{\partial\mathbf p}\right)^{-1} \frac{\partial \mathbf R}{\partial \mathbf x} $$</p>
 <p>The direct method hence solves the following linear system by left multiplication of $\partial \mathbf R / \partial \mathbf p$:
 $$ \frac{\partial \mathbf R}{\partial \mathbf p}\boldsymbol \psi = -\frac{\partial \mathbf R}{\partial \mathbf x}$$</p>
-<p>Notice that this expression is almost identical to the Newton step, extended to total derivatives with respect to the design variables. Essentially, the RHS is a matrix whose number of columns increases linearly with the number of design variables. This corresponds to numerous linear equations, one for each column of the RHS corresponding to a design variable. The big Jacobian on the LHS is already computed from the Newton step, and only the RHS needs to be computed. If you have the factorisation of the Jacobian from the Newton step, it could be very efficient to simply reuse the factorisation and back-substitute to solve the numerous equations if the RHS is not very expensive to compute.</p>
+<p>Notice that this expression is almost identical to the Newton step, extended to total derivatives with respect to the design variables. Essentially, the right-hand-side (RHS) is a matrix whose number of columns increases linearly with the number of design variables. This corresponds to numerous linear equations, one for each column of the RHS corresponding to a design variable. The big Jacobian on the left-hand-side is already computed from the Newton step, and only the RHS needs to be computed. If you have the factorisation of the Jacobian from the Newton step, it could be very efficient to simply reuse the factorisation and back-substitute to solve the numerous equations if the RHS is not very expensive to compute.</p>
 <div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="k">function</span> <span class="n">solve_direct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">∂R∂x</span><span class="p">,</span> <span class="n">∂R∂u</span><span class="p">)</span>
     <span class="n">∂R∂u_sq</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">∂R∂u</span><span class="p">,</span> <span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="o">:</span><span class="p">]),</span> <span class="n">length</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="o">:</span><span class="p">])))</span>
     <span class="n">reshape</span><span class="p">(</span><span class="n">hcat</span><span class="p">((</span><span class="n">∂R∂u_sq</span> <span class="o">\</span> <span class="o">-</span><span class="p">(</span><span class="n">∂R∂x</span><span class="p">)[</span><span class="o">:</span><span class="p">,</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">][</span><span class="o">:</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">...</span><span class="p">),</span> <span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">...</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
@@ -486,9 +486,15 @@ $$ \left(\frac{I}{\Delta t} + 1\right)? \mathbf J_i d\mathbf x_i = -\mathbf f_i 
 </article>
                 
                     
-<article class="">
+<article class="has-image">
     <a href="/post/nonlinear-dynamics/">
         
+        
+            <div class="article-image">
+                
+                    <img src="/post/nonlinear-dynamics/images/wabbitsfoxes.svg" loading="lazy" data-key="nonlinear-dynamics" data-hash="/post/nonlinear-dynamics/images/wabbitsfoxes.svg"/>
+                
+            </div>
         
 
         <div class="article-details">
