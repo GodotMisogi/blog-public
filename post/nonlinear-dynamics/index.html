@@ -283,20 +283,22 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
-    <h2 id="lotka-volterra-equation">Lotka-Volterra Equation</h2>
+    <p><em>Note:</em> The code presented over here is available on my repository <a class="link" href="https://github.com/GodotMisogi/NonlinearDynamics"  target="_blank" rel="noopener"
+    ><code>NonlinearDynamics</code></a>, with the additional code that was used to generate the plots shown here.</p>
+<h2 id="lotka-volterra-equation">Lotka-Volterra Equation</h2>
 <h3 id="introduction">Introduction</h3>
-<p>The Lotka-Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment. Here we will play with the populations of wabbits and foxes. Consider $x$ as the number of wabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations.</p>
-<p>$$ \begin{aligned} 
-\dot x &amp; = \alpha x - \eta yx, &amp; \alpha, \eta &gt; 0 \\ 
-\dot y &amp; = -\beta y + \lambda xy, &amp; \beta, \lambda &gt; 0 \\ 
+<p>The Lotka-Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment. Here we will play with the populations of wabbits and foxes. Consider $x$ as the number of wabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations, because populations are continuous variables.</p>
+<p>$$ \begin{aligned}
+\dot x &amp; = \alpha x - \eta yx, &amp; \alpha, \eta &gt; 0 \\
+\dot y &amp; = -\beta y + \lambda xy, &amp; \beta, \lambda &gt; 0 \\
 \end{aligned} $$</p>
 <p>Physically, these equations can be read off in the following manner: The change in the population of wabbits depends on a rate $\alpha$ proportional to the current population, and decreases at a rate $\eta$ proportional to the populations of foxes and wabbits, and similarly for the change in the population of foxes.</p>
 <h3 id="critical-points">Critical Points</h3>
 <p>The critical points of the system $(x_c, y_c)$ are the points at which the right-hand-sides are simultaneously zero. In this case, it&rsquo;s simple to evaluate by hand.</p>
-<p>$$ \begin{aligned} 
-x(\alpha - \eta y) &amp; = 0 \\ 
+<p>$$ \begin{aligned}
+x(\alpha - \eta y) &amp; = 0 \\
 y(\lambda x - \beta) &amp; = 0
-\end{aligned} \\ 
+\end{aligned} \\
 \implies (x_c, y_c) = \left\{ (0, 0), \left(\frac{\beta}{\lambda}, \frac{\alpha}{\eta}\right) \right\} $$</p>
 <h4 id="stability">Stability</h4>
 <p>At $(x_c, y_c) = (0, 0)$, any perturbation in $x$ while keeping $y$ fixed results in an increase in $\dot x$, hence it is unstable in this direction, and vice versa for $y$ and $\dot y$.</p>
@@ -361,15 +363,15 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/wabbitsfoxes-critical.json", fun
 <p>The Falkner-Skan transformation of the thin shear layer equations governing boundary layers is given by the following third-order differential equation:</p>
 <p>$$ F''' + \left(\frac{1 + a}{2}\right) F F'' + a\left[1 - (F')^2\right] = 0 $$</p>
 <p>with boundary conditions $F(0) = F'(0) = 0, ~ F'(\eta) = 1$, where $\eta$ is some specified upper bound. This can be expressed in terms of an autonomous system of first-order differential equations: $\dot{\mathbf x} = \mathbf f(\mathbf x, \mathbf p, η)$ by setting each derivative as an independent variable.</p>
-<p>$$ \frac{d}{dt} 
-\begin{bmatrix} 
-F \\ 
-U \\ 
-S 
-\end{bmatrix} = 
-\begin{bmatrix} 
-U \\ 
-S \\ 
+<p>$$ \frac{d}{dt}
+\begin{bmatrix}
+F \\
+U \\
+S
+\end{bmatrix} =
+\begin{bmatrix}
+U \\
+S \\
 -\left(\frac{1 + a}{2}\right) FS - a \left(1 - U^2\right)
 \end{bmatrix} $$</p>
 <h3 id="computation-1">Computation</h3>
@@ -406,6 +408,53 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/falknerskan.json", function(err,
 </script>
 </center>
 <p>Here we can observe the incepient separation point at a specific value of $a \approx -0.0904$. Can this be figured out analytically?</p>
+<h2 id="double-pendulum">Double Pendulum</h2>
+<p>Refer to <a class="link" href="../../post/dubby-pendy/" >my previous post on the double pendulum</a> for a review of the theory and equations. Julia&rsquo;s various libraries and their compositions allow me to set up the differential equations, choose the integration solver, and set up plots with layouts <em>very</em> easily. This is much simpler than writing different differential equation solver algorithms and plotting tools manually for experimentation.</p>
+<p>The double pendulum is a famous example of a chaotic system, and is very sensitive to time-step sizes, initial conditions, and even the solver algorithm itself due to compounding numerical noise.</p>
+<h3 id="stability-and-fixed-points">Stability and Fixed Points</h3>
+<p>The Lagrangian of the system is:</p>
+<p>$$ \mathcal{L} = T - V  \quad \mathrm{where} \quad \begin{aligned} T &amp; = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2\left[l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)\right] \\ V &amp; = -(m_1 + m_2)gl_1\cos \theta_1 - m_2gl_2\cos\theta_2 \end{aligned} $$</p>
+<h3 id="computation-2">Computation</h3>
+<p>Here the expressions are complicated and would benefit from temporary variables in the function, which are not supported in the domain-specific-language of <code>ParametrizedFunctions.jl</code>, so a regular function is prepared instead of using the <code>@ode_def</code> macro.</p>
+<div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="c">## ODE definition</span>
+<span class="k">function</span> <span class="n">dubby_pendy!</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ps</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">θ₁</span><span class="p">,</span> <span class="n">θ₂</span><span class="p">,</span> <span class="n">p₁</span><span class="p">,</span> <span class="n">p₂</span>     <span class="o">=</span> <span class="n">x</span>
+    <span class="n">l₁</span><span class="p">,</span> <span class="n">l₂</span><span class="p">,</span> <span class="n">m₁</span><span class="p">,</span> <span class="n">m₂</span><span class="p">,</span> <span class="n">g</span>  <span class="o">=</span> <span class="n">ps</span>
+
+    <span class="n">C₀</span>  <span class="o">=</span> <span class="n">l₁</span> <span class="o">*</span> <span class="n">l₂</span> <span class="o">*</span> <span class="p">(</span><span class="n">m₁</span> <span class="o">+</span> <span class="n">m₂</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ₁</span> <span class="o">-</span> <span class="n">θ₂</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">C₁</span>  <span class="o">=</span> <span class="p">(</span><span class="n">p₁</span> <span class="o">*</span> <span class="n">p₂</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ₁</span> <span class="o">-</span> <span class="n">θ₂</span><span class="p">))</span> <span class="o">/</span> <span class="n">C₀</span>
+    <span class="n">C₂</span>  <span class="o">=</span> <span class="p">(</span><span class="n">m₂</span> <span class="o">*</span> <span class="p">((</span><span class="n">l₂</span> <span class="o">*</span> <span class="n">p₁</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">m₁</span> <span class="o">+</span> <span class="n">m₂</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">l₁</span> <span class="o">*</span> <span class="n">p₂</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> 
+          <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">l₁</span> <span class="o">*</span> <span class="n">l₂</span> <span class="o">*</span> <span class="n">m₂</span> <span class="o">*</span> <span class="n">p₁</span> <span class="o">*</span> <span class="n">p₂</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">θ₁</span> <span class="o">-</span> <span class="n">θ₂</span><span class="p">))</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="p">(</span><span class="n">θ₁</span> <span class="o">-</span> <span class="n">θ₂</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="n">C₀</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">dx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">l₂</span> <span class="o">*</span> <span class="n">p₁</span> <span class="o">-</span> <span class="n">l₁</span> <span class="o">*</span> <span class="n">p₂</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">θ₁</span> <span class="o">-</span> <span class="n">θ₂</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">l₁</span> <span class="o">*</span> <span class="n">C₀</span><span class="p">)</span>
+    <span class="n">dx</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">l₁</span> <span class="o">*</span> <span class="p">(</span><span class="n">m₁</span> <span class="o">+</span> <span class="n">m₂</span><span class="p">)</span> <span class="o">*</span> <span class="n">p₂</span> <span class="o">-</span> <span class="n">l₂</span> <span class="o">*</span> <span class="n">m₂</span> <span class="o">*</span> <span class="n">p₁</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">θ₁</span> <span class="o">-</span> <span class="n">θ₂</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">l₂</span> <span class="o">*</span> <span class="n">m₂</span> <span class="o">*</span> <span class="n">C₀</span><span class="p">)</span>
+    <span class="n">dx</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">m₁</span> <span class="o">+</span> <span class="n">m₂</span><span class="p">)</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">l₁</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ₁</span><span class="p">)</span> <span class="o">-</span> <span class="n">C₁</span> <span class="o">+</span> <span class="n">C₂</span>
+    <span class="n">dx</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">m₂</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">l₂</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ₂</span><span class="p">)</span> <span class="o">+</span> <span class="n">C₁</span> <span class="o">-</span> <span class="n">C₂</span>
+
+    <span class="nb">nothing</span>
+<span class="k">end</span> 
+</code></pre></div><p>Let&rsquo;s set up the initial conditions and parameters and solve the problem. For the purposes of smooth plotting with a &ldquo;nice&rdquo; trajectory, I&rsquo;ve picked an adaptive Runge-Kutta method of order 4 solver with a small timestep; these choices directly influence the solutions themselves due to the chaotic nature of the system.</p>
+<div class="highlight"><pre class="chroma"><code class="language-julia" data-lang="julia"><span class="c">## Inputs and parameters</span>
+<span class="n">m1</span><span class="p">,</span> <span class="n">m2</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">12.0</span> <span class="c"># Masses</span>
+<span class="n">l1</span><span class="p">,</span> <span class="n">l2</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">7.0</span>   <span class="c"># Lengths</span>
+<span class="n">g</span>      <span class="o">=</span> <span class="mf">9.81</span>       <span class="c"># Gravitational acceleration</span>
+
+<span class="n">ps</span>    <span class="o">=</span> <span class="p">[</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">g</span> <span class="p">]</span>
+<span class="n">x0</span>    <span class="o">=</span> <span class="p">[</span> <span class="nb">π</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="nb">π</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.</span> <span class="p">]</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">)</span>
+<span class="n">tstep</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">dt</span>    <span class="o">=</span> <span class="n">maximum</span><span class="p">(</span><span class="n">tspan</span><span class="p">)</span> <span class="o">/</span> <span class="n">tstep</span>
+
+<span class="c">## ODEProblem and solution</span>
+<span class="n">run</span>   <span class="o">=</span> <span class="n">ODEFunction</span><span class="p">(</span><span class="n">dubby_pendy!</span><span class="p">,</span> <span class="n">syms</span> <span class="o">=</span> <span class="p">[</span><span class="o">:</span><span class="n">θ₁</span><span class="p">,</span> <span class="o">:</span><span class="n">θ₂</span><span class="p">,</span> <span class="o">:</span><span class="n">p₁</span><span class="p">,</span> <span class="o">:</span><span class="n">p₂</span><span class="p">])</span>
+<span class="n">prob</span>  <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">ps</span><span class="p">)</span>
+<span class="n">sol</span>   <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">RK4</span><span class="p">(),</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">df</span>    <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</code></pre></div><center>
+<video autoplay loop><source src="images/dubbypendy.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</center>
 
 </section>
 

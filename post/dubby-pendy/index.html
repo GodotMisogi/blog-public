@@ -291,17 +291,17 @@ if (!doNotTrack) {
 <p>The following shows the double pendulum system:</p>
 <div style="text-align:center"><img src="DubbyPendy.svg" width=80% /></div>
 <p>The Lagrangian of the system is:</p>
-<p>$$ \mathcal{L} = T - V $$
-$$ T = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2\left[l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)\right]$$ 
-$$ V = -(m_1 + m_2)gl_1\cos \theta_1 - m_2gl_2\cos\theta_2 $$</p>
+<p>$$ \mathcal{L} = T - V  \quad \mathrm{where} \quad \begin{aligned} T &amp; = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2\left[l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)\right] \\ V &amp; = -(m_1 + m_2)gl_1\cos \theta_1 - m_2gl_2\cos\theta_2 \end{aligned} $$</p>
 <p>After a <a class="link" href="http://scienceworld.wolfram.com/physics/DoublePendulum.html"  target="_blank" rel="noopener"
-    >very long derivation</a>, Hamilton&rsquo;s equations can be obtained:</p>
-<p>$$ \dot{\theta_1} = \frac{l_2 p_{\theta_1} - l_1 p_{\theta_2}\cos(\theta_1 - \theta_2)}{l_1^2 l_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} $$
-$$ \dot{\theta_2} = \frac{l_1 (m_1 + m_2)p_{\theta_1} - l_2 m_2 p_{\theta_1}\cos(\theta_1 - \theta_2)}{l_1^2 l_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} $$
-$$ \dot{p}_{\theta_1} = -(m_1 + m_2)gl_1\sin\theta_1 - C_1 + C_2$$
-$$ \dot{p}_{\theta_2} = -m_2gl_2\sin\theta_2 + C_1 - C_2$$
-$$ C_1 = \frac{p_{\theta_1}p_{\theta_2}\sin(\theta_1-\theta_2)}{l_1 l_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} $$
-$$ C_2 = \frac{l_2^2 m_2 p_{\theta_1}^2 + l_1^2(m_1 + m_2)p_{\theta_2}^2 - l_1 l_2 m_2 p_{\theta_1} p_{\theta_2} \cos(\theta_1 - \theta_2)}{2l_1^2 l_2^2[m_1 + m_2\sin^2(\theta_1-\theta_2)]^2}\sin[2(\theta_1 - \theta_2)] $$</p>
+    >very long and painful derivation</a>, Hamilton&rsquo;s equations can be obtained:</p>
+<p>$$ \begin{aligned}
+\dot{\theta_1} &amp; = \frac{l_2 p_{\theta_1} - l_1 p_{\theta_2}\cos(\theta_1 - \theta_2)}{l_1^2 l_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} \\
+\dot{\theta_2} &amp; = \frac{l_1 (m_1 + m_2)p_{\theta_1} - l_2 m_2 p_{\theta_1}\cos(\theta_1 - \theta_2)}{l_1 l_2^2 m_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} \\
+\dot{p}_{\theta_1} &amp; = -(m_1 + m_2)gl_1\sin\theta_1 - C_1 + C_2 \\
+\dot{p}_{\theta_2} &amp; = -m_2gl_2\sin\theta_2 + C_1 - C_2 \\
+C_1 &amp; = \frac{p_{\theta_1}p_{\theta_2}\sin(\theta_1-\theta_2)}{l_1 l_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} \\
+C_2 &amp; = \frac{l_2^2 m_2 p_{\theta_1}^2 + l_1^2(m_1 + m_2)p_{\theta_2}^2 - l_1 l_2 m_2 p_{\theta_1} p_{\theta_2} \cos(\theta_1 - \theta_2)}{2l_1^2 l_2^2 [m_1 + m_2\sin^2(\theta_1-\theta_2)]^2}\sin[2(\theta_1 - \theta_2)]
+\end{aligned} $$</p>
 <p>These are very formidable-looking equations, and it is almost impossible to determine the particle trajectories by solving these equations analytically! So how does one solve it for practical purposes? Numerical methods and programming. I used Lua to program the simulator, including the <a class="link" href="https://love2d.org"  target="_blank" rel="noopener"
     >LÖVE</a> framework for the graphics.</p>
 <p>Since the only data structure in Lua is a table, I decided to see how I could make use of that property for this program. Lua doesn&rsquo;t have functions to perform scalar multiplication or addition between tables, so I wrote some:</p>
