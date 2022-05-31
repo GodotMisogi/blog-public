@@ -345,10 +345,10 @@ if (!doNotTrack) {
 <p>This can be solved via the method of Green functions:</p>
 <p>$$
 \begin{aligned}
-\nabla_N^2 G(\vec x, \vec x_0) &amp; = \delta(\vec x - \vec x_0) \\ 
-\int_{-\infty}^{\infty} \left[\nabla_N^2 G(\vec x, \vec x_0)\right]  e^{i\vec k \cdot \vec x}\ d\vec x &amp; = \int_{-\infty}^{\infty} \delta(\vec x - \vec x_0) e^{i\vec k \cdot \vec x}\ d\vec x \\ 
-|\vec k|^2 G(\vec k, \vec x_0) &amp; = e^{i \vec k \cdot \vec x_0} \\ 
-\implies G(\vec x, \vec x_0) &amp; = \frac{1}{(2\pi)^N}\int_{-\infty}^{\infty} \frac{e^{-i \vec k \cdot (\vec x -\vec x_0)}}{|\vec k|^2} \ d\vec k 
+\nabla_N^2 G(\vec x, \vec x_0) &amp; = \delta(\vec x - \vec x_0) \\
+\int_{-\infty}^{\infty} \left[\nabla_N^2 G(\vec x, \vec x_0)\right]  e^{i\vec k \cdot \vec x}\ d\vec x &amp; = \int_{-\infty}^{\infty} \delta(\vec x - \vec x_0) e^{i\vec k \cdot \vec x}\ d\vec x \\
+|\vec k|^2 G(\vec k, \vec x_0) &amp; = e^{i \vec k \cdot \vec x_0} \\
+\implies G(\vec x, \vec x_0) &amp; = \frac{1}{(2\pi)^N}\int_{-\infty}^{\infty} \frac{e^{-i \vec k \cdot (\vec x -\vec x_0)}}{|\vec k|^2} \ d\vec k
 \end{aligned}
 $$</p>
 <p>Laplace&rsquo;s equation is spherically symmetric in $N$ dimensions (evident from the $|\vec k|^2$ term), so expressing the integral in a $N$-spherical polar coordinate system will be more convenient. This is singular with multiple poles at $\vec k = \vec 0$, so the contour must be deformed in the complex plane.</p>

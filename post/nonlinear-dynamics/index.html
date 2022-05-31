@@ -288,17 +288,17 @@ if (!doNotTrack) {
 <h2 id="lotka-volterra-equation">Lotka-Volterra Equation</h2>
 <h3 id="introduction">Introduction</h3>
 <p>The Lotka-Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment. Here we will play with the populations of wabbits and foxes. Consider $x$ as the number of wabbits, and $y$ as the number of foxes. This is expressed in the form of the following autonomous system of ordinary differential equations, because populations are continuous variables.</p>
-<p>$$ \begin{aligned} 
-\dot x &amp; = \alpha x - \eta yx, &amp; \alpha, \eta &gt; 0 \\ 
-\dot y &amp; = -\beta y + \lambda xy, &amp; \beta, \lambda &gt; 0 \\ 
+<p>$$ \begin{aligned}
+\dot x &amp; = \alpha x - \eta yx, &amp; \alpha, \eta &gt; 0 \\
+\dot y &amp; = -\beta y + \lambda xy, &amp; \beta, \lambda &gt; 0 \\
 \end{aligned} $$</p>
 <p>Physically, these equations can be read off in the following manner: The change in the population of wabbits depends on a rate $\alpha$ proportional to the current population, and decreases at a rate $\eta$ proportional to the populations of foxes and wabbits, and similarly for the change in the population of foxes.</p>
 <h3 id="critical-points">Critical Points</h3>
 <p>The critical points of the system $(x_c, y_c)$ are the points at which the right-hand-sides are simultaneously zero. In this case, it&rsquo;s simple to evaluate by hand.</p>
-<p>$$ \begin{aligned} 
-x(\alpha - \eta y) &amp; = 0 \\ 
+<p>$$ \begin{aligned}
+x(\alpha - \eta y) &amp; = 0 \\
 y(\lambda x - \beta) &amp; = 0
-\end{aligned} \\ 
+\end{aligned} \\
 \implies (x_c, y_c) = \left\{ (0, 0), \left(\frac{\beta}{\lambda}, \frac{\alpha}{\eta}\right) \right\} $$</p>
 <h4 id="stability">Stability</h4>
 <p>At $(x_c, y_c) = (0, 0)$, any perturbation in $x$ while keeping $y$ fixed results in an increase in $\dot x$, hence it is unstable in this direction, and vice versa for $y$ and $\dot y$.</p>
@@ -363,15 +363,15 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/wabbitsfoxes-critical.json", fun
 <p>The Falkner-Skan transformation of the thin shear layer equations governing boundary layers is given by the following third-order differential equation:</p>
 <p>$$ F''' + \left(\frac{1 + a}{2}\right) F F'' + a\left[1 - (F')^2\right] = 0 $$</p>
 <p>with boundary conditions $F(0) = F'(0) = 0, ~ F'(\eta) = 1$, where $\eta$ is some specified upper bound. This can be expressed in terms of an autonomous system of first-order differential equations: $\dot{\mathbf x} = \mathbf f(\mathbf x, \mathbf p, η)$ by setting each derivative as an independent variable.</p>
-<p>$$ \frac{d}{dt} 
-\begin{bmatrix} 
-F \\ 
-U \\ 
-S 
-\end{bmatrix} = 
-\begin{bmatrix} 
-U \\ 
-S \\ 
+<p>$$ \frac{d}{dt}
+\begin{bmatrix}
+F \\
+U \\
+S
+\end{bmatrix} =
+\begin{bmatrix}
+U \\
+S \\
 -\left(\frac{1 + a}{2}\right) FS - a \left(1 - U^2\right)
 \end{bmatrix} $$</p>
 <h3 id="computation-1">Computation</h3>
