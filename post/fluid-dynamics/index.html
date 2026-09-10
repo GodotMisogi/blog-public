@@ -15,16 +15,14 @@
 <meta name="twitter:description" content="An over-condensed introduction to fluid dynamics for quick reference.">
     <link rel="shortcut icon" href="/punpun1.jpg" />
 
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-308292845"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-89998292-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-308292845', { 'anonymize_ip': false });
 }
 </script>
 
@@ -290,23 +288,23 @@ if (!doNotTrack) {
 <p>The <strong>circulation</strong> $\Gamma$ of a vector field $\vec f(x^i)$ about a closed contour $C$ parametrised by a vector $d x_i$:</p>
 <p>$$ \Gamma \equiv \oint_C \vec f(x^i)\ dx_i $$</p>
 <p>Note that the dimension of the vector space is irrelevant.</p>
-<p>This is related to <strong>Stokes' theorem</strong>, which indicates the &lsquo;total&rsquo; curl of the vector field for an open surface $\partial \mathcal S$:</p>
+<p>This is related to <strong>Stokes&rsquo; theorem</strong>, which indicates the &rsquo;total&rsquo; curl of the vector field for an open surface $\partial \mathcal S$:</p>
 <p>$$ \oint_C \vec f \cdot d\vec l = \iint_{\partial \mathcal S} \left(\nabla \times \vec f\right)\cdot \vec n\ d\mathcal S $$</p>
-<p>Similarly, the total &lsquo;emittance&rsquo; of $\vec f$ over a closed surface $S$ is related to the &lsquo;total&rsquo; divergence of a vector field from a volume $\mathcal V$ via <strong>Gauss' theorem</strong>:</p>
+<p>Similarly, the total &rsquo;emittance&rsquo; of $\vec f$ over a closed surface $S$ is related to the &rsquo;total&rsquo; divergence of a vector field from a volume $\mathcal V$ via <strong>Gauss&rsquo; theorem</strong>:</p>
 <p>$$ \iint_{\mathcal S} \vec f \cdot d\vec {\mathcal S} = \iiint_{\mathcal V}\nabla \cdot \vec f \ d\mathcal V $$</p>
-<p><em>Note:</em> Gauss' and Stokes' theorems are properties of integrals, and are not particularly related to vector spaces as such. They are independent of tensor rank and dimensionality (consider the higher-dimensional tensor $f^{ijk}$ instead of just the vector $f^i$, nothing changes except the equations become identities on the components with the free indices).</p>
+<p><em>Note:</em> Gauss&rsquo; and Stokes&rsquo; theorems are properties of integrals, and are not particularly related to vector spaces as such. They are independent of tensor rank and dimensionality (consider the higher-dimensional tensor $f^{ijk}$ instead of just the vector $f^i$, nothing changes except the equations become identities on the components with the free indices).</p>
 <p>The <strong>material/Lagrangian/etc&hellip; derivative</strong> $D/Dt$ is an operator expressing the chain rule on any tensor field that signifies the time rate of change of the tensor if it is dependent on space-time macroscopic velocity field variations. In a flat spacetime:</p>
 <p>$$ \frac{D}{Dt} \equiv \frac{\partial}{\partial t} + v^i\frac{\partial}{\partial x_i} $$</p>
 <p>This can be defined more generally on a smooth manifold by upgrading the spatial partial derivatives to covariant derivatives.</p>
-<p>The conservation of an <em>extensive property</em> $N$ as it travels through a defined <strong>control volume</strong> $\mathcal V$, in which the conservation is described in terms of an <em>intensive property</em> $\eta$ (such as the density or any equivalent macroscopic property corresponding to a continuum formulation), is dictated by the <strong>Reynolds' transport theorem</strong> in the following temporal formulation:</p>
+<p>The conservation of an <em>extensive property</em> $N$ as it travels through a defined <strong>control volume</strong> $\mathcal V$, in which the conservation is described in terms of an <em>intensive property</em> $\eta$ (such as the density or any equivalent macroscopic property corresponding to a continuum formulation), is dictated by the <strong>Reynolds&rsquo; transport theorem</strong> in the following temporal formulation:</p>
 <p>$$ \frac{DN}{Dt} = \iiint_{\mathcal V} \frac{\partial \eta}{\partial t}\ d\mathcal{V} + \iint_{\mathcal S} \eta \vec V \cdot d\vec{\mathcal S} $$</p>
-<p>The surface integral can usually be converted into a differential form over the volume via Gauss' theorem.</p>
+<p>The surface integral can usually be converted into a differential form over the volume via Gauss&rsquo; theorem.</p>
 <h4 id="fluid--dynamics">Fluid  Dynamics</h4>
 <p>A <strong>fluid</strong> is defined as a continuum of particles such that its microscopic properties average into macroscopic properties that approximate its behaviour as a single element, a behaviour characterised by negligibly resistive non-retention of shape when deformed. This continuum approximation is applicable when analysing flows over length scales much larger (say a ratio of $10^{3}$ at least?) than the molecular mean free path of the fluid.</p>
 <p>The definitions of circulation and the material derivative are sufficient to derive <strong>Kelvin&rsquo;s circulation theorem</strong> for velocity fields $\vec V$ along a fluid curve $C$, defined as a curve which always passes through the same fluid elements:</p>
 <p>$$ \frac{D\Gamma}{Dt} = \frac{D}{Dt}\oint_C \vec V \cdot d\vec l = \oint_C \frac{D\vec V}{Dt} \cdot d\vec l + \oint_C \vec V \cdot \frac{D}{dt} d\vec l$$</p>
 <p>$$ \implies \frac{D\Gamma}{Dt} = \oint_C \vec a \cdot d\vec l, \quad \because \frac{D\vec V}{Dt} = \vec a,\quad \oint_C \vec V \cdot d\vec V = 0 $$</p>
-<p>The differential form of the expression of <strong>continuity</strong> representing the conservation of mass $M$, with a macroscopic property called the <strong>density</strong> $\rho$, via the Reynolds' transport theorem is:</p>
+<p>The differential form of the expression of <strong>continuity</strong> representing the conservation of mass $M$, with a macroscopic property called the <strong>density</strong> $\rho$, via the Reynolds&rsquo; transport theorem is:</p>
 <p>$$ \frac{DM}{Dt} = \frac{\partial \rho}{\partial t} + \nabla\cdot (\rho \vec V) $$</p>
 <p>For a control volume with no space-time-varying source or sink of mass, $dM/dt = 0$, which gives the usual continuity equation analysed in fluid mechanics. An <strong>incompressible flow</strong> is defined as a flow in which the changes in density with respect to space and time are negligible.</p>
 <p>The differential form of the <strong>incompressible Navier-Stokes equations</strong> in an external time-independent gravitational field $\vec g$ with non-conservative body forces $\vec f$ is:</p>
@@ -324,7 +322,7 @@ if (!doNotTrack) {
 <p>$$ \rho(\vec V \cdot \nabla \vec V) = -\nabla p + \rho\vec g + \vec f$$</p>
 <p>Assume that the external gravitational field is conservative, and hence is expressible as a scalar potential $\vec g = -\nabla \xi$, as is usually done in physics. Assuming no non-conservative body forces, Kelvin&rsquo;s circulation theorem provides the following statement of angular momentum conservation:</p>
 <p>$$ \frac{D\Gamma}{Dt} = \oint_C \nabla\left(\frac{-p}{\rho}\right) \cdot d\vec l + \frac{1}{\rho}\oint_C \vec g \cdot d\vec l = 0 $$</p>
-<p>The <strong>vorticity</strong> $\omega$ is defined as the curl of the velocity field $\vec V$, specifically: $ \omega \equiv \nabla \times \vec V $. Assume the flow is irrotational, i.e. $\omega = 0$, and there are no body forces, because the assumptions aren&rsquo;t enough. Using Stokes' theorem, $\Gamma = 0$. This describes a <em>conservative</em> vector field, which can be expressed in the form of a scalar potential $\vec V = \nabla \phi$, when inserted into the continuity equation gives <strong>Laplace&rsquo;s equation</strong>:</p>
+<p>The <strong>vorticity</strong> $\omega$ is defined as the curl of the velocity field $\vec V$, specifically: $ \omega \equiv \nabla \times \vec V $. Assume the flow is irrotational, i.e. $\omega = 0$, and there are no body forces, because the assumptions aren&rsquo;t enough. Using Stokes&rsquo; theorem, $\Gamma = 0$. This describes a <em>conservative</em> vector field, which can be expressed in the form of a scalar potential $\vec V = \nabla \phi$, when inserted into the continuity equation gives <strong>Laplace&rsquo;s equation</strong>:</p>
 <p>$$ \nabla^2 \phi = 0 $$</p>
 <p>As the real and imaginary parts of an analytic function of a complex variable $z$ independently satisfy Laplace&rsquo;s equation, another Laplace equation can be constructed by considering $\phi$ as the real part and using the Cauchy-Riemann conditions in Cartesian coordinates:</p>
 <p>$$ \vec V = (u(x,y), v(x,y)), \quad u = \frac{\partial \phi}{\partial x} = \frac{\partial \psi}{\partial y},\quad v = \frac{\partial \phi}{\partial y} = -\frac{\partial \psi}{\partial x} $$</p>
@@ -513,7 +511,7 @@ $$</p>
     <div class="disqus-container">
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -560,7 +558,7 @@ $$</p>
         
             2016 - 
         
-        2022 ｢ALL FICTION｣
+        2026 ｢ALL FICTION｣
     </section>
     
     <section class="powerby">

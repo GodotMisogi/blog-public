@@ -23,7 +23,7 @@ Lotka-Volterra Equation Introduction The Lotka-Volterra equation governs coupled
       <pubDate>Wed, 24 Feb 2021 22:55:27 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/panel-methods/</guid>
-      <description>References  Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Drela, Mark and Giles, M. B. Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils. AIAA Journal, 1986. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001.  Viscous-Inviscid Panel Methods Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&amp;rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.</description>
+      <description>References Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Drela, Mark and Giles, M. B. Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils. AIAA Journal, 1986. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Viscous-Inviscid Panel Methods Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&amp;rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.</description>
     </item>
     
     <item>
@@ -43,7 +43,7 @@ $$ \mathbf R(\mathbf p) = \mathbf 0 $$</description>
       <pubDate>Mon, 30 Sep 2019 00:00:00 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/fluid-dynamics/</guid>
-      <description>References  Batchelor, G. K. An Introduction to Fluid Dynamics. Cambridge University Press, 1992. Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Feynman, Richard P., Leighton, Robert B. and Sands, Matthew. The Feynman Lectures on Physics, Vol. 2: Mainly Electromagnetism and Matter. Basic Books, 2011. Balakrishnan, V. Selected Topics in Mathematical Physics. NPTEL, 2014.  Definitions The circulation $\Gamma$ of a vector field $\vec f(x^i)$ about a closed contour $C$ parametrised by a vector $d x_i$:</description>
+      <description>References Batchelor, G. K. An Introduction to Fluid Dynamics. Cambridge University Press, 1992. Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Feynman, Richard P., Leighton, Robert B. and Sands, Matthew. The Feynman Lectures on Physics, Vol. 2: Mainly Electromagnetism and Matter. Basic Books, 2011. Balakrishnan, V. Selected Topics in Mathematical Physics. NPTEL, 2014. Definitions The circulation $\Gamma$ of a vector field $\vec f(x^i)$ about a closed contour $C$ parametrised by a vector $d x_i$:</description>
     </item>
     
     <item>
@@ -52,7 +52,7 @@ $$ \mathbf R(\mathbf p) = \mathbf 0 $$</description>
       <pubDate>Sat, 05 May 2018 16:54:58 +0530</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/cfd-python/</guid>
-      <description>This &amp;lsquo;notebook&amp;rsquo; consists of my run-through of Prof. Lorena Barba&amp;rsquo;s &amp;ldquo;12 steps to Navier-Stokes&amp;rdquo; course, because I admit I have a problem with fluids. The Navier-Stokes equations that will be solved in this notebook are the following in conservative form:
+      <description>This &amp;rsquo;notebook&amp;rsquo; consists of my run-through of Prof. Lorena Barba&amp;rsquo;s &amp;ldquo;12 steps to Navier-Stokes&amp;rdquo; course, because I admit I have a problem with fluids. The Navier-Stokes equations that will be solved in this notebook are the following in conservative form:
 $$ \frac{\partial \rho}{\partial t} + \nabla \cdot \left(\rho V\right) = 0 $$
 $$ \frac{\partial (\rho\vec V)}{\partial t} + \nabla \cdot \left(\rho ~\vec V \otimes \vec V + p\hat I \right) = \rho \vec g + \nabla \cdot \hat \tau + \vec f$$</description>
     </item>
@@ -84,7 +84,7 @@ Note: At first I derived it from variational principles, but the Euler-Lagrange 
       
       <guid>https://godot-bloggy.xyz/post/indian-classical/</guid>
       <description>I&amp;rsquo;ve been a rock/metal guitarist for the past 9 or 10 years, mostly concentrating on Western music and its theory; I am by no means an expert, but I&amp;rsquo;m curious about music theory and like to learn its different applications/interpretations in various styles.
- I attended a Remember Shakti concert in 2012, which was my first real introduction to Indian classical musical elements. I know that it&amp;rsquo;s a fusion band, but I learnt the basic rhythmic elements during the concert thanks to my school&amp;rsquo;s guitar teacher, with whom I went to the concert (Maniche Farande, for anyone who&amp;rsquo;s interested in stalking him).</description>
+I attended a Remember Shakti concert in 2012, which was my first real introduction to Indian classical musical elements. I know that it&amp;rsquo;s a fusion band, but I learnt the basic rhythmic elements during the concert thanks to my school&amp;rsquo;s guitar teacher, with whom I went to the concert (Maniche Farande, for anyone who&amp;rsquo;s interested in stalking him).</description>
     </item>
     
     <item>
@@ -105,7 +105,7 @@ A famous example of a system whose equations of motion can be more easily attain
       <guid>https://godot-bloggy.xyz/post/induced-drag/</guid>
       <description>While reading through John D. Anderson Jr.&amp;rsquo;s derivation of minimum induced drag, I thought of a cool application of the calculus of variations in one of the equations to deduce the required condition.
 The equation that determines the downwash at a point is:
-$$w(y_0) = -\frac{1}{4\pi }\int^{b/2}_{-b/2} \frac{(\mathrm{d}\Gamma/\mathrm{d}y)}{y_0 - y}\mathrm{d}y = \int^{b/2}_{-b/2} \mathcal{L}(\Gamma,\Gamma&#39;,y)~\mathrm{d}y$$
+$$w(y_0) = -\frac{1}{4\pi }\int^{b/2}_{-b/2} \frac{(\mathrm{d}\Gamma/\mathrm{d}y)}{y_0 - y}\mathrm{d}y = \int^{b/2}_{-b/2} \mathcal{L}(\Gamma,\Gamma&amp;rsquo;,y)~\mathrm{d}y$$
 This effectively implies that the downwash can be expressed as a functional of $\Gamma$, i.e. $w\left[\Gamma(y)\right]$, and one can find the functional derivative to find the extremal point.</description>
     </item>
     
@@ -116,9 +116,9 @@ This effectively implies that the downwash can be expressed as a functional of $
       
       <guid>https://godot-bloggy.xyz/post/roots-of-unity/</guid>
       <description>During my second year of the International Baccalaureate: Diploma Programme, we were assigned the task of making a portfolio for a problem statement in Mathematics HL. While I don&amp;rsquo;t have the problem statement anymore, I&amp;rsquo;ll outline the major points of the task:
-  Find the solutions to $z^n - 1 = 0,~ z \in \mathbb{C}$.
-  Plot these solutions on the Argand plane.
-  Draw a tree diagram starting from the trivial solution $z = 1$ to every other root.</description>
+Find the solutions to $z^n - 1 = 0,~ z \in \mathbb{C}$.
+Plot these solutions on the Argand plane.
+Draw a tree diagram starting from the trivial solution $z = 1$ to every other root.</description>
     </item>
     
   </channel>

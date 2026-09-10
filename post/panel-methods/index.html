@@ -16,16 +16,14 @@
     <meta name="twitter:image" content='https://godot-bloggy.xyz/post/panel-methods/images/aeropython.jpg' />
     <link rel="shortcut icon" href="/punpun1.jpg" />
 
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-308292845"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-89998292-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-308292845', { 'anonymize_ip': false });
 }
 </script>
 
@@ -342,9 +340,9 @@ $$ \nabla^2 \phi = \nabla^2\left(\Phi + \Phi_\infty\right) = 0 $$</p>
 <h3 id="discretisation">Discretisation</h3>
 <p>Discretise the equation for a foil, in which $N$ panels are assigned to the foil, and $N_w$ panels are assigned to the wake.</p>
 <p>Assigning each panel on the foil a constant doublet strength $\phi$, and assign all panels constant source strengths $\sigma$, giving the following:</p>
-<p>$$ \Phi_{\infty}(x,y) + \sum_{j = 1}^N \left(\frac{\sigma}{\pi}\int_{\text{panel}}\ln r \ dS\right)_j - \sum_{j = 1}^N \left(\frac{\phi}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\right)_j = \phi_p(x,y) $$</p>
+<p>$$ \Phi_{\infty}(x,y) + \sum_{j = 1}^N \left(\frac{\sigma}{\pi}\int_{\text{panel}}\ln r \ dS\right)<em>j - \sum</em>{j = 1}^N \left(\frac{\phi}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\right)_j = \phi_p(x,y) $$</p>
 <p>Let:
-$$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|_j, \quad A_j \equiv -\frac{1}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\bigg|_j$$</p>
+$$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|<em>j, \quad A_j \equiv -\frac{1}{\pi}\int</em>{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\bigg|_j$$</p>
 <p>For foil panels, we get the following system of equations:</p>
 <p>$$ A \phi + \vec\Phi^{*} = \vec\Phi_{\infty} - B\sigma $$</p>
 <p>Let $\vec U_s = \{~\vec U \cdot ~\hat s_i \mid 1 \leq i \leq N + N_w ~\}$.</p>
@@ -461,8 +459,8 @@ $$</p>
 <p>Resulting in the following discrete BL equations:</p>
 <p>$$
 \begin{aligned}
-\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^*}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp; = 0 \\
-\frac{\Delta H^*}{\Delta s} + H_a^*(1 - H_a)\frac{\theta_a}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - 2c_{\mathcal{D}_a} + H_a^*\frac{c_{f_a}}{2} &amp; = 0
+\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^<em>}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp; = 0 \\
+\frac{\Delta H^</em>}{\Delta s} + H_a^<em>(1 - H_a)\frac{\theta_a}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - 2c_{\mathcal{D}_a} + H_a^</em>\frac{c_{f_a}}{2} &amp; = 0
 \end{aligned}
 $$</p>
 <h2 id="residual-equations">Residual Equations</h2>
@@ -481,9 +479,9 @@ $$</p>
 \begin{bmatrix}
 P \\
 \hline A^wP + B
-\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^*)}{\Delta s} &amp; = \mathcal R_1(\mathbf m) \\
+\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^<em>)}{\Delta s} &amp; = \mathcal R_1(\mathbf m) \\
 \frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\
-\frac{\Delta H^*}{H^*_a} + \left(1 - H\right)\frac{\Delta u_e}{u_{e}} + \left(\frac{c_{f}}{2} - \frac{2C_{\mathcal D}}{H^*} \right) \frac{\Delta s}{\theta} &amp; = \mathcal R_3(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
+\frac{\Delta H^</em>}{H^<em><em>a} + \left(1 - H\right)\frac{\Delta u_e}{u</em>{e}} + \left(\frac{c_{f}}{2} - \frac{2C_{\mathcal D}}{H^</em>} \right) \frac{\Delta s}{\theta} &amp; = \mathcal R_3(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
 \end{aligned}
 $$</p>
 <p>The previous setup is sufficient for modelling flows with laminar boundary layers. The additional equations for modelling transition and turbulence are:</p>
@@ -646,7 +644,7 @@ $$</p>
     <div class="disqus-container">
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -693,7 +691,7 @@ $$</p>
         
             2016 - 
         
-        2022 ｢ALL FICTION｣
+        2026 ｢ALL FICTION｣
     </section>
     
     <section class="powerby">

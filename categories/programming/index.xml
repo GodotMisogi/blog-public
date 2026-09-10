@@ -23,7 +23,7 @@ Lotka-Volterra Equation Introduction The Lotka-Volterra equation governs coupled
       <pubDate>Wed, 24 Feb 2021 22:55:27 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/panel-methods/</guid>
-      <description>References  Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Drela, Mark and Giles, M. B. Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils. AIAA Journal, 1986. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001.  Viscous-Inviscid Panel Methods Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&amp;rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.</description>
+      <description>References Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Drela, Mark and Giles, M. B. Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils. AIAA Journal, 1986. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Viscous-Inviscid Panel Methods Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&amp;rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.</description>
     </item>
     
     <item>
@@ -43,7 +43,7 @@ $$ \mathbf R(\mathbf p) = \mathbf 0 $$</description>
       <pubDate>Sat, 05 May 2018 16:54:58 +0530</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/cfd-python/</guid>
-      <description>This &amp;lsquo;notebook&amp;rsquo; consists of my run-through of Prof. Lorena Barba&amp;rsquo;s &amp;ldquo;12 steps to Navier-Stokes&amp;rdquo; course, because I admit I have a problem with fluids. The Navier-Stokes equations that will be solved in this notebook are the following in conservative form:
+      <description>This &amp;rsquo;notebook&amp;rsquo; consists of my run-through of Prof. Lorena Barba&amp;rsquo;s &amp;ldquo;12 steps to Navier-Stokes&amp;rdquo; course, because I admit I have a problem with fluids. The Navier-Stokes equations that will be solved in this notebook are the following in conservative form:
 $$ \frac{\partial \rho}{\partial t} + \nabla \cdot \left(\rho V\right) = 0 $$
 $$ \frac{\partial (\rho\vec V)}{\partial t} + \nabla \cdot \left(\rho ~\vec V \otimes \vec V + p\hat I \right) = \rho \vec g + \nabla \cdot \hat \tau + \vec f$$</description>
     </item>

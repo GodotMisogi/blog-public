@@ -13,7 +13,7 @@
       <pubDate>Wed, 24 Feb 2021 22:55:27 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/panel-methods/</guid>
-      <description>References  Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Drela, Mark and Giles, M. B. Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils. AIAA Journal, 1986. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001.  Viscous-Inviscid Panel Methods Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&amp;rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.</description>
+      <description>References Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Drela, Mark and Giles, M. B. Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils. AIAA Journal, 1986. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Viscous-Inviscid Panel Methods Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&amp;rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Mon, 30 Sep 2019 00:00:00 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/fluid-dynamics/</guid>
-      <description>References  Batchelor, G. K. An Introduction to Fluid Dynamics. Cambridge University Press, 1992. Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Feynman, Richard P., Leighton, Robert B. and Sands, Matthew. The Feynman Lectures on Physics, Vol. 2: Mainly Electromagnetism and Matter. Basic Books, 2011. Balakrishnan, V. Selected Topics in Mathematical Physics. NPTEL, 2014.  Definitions The circulation $\Gamma$ of a vector field $\vec f(x^i)$ about a closed contour $C$ parametrised by a vector $d x_i$:</description>
+      <description>References Batchelor, G. K. An Introduction to Fluid Dynamics. Cambridge University Press, 1992. Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Feynman, Richard P., Leighton, Robert B. and Sands, Matthew. The Feynman Lectures on Physics, Vol. 2: Mainly Electromagnetism and Matter. Basic Books, 2011. Balakrishnan, V. Selected Topics in Mathematical Physics. NPTEL, 2014. Definitions The circulation $\Gamma$ of a vector field $\vec f(x^i)$ about a closed contour $C$ parametrised by a vector $d x_i$:</description>
     </item>
     
     <item>
@@ -42,7 +42,7 @@
       <guid>https://godot-bloggy.xyz/post/induced-drag/</guid>
       <description>While reading through John D. Anderson Jr.&amp;rsquo;s derivation of minimum induced drag, I thought of a cool application of the calculus of variations in one of the equations to deduce the required condition.
 The equation that determines the downwash at a point is:
-$$w(y_0) = -\frac{1}{4\pi }\int^{b/2}_{-b/2} \frac{(\mathrm{d}\Gamma/\mathrm{d}y)}{y_0 - y}\mathrm{d}y = \int^{b/2}_{-b/2} \mathcal{L}(\Gamma,\Gamma&#39;,y)~\mathrm{d}y$$
+$$w(y_0) = -\frac{1}{4\pi }\int^{b/2}_{-b/2} \frac{(\mathrm{d}\Gamma/\mathrm{d}y)}{y_0 - y}\mathrm{d}y = \int^{b/2}_{-b/2} \mathcal{L}(\Gamma,\Gamma&amp;rsquo;,y)~\mathrm{d}y$$
 This effectively implies that the downwash can be expressed as a functional of $\Gamma$, i.e. $w\left[\Gamma(y)\right]$, and one can find the functional derivative to find the extremal point.</description>
     </item>
     

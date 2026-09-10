@@ -24,7 +24,7 @@ $$ \mathbf R(\mathbf p) = \mathbf 0 $$</description>
       <pubDate>Mon, 30 Sep 2019 00:00:00 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/fluid-dynamics/</guid>
-      <description>References  Batchelor, G. K. An Introduction to Fluid Dynamics. Cambridge University Press, 1992. Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Feynman, Richard P., Leighton, Robert B. and Sands, Matthew. The Feynman Lectures on Physics, Vol. 2: Mainly Electromagnetism and Matter. Basic Books, 2011. Balakrishnan, V. Selected Topics in Mathematical Physics. NPTEL, 2014.  Definitions The circulation $\Gamma$ of a vector field $\vec f(x^i)$ about a closed contour $C$ parametrised by a vector $d x_i$:</description>
+      <description>References Batchelor, G. K. An Introduction to Fluid Dynamics. Cambridge University Press, 1992. Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Feynman, Richard P., Leighton, Robert B. and Sands, Matthew. The Feynman Lectures on Physics, Vol. 2: Mainly Electromagnetism and Matter. Basic Books, 2011. Balakrishnan, V. Selected Topics in Mathematical Physics. NPTEL, 2014. Definitions The circulation $\Gamma$ of a vector field $\vec f(x^i)$ about a closed contour $C$ parametrised by a vector $d x_i$:</description>
     </item>
     
     <item>
@@ -34,7 +34,7 @@ $$ \mathbf R(\mathbf p) = \mathbf 0 $$</description>
       
       <guid>https://godot-bloggy.xyz/project/academics/</guid>
       <description>I&amp;rsquo;ve been studying some physics for a while and decided to write solution manuals for reference in case I forget the approach to a problem later. They&amp;rsquo;re lazily written, hence some solutions might be incomplete, incorrect or have illogical statements. Here&amp;rsquo;s what I&amp;rsquo;ve compiled so far:
- Tom Lancaster et. al. - Quantum Field Theory for the Gifted Amateur Bernard F. Schutz - A First Course in General Relativity Ramamurti Shankar - Principles of Quantum Mechanics T.</description>
+Tom Lancaster et. al. - Quantum Field Theory for the Gifted Amateur Bernard F. Schutz - A First Course in General Relativity Ramamurti Shankar - Principles of Quantum Mechanics T.</description>
     </item>
     
     <item>

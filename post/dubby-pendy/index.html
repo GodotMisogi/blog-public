@@ -16,16 +16,14 @@
     <meta name="twitter:image" content='https://godot-bloggy.xyz/post/dubby-pendy/DubbyPendy.svg' />
     <link rel="shortcut icon" href="/punpun1.jpg" />
 
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-308292845"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-89998292-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-308292845', { 'anonymize_ip': false });
 }
 </script>
 
@@ -297,100 +295,100 @@ if (!doNotTrack) {
 <p>$$ \begin{aligned}
 \dot{\theta_1} &amp; = \frac{l_2 p_{\theta_1} - l_1 p_{\theta_2}\cos(\theta_1 - \theta_2)}{l_1^2 l_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} \\
 \dot{\theta_2} &amp; = \frac{l_1 (m_1 + m_2)p_{\theta_1} - l_2 m_2 p_{\theta_1}\cos(\theta_1 - \theta_2)}{l_1 l_2^2 m_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} \\
-\dot{p}_{\theta_1} &amp; = -(m_1 + m_2)gl_1\sin\theta_1 - C_1 + C_2 \\
-\dot{p}_{\theta_2} &amp; = -m_2gl_2\sin\theta_2 + C_1 - C_2 \\
+\dot{p}<em>{\theta_1} &amp; = -(m_1 + m_2)gl_1\sin\theta_1 - C_1 + C_2 \\
+\dot{p}</em>{\theta_2} &amp; = -m_2gl_2\sin\theta_2 + C_1 - C_2 \\
 C_1 &amp; = \frac{p_{\theta_1}p_{\theta_2}\sin(\theta_1-\theta_2)}{l_1 l_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} \\
 C_2 &amp; = \frac{l_2^2 m_2 p_{\theta_1}^2 + l_1^2(m_1 + m_2)p_{\theta_2}^2 - l_1 l_2 m_2 p_{\theta_1} p_{\theta_2} \cos(\theta_1 - \theta_2)}{2l_1^2 l_2^2 [m_1 + m_2\sin^2(\theta_1-\theta_2)]^2}\sin[2(\theta_1 - \theta_2)]
 \end{aligned} $$</p>
 <p>These are very formidable-looking equations, and it is almost impossible to determine the particle trajectories by solving these equations analytically! So how does one solve it for practical purposes? Numerical methods and programming. I used Lua to program the simulator, including the <a class="link" href="https://love2d.org"  target="_blank" rel="noopener"
     >LÖVE</a> framework for the graphics.</p>
 <p>Since the only data structure in Lua is a table, I decided to see how I could make use of that property for this program. Lua doesn&rsquo;t have functions to perform scalar multiplication or addition between tables, so I wrote some:</p>
-<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="kr">function</span> <span class="nf">directSum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">c</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="kr">for</span> <span class="n">i</span><span class="p">,</span><span class="n">v</span> <span class="kr">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="kr">do</span>
-        <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="kr">end</span>
-    <span class="kr">return</span> <span class="n">c</span>
-<span class="kr">end</span>
-
-<span class="kr">function</span> <span class="nf">scalarMultiply</span><span class="p">(</span><span class="n">scalar</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="kr">for</span> <span class="n">i</span><span class="p">,</span><span class="n">v</span> <span class="kr">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="kr">do</span>
-        <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scalar</span><span class="o">*</span><span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="kr">end</span>
-    <span class="kr">return</span> <span class="n">output</span>
-<span class="kr">end</span>
-</code></pre></div><p>So now I can store values, such as the initial conditions and parameters of the system in a table and perform basic arithmetic operations between tables to change values. Now to implement the physics of the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kr">function</span> <span class="nf">directSum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">c</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">for</span> <span class="n">i</span><span class="p">,</span><span class="n">v</span> <span class="kr">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="kr">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">function</span> <span class="nf">scalarMultiply</span><span class="p">(</span><span class="n">scalar</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">for</span> <span class="n">i</span><span class="p">,</span><span class="n">v</span> <span class="kr">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="kr">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scalar</span><span class="o">*</span><span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="n">output</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span></code></pre></div><p>So now I can store values, such as the initial conditions and parameters of the system in a table and perform basic arithmetic operations between tables to change values. Now to implement the physics of the problem.</p>
 <p>First, I defined a generator that randomly generates initial values (within a given range) of the masses of the bobs, the lengths of the rods, their angles with respect to the vertical, their initial angular velocities and calculated the momenta of the bobs. This is fed into a table called <code>data</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="kr">function</span> <span class="nf">Generator</span><span class="p">()</span>
-    
-    <span class="kd">local</span> <span class="n">self</span> <span class="o">=</span> <span class="p">{}</span>
-    
-    <span class="n">self.m1</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
-    <span class="n">self.m2</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
-    <span class="n">self.l1</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
-    <span class="n">self.l2</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
-    <span class="n">self.t1</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="o">-</span><span class="mf">6.28</span><span class="p">,</span> <span class="mf">6.28</span> <span class="p">)</span>
-    <span class="n">self.t2</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="o">-</span><span class="mf">6.28</span><span class="p">,</span> <span class="mf">6.28</span> <span class="p">)</span>
-    <span class="n">self.o1</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span> <span class="p">)</span>
-    <span class="n">self.o2</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
-    <span class="n">self.p1</span> <span class="o">=</span> <span class="p">(</span><span class="n">self.m1</span><span class="o">+</span><span class="n">self.m2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">self.l1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">self.o1</span> 
-    <span class="o">+</span> <span class="n">self.m2</span><span class="o">*</span><span class="n">self.l1</span><span class="o">*</span><span class="n">self.l2</span><span class="o">*</span><span class="n">self.o2</span><span class="o">*</span><span class="n">math.cos</span><span class="p">(</span><span class="n">self.t1</span><span class="o">-</span><span class="n">self.t2</span><span class="p">)</span>
-    <span class="n">self.p2</span> <span class="o">=</span> <span class="n">self.m2</span><span class="o">*</span><span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">self.l2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">self.o2</span> 
-    <span class="o">+</span> <span class="n">self.m2</span><span class="o">*</span><span class="n">self.l1</span><span class="o">*</span><span class="n">self.l2</span><span class="o">*</span><span class="n">self.o1</span><span class="o">*</span><span class="n">math.cos</span><span class="p">(</span><span class="n">self.t1</span><span class="o">-</span><span class="n">self.t2</span><span class="p">)</span>
-    
-    <span class="kr">return</span> <span class="n">self</span>
-<span class="kr">end</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">Generator</span><span class="p">()</span>
-</code></pre></div><p>Now we set up the equations of motion using a function called <code>Hamiltonian</code>. It takes the initial values from <code>data</code> to perform calculations, and a new table called <code>phase</code> which consists of the phase space variables to update the angles and momenta over time:</p>
-<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="kr">function</span> <span class="nf">Hamiltonian</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-
-    <span class="kd">local</span> <span class="n">update</span> <span class="o">=</span> <span class="p">{}</span>
-    
-    <span class="n">t1</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">t2</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-    <span class="n">p1</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">p2</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-    
-    <span class="n">C0</span> <span class="o">=</span> <span class="n">data.l1</span><span class="o">*</span><span class="n">data.l2</span><span class="o">*</span><span class="p">(</span><span class="n">data.m1</span><span class="o">+</span><span class="n">data.m2</span><span class="o">*</span><span class="n">math.pow</span><span class="p">(</span><span class="n">math.sin</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span><span class="o">*</span><span class="n">p2</span><span class="o">*</span><span class="n">math.sin</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span><span class="o">/</span><span class="n">C0</span>
-    <span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="n">data.m2</span><span class="o">*</span><span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">data.l2</span><span class="o">*</span><span class="n">p1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="n">data.m1</span><span class="o">+</span><span class="n">data.m2</span><span class="p">)</span><span class="o">*</span>
-    <span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">data.l1</span><span class="o">*</span><span class="n">p2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">data.l1</span><span class="o">*</span><span class="n">data.l2</span><span class="o">*</span><span class="n">data.m2</span><span class="o">*</span><span class="n">p1</span><span class="o">*</span><span class="n">p2</span><span class="o">*</span>
-    <span class="n">math.cos</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span><span class="o">*</span><span class="n">math.sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">C0</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
-    
-    <span class="n">update</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data.l2</span><span class="o">*</span><span class="n">p1</span> <span class="o">-</span> <span class="n">data.l1</span><span class="o">*</span><span class="n">p2</span><span class="o">*</span><span class="n">math.cos</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">data.l1</span><span class="o">*</span><span class="n">C0</span><span class="p">)</span>
-    <span class="n">update</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data.l1</span><span class="o">*</span><span class="p">(</span><span class="n">data.m1</span><span class="o">+</span><span class="n">data.m2</span><span class="p">)</span><span class="o">*</span><span class="n">p2</span> <span class="o">-</span> <span class="n">data.l2</span><span class="o">*</span><span class="n">data.m2</span><span class="o">*</span><span class="n">p1</span><span class="o">*</span>
-                <span class="n">math.cos</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">data.l2</span><span class="o">*</span><span class="n">data.m2</span><span class="o">*</span><span class="n">C0</span><span class="p">)</span>
-    <span class="n">update</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">data.m1</span> <span class="o">+</span> <span class="n">data.m2</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">data.l1</span><span class="o">*</span><span class="n">math.sin</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span> <span class="o">-</span> <span class="n">C1</span> <span class="o">+</span> <span class="n">C2</span>
-    <span class="n">update</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">data.m2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">data.l2</span><span class="o">*</span><span class="n">math.sin</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span> <span class="o">+</span> <span class="n">C1</span> <span class="o">-</span> <span class="n">C2</span>
-    
-    <span class="kr">return</span> <span class="n">update</span>
-<span class="kr">end</span>
-</code></pre></div><p>All the required information with regard to the physics are now processed. To solve the differential equations, I implemented the Runge-Kutta method of order 4, performing operations on the tables using <code>directSum</code> and <code>scalarMultiply</code>. These operations take place in <code>Solver</code>, which takes the time input <code>dt</code> from LÖVE in <code>love.update()</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="kr">function</span> <span class="nf">Solver</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
-
-    <span class="kd">local</span> <span class="n">phase</span> <span class="o">=</span> <span class="p">{</span><span class="n">data.t1</span><span class="p">,</span> <span class="n">data.t2</span><span class="p">,</span> <span class="n">data.p1</span><span class="p">,</span> <span class="n">data.p2</span><span class="p">}</span>
-
-    <span class="kd">local</span> <span class="n">k1</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">directSum</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">k1</span><span class="p">)),</span> <span class="n">data</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">k3</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">directSum</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">k2</span><span class="p">)),</span> <span class="n">data</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">k4</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">directSum</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">k3</span><span class="p">)),</span> <span class="n">data</span><span class="p">)</span>
-    
-    <span class="kd">local</span> <span class="n">R</span> <span class="o">=</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> 	
-    <span class="n">directSum</span><span class="p">(</span><span class="n">directSum</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k2</span><span class="p">)),</span> 
-    <span class="n">directSum</span><span class="p">(</span><span class="n">scalarMultiply</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k3</span><span class="p">),</span> <span class="n">k4</span><span class="p">)))</span>
-    
-    <span class="n">data.t1</span> <span class="o">=</span> <span class="n">data.t1</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">data.t2</span> <span class="o">=</span> <span class="n">data.t2</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-    <span class="n">data.p1</span> <span class="o">=</span> <span class="n">data.p1</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">data.p2</span> <span class="o">=</span> <span class="n">data.p2</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-<span class="kr">end</span>
-
-<span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">()</span>
-    <span class="n">Solver</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
-<span class="kr">end</span>
-</code></pre></div><p>After setting up the graphics end, I obtain nice animations like this:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kr">function</span> <span class="nf">Generator</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">self</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">self.m1</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.m2</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.l1</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.l2</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.t1</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="o">-</span><span class="mf">6.28</span><span class="p">,</span> <span class="mf">6.28</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.t2</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="o">-</span><span class="mf">6.28</span><span class="p">,</span> <span class="mf">6.28</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.o1</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.o2</span> <span class="o">=</span> <span class="n">love.math</span><span class="p">.</span><span class="n">random</span><span class="p">(</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.p1</span> <span class="o">=</span> <span class="p">(</span><span class="n">self.m1</span><span class="o">+</span><span class="n">self.m2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">self.l1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">self.o1</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">+</span> <span class="n">self.m2</span><span class="o">*</span><span class="n">self.l1</span><span class="o">*</span><span class="n">self.l2</span><span class="o">*</span><span class="n">self.o2</span><span class="o">*</span><span class="n">math.cos</span><span class="p">(</span><span class="n">self.t1</span><span class="o">-</span><span class="n">self.t2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self.p2</span> <span class="o">=</span> <span class="n">self.m2</span><span class="o">*</span><span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">self.l2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">self.o2</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">+</span> <span class="n">self.m2</span><span class="o">*</span><span class="n">self.l1</span><span class="o">*</span><span class="n">self.l2</span><span class="o">*</span><span class="n">self.o1</span><span class="o">*</span><span class="n">math.cos</span><span class="p">(</span><span class="n">self.t1</span><span class="o">-</span><span class="n">self.t2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="n">self</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">Generator</span><span class="p">()</span>
+</span></span></code></pre></div><p>Now we set up the equations of motion using a function called <code>Hamiltonian</code>. It takes the initial values from <code>data</code> to perform calculations, and a new table called <code>phase</code> which consists of the phase space variables to update the angles and momenta over time:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kr">function</span> <span class="nf">Hamiltonian</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">update</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">t1</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t2</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p1</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p2</span> <span class="o">=</span> <span class="n">phase</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">C0</span> <span class="o">=</span> <span class="n">data.l1</span><span class="o">*</span><span class="n">data.l2</span><span class="o">*</span><span class="p">(</span><span class="n">data.m1</span><span class="o">+</span><span class="n">data.m2</span><span class="o">*</span><span class="n">math.pow</span><span class="p">(</span><span class="n">math.sin</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span><span class="o">*</span><span class="n">p2</span><span class="o">*</span><span class="n">math.sin</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span><span class="o">/</span><span class="n">C0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="n">data.m2</span><span class="o">*</span><span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">data.l2</span><span class="o">*</span><span class="n">p1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="n">data.m1</span><span class="o">+</span><span class="n">data.m2</span><span class="p">)</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">data.l1</span><span class="o">*</span><span class="n">p2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">data.l1</span><span class="o">*</span><span class="n">data.l2</span><span class="o">*</span><span class="n">data.m2</span><span class="o">*</span><span class="n">p1</span><span class="o">*</span><span class="n">p2</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl">    <span class="n">math.cos</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span><span class="o">*</span><span class="n">math.sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">math.pow</span><span class="p">(</span><span class="n">C0</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">update</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data.l2</span><span class="o">*</span><span class="n">p1</span> <span class="o">-</span> <span class="n">data.l1</span><span class="o">*</span><span class="n">p2</span><span class="o">*</span><span class="n">math.cos</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">data.l1</span><span class="o">*</span><span class="n">C0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">update</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data.l1</span><span class="o">*</span><span class="p">(</span><span class="n">data.m1</span><span class="o">+</span><span class="n">data.m2</span><span class="p">)</span><span class="o">*</span><span class="n">p2</span> <span class="o">-</span> <span class="n">data.l2</span><span class="o">*</span><span class="n">data.m2</span><span class="o">*</span><span class="n">p1</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl">                <span class="n">math.cos</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">data.l2</span><span class="o">*</span><span class="n">data.m2</span><span class="o">*</span><span class="n">C0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">update</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">data.m1</span> <span class="o">+</span> <span class="n">data.m2</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">data.l1</span><span class="o">*</span><span class="n">math.sin</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span> <span class="o">-</span> <span class="n">C1</span> <span class="o">+</span> <span class="n">C2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">update</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">data.m2</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">data.l2</span><span class="o">*</span><span class="n">math.sin</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span> <span class="o">+</span> <span class="n">C1</span> <span class="o">-</span> <span class="n">C2</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="n">update</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span></code></pre></div><p>All the required information with regard to the physics are now processed. To solve the differential equations, I implemented the Runge-Kutta method of order 4, performing operations on the tables using <code>directSum</code> and <code>scalarMultiply</code>. These operations take place in <code>Solver</code>, which takes the time input <code>dt</code> from LÖVE in <code>love.update()</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kr">function</span> <span class="nf">Solver</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">phase</span> <span class="o">=</span> <span class="p">{</span><span class="n">data.t1</span><span class="p">,</span> <span class="n">data.t2</span><span class="p">,</span> <span class="n">data.p1</span><span class="p">,</span> <span class="n">data.p2</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">k1</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">directSum</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">k1</span><span class="p">)),</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">k3</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">directSum</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">k2</span><span class="p">)),</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">k4</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">directSum</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">k3</span><span class="p">)),</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">R</span> <span class="o">=</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> 	
+</span></span><span class="line"><span class="cl">    <span class="n">directSum</span><span class="p">(</span><span class="n">directSum</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">scalarMultiply</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k2</span><span class="p">)),</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">directSum</span><span class="p">(</span><span class="n">scalarMultiply</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k3</span><span class="p">),</span> <span class="n">k4</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">data.t1</span> <span class="o">=</span> <span class="n">data.t1</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data.t2</span> <span class="o">=</span> <span class="n">data.t2</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data.p1</span> <span class="o">=</span> <span class="n">data.p1</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data.p2</span> <span class="o">=</span> <span class="n">data.p2</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Solver</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span></code></pre></div><p>After setting up the graphics end, I obtain nice animations like this:
 <video width="100%" autoplay loop><source src="DubbyPendy.webm" type="video/webm">
 Your browser does not support the video tag.
 </video></p>
@@ -549,7 +547,7 @@ Your browser does not support the video tag.
     <div class="disqus-container">
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -596,7 +594,7 @@ Your browser does not support the video tag.
         
             2016 - 
         
-        2022 ｢ALL FICTION｣
+        2026 ｢ALL FICTION｣
     </section>
     
     <section class="powerby">
