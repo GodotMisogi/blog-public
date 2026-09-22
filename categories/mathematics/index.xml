@@ -6,17 +6,7 @@
     <description>Recent content in Mathematics on ｢ALL FICTION｣</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Thu, 01 Jun 2023 00:00:00 +0800</lastBuildDate><atom:link href="https://godot-bloggy.xyz/categories/mathematics/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Aerodynamics Modeling — Viscous-Inviscid Methods</title>
-      <link>https://godot-bloggy.xyz/project/aerodynamics-vii/</link>
-      <pubDate>Thu, 01 Jun 2023 00:00:00 +0800</pubDate>
-      
-      <guid>https://godot-bloggy.xyz/project/aerodynamics-vii/</guid>
-      <description>Viscous-inviscid interacting (VII) boundary layer methods for aerodynamic analyses.
-Implemented a modular, strongly-coupled VII integral boundary layer method. Incorporated automatic differentiation for generalizations to coupled analyses (e.g. aero-structural). Researching generic optimization capabilities within various MDO architectures (MDF, SAND). The solver couples an inviscid panel solution with integral boundary layer equations over the upper surface, lower surface, and wake, resolving the pressure distribution together with boundary layer integral quantities in a single differentiable system, implemented in ViscFoil.</description>
-    </item>
-    
+    <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0800</lastBuildDate><atom:link href="https://godot-bloggy.xyz/categories/mathematics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Abstract Algebra — Descending Endomorphisms</title>
       <link>https://godot-bloggy.xyz/project/abstract-algebra/</link>

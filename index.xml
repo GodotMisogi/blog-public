@@ -292,7 +292,7 @@
 &lt;li&gt;Incorporated &lt;em&gt;automatic differentiation&lt;/em&gt; for generalizations to coupled analyses (e.g. aero-structural).&lt;/li&gt;
 &lt;li&gt;Researching generic optimization capabilities within various MDO architectures (MDF, SAND).&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The solver couples an inviscid panel solution with integral boundary layer equations over the upper surface, lower surface, and wake, resolving the pressure distribution together with boundary layer integral quantities in a single differentiable system, implemented in &lt;a class=&#34;link&#34; href=&#34;https://github.com/GodotMisogi/ViscFoil.jl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;The solver strongly couples an inviscid panel solution with the integral boundary layer equations over the upper surface, lower surface, and wake, in a single differentiable system, implemented in &lt;a class=&#34;link&#34; href=&#34;https://github.com/GodotMisogi/ViscFoil.jl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViscFoil.jl&lt;/a&gt; (currently private).&lt;/p&gt;
 &lt;p&gt;&lt;figure 
 	&gt;
@@ -308,7 +308,7 @@
 	&lt;figcaption&gt;Strongly-coupled viscous-inviscid integral boundary layer analysis&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;The formulation is developed in detail below.&lt;/p&gt;
+&lt;!-- The formulation is developed in detail below. --&gt;
 &lt;hr&gt;
 &lt;h4 id=&#34;references&#34;&gt;References&lt;/h4&gt;
 &lt;ol&gt;
@@ -316,50 +316,80 @@
 &lt;li&gt;Drela, Mark and Giles, M. B. &lt;em&gt;Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils&lt;/em&gt;. AIAA Journal, 1986.&lt;/li&gt;
 &lt;li&gt;Katz, Joseph and Plotkin, Allen. &lt;em&gt;Low-Speed Aerodynamics - 2nd Edition.&lt;/em&gt; Cambridge University Press, 2001.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&#34;viscous-inviscid-panel-methods&#34;&gt;Viscous-Inviscid Panel Methods&lt;/h1&gt;
-&lt;p&gt;Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&amp;rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.&lt;/p&gt;
-&lt;h2 id=&#34;equivalent-inviscid-flow&#34;&gt;Equivalent Inviscid Flow&lt;/h2&gt;
-&lt;h3 id=&#34;governing-equation&#34;&gt;Governing equation&lt;/h3&gt;
-&lt;p&gt;The governing equation for this problem is Laplace&amp;rsquo;s equation in 2 dimensions:
-$$ \nabla^2 \phi = \nabla^2\left(\Phi + \Phi_\infty\right) = 0 $$&lt;/p&gt;
-&lt;p&gt;Note that the Laplace equation is an elliptic PDE, hence boundary conditions specified at any point in the domain affect the solution at all other points in the domain.&lt;/p&gt;
-&lt;p&gt;The &amp;ldquo;physically&amp;rdquo; motivated formulation for a closed, non-porous foil is the specification of Neumann boundary conditions, which state that the normal velocity through the foil is zero and the velocity vanishes at infinity:&lt;/p&gt;
-&lt;p&gt;$$\nabla \Phi^* \cdot \hat{\mathbf n} = \nabla (\Phi + \Phi_\infty) \cdot \hat{\mathbf n} = 0, \quad \lim_{n \to \infty} \nabla \Phi = \mathbf 0$$&lt;/p&gt;
-&lt;p&gt;This implies that the potential of the interior of the body is equal to some constant $c$:&lt;/p&gt;
-&lt;p&gt;$$ \Phi_\text{int}^* = (\Phi + \Phi_\infty) = c$$&lt;/p&gt;
-&lt;p&gt;The above condition is an alternative specification in the form of a Dirichlet boundary condition on the surface boundary $\partial S$, and turns out to be more computationally efficient as the operations are on scalars rather than vectors.&lt;/p&gt;
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-&lt;p&gt;Using Green&amp;rsquo;s third identity, the solution on $\partial S$ is expressed in terms of sources $\sigma$ and doublets $\phi$ of varying strength in streamwise-normal ($\hat{\mathbf s}, \hat{\mathbf n}$) coordinates:&lt;/p&gt;
-&lt;p&gt;$$ \Phi^{*}_{\text{int}}(x,y) = \Phi_{\infty}(x,y) + \frac{1}{2\pi}\int_{\partial S} \left[\sigma \ln r - \phi \frac{\partial\ln r}{\partial n}\right]\ dS, \quad \sigma = \frac{\partial\phi}{\partial n} $$&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: Vortices are streamwise derivatives of doublets:&lt;/p&gt;
-&lt;p&gt;$$ \vec\gamma(s) = \hat{\mathbf n} \times \hat{\mathbf s}\frac{d\phi}{ds} $$&lt;/p&gt;
-&lt;h3 id=&#34;discretisation&#34;&gt;Discretisation&lt;/h3&gt;
-&lt;p&gt;Discretise the equation for a foil, in which $N$ panels are assigned to the foil, and $N_w$ panels are assigned to the wake.&lt;/p&gt;
-&lt;p&gt;Assign each panel on the foil a constant doublet strength $\phi$, and assign all panels constant source strengths $\sigma$, giving the following:&lt;/p&gt;
-&lt;p&gt;$$ \Phi_{\infty}(x,y) + \sum_{j = 1}^N \left(\frac{\sigma}{\pi}\int_{\text{panel}}\ln r \ dS\right)&lt;em&gt;j - \sum&lt;/em&gt;{j = 1}^N \left(\frac{\phi}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\right)_j = \phi_p(x,y) $$&lt;/p&gt;
-&lt;p&gt;Let:
-$$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|&lt;em&gt;j, \quad A_j \equiv -\frac{1}{\pi}\int&lt;/em&gt;{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\bigg|_j$$&lt;/p&gt;
-&lt;p&gt;For foil panels, we get the following system of equations:&lt;/p&gt;
-&lt;p&gt;$$ A \phi + \vec\Phi^{*} = \vec\Phi_{\infty} - B\sigma $$&lt;/p&gt;
-&lt;p&gt;Let $\vec U_s = \{~\vec U \cdot ~\hat s_i \mid 1 \leq i \leq N + N_w ~\}$.&lt;/p&gt;
-&lt;h3 id=&#34;kutta-condition&#34;&gt;Kutta Condition&lt;/h3&gt;
-&lt;p&gt;The Kutta condition ensures the flow leaves the trailing edge &amp;ldquo;smoothly&amp;rdquo;:&lt;/p&gt;
-&lt;p&gt;$$ \Delta \phi_W = \phi_N - \phi_1 $$&lt;/p&gt;
-&lt;p&gt;The Morino condition, which equates the potential difference at the upper and lower streamlines of the trailing edge, sometimes appears to be more accurate:&lt;/p&gt;
-&lt;p&gt;$$ \phi_1 - \phi_2 = \phi_N - \phi_{N-1} $$&lt;/p&gt;
-&lt;h3 id=&#34;cases&#34;&gt;Cases&lt;/h3&gt;
-&lt;p&gt;Now we deal with two cases:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Let $\Phi_{\infty}(x,y) = \Phi^{*}_\text{int}(x,y)$. This system is directly invertible for $\phi_j$ when $\sigma_j$ is specified as $\sigma_j = \vec U_\infty \cdot \hat n_j$.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;$$ \vec\phi = (-A^{-1}B)\vec\sigma \equiv P\vec\sigma$$&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;Let $\sigma_j = \Phi^{*}_\text{int} = 0$, then the system is also directly invertible for $\vec\phi$ at a lower cost:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;$$ \vec\phi = A^{-1} \vec\Phi_{\infty}(x,y)$$&lt;/p&gt;
-&lt;h2 id=&#34;real-viscous-flow&#34;&gt;Real Viscous Flow&lt;/h2&gt;
-&lt;h3 id=&#34;doublet-expressions&#34;&gt;Doublet Expressions&lt;/h3&gt;
-&lt;p&gt;For viscous modelling, we deal with the first case using the wall transpiration model on the EIF. First, we express the edge velocities over the panels, which are the tangential derivatives of the exterior potential, expressed as the sum of the internal potential and the potential &amp;lsquo;jump&amp;rsquo; across the singularity distribution: $\Phi^{*}_\text{ext} = \Phi^{*}_\text{int} - \phi$. In case 1: $\Phi^{*}_\text{int} = c \in \mathbb R$, and $\phi = \Phi_{\infty} +???$.&lt;/p&gt;
+&lt;!-- 
+# Viscous-Inviscid Panel Methods
+
+Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&#39;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.
+
+## Equivalent Inviscid Flow
+
+### Governing Equations
+
+The governing equation for this problem is Laplace&#39;s equation in 2 dimensions:
+$$ \nabla^2 \phi = \nabla^2\left(\Phi + \Phi_\infty\right) = 0 $$
+
+Note that the Laplace equation is an elliptic PDE, hence boundary conditions specified at any point in the domain affect the solution at all other points in the domain.
+
+The &#34;physically&#34; motivated formulation for a closed, non-porous foil is the specification of Neumann boundary conditions, which state that the normal velocity through the foil is zero and the velocity vanishes at infinity:
+
+$$\nabla \Phi^* \cdot \hat{\mathbf n} = \nabla (\Phi + \Phi_\infty) \cdot \hat{\mathbf n} = 0, \quad \lim_{n \to \infty} \nabla \Phi = \mathbf 0$$
+
+This implies that the potential of the interior of the body is equal to some constant $c$:
+
+$$ \Phi_\text{int}^* = (\Phi + \Phi_\infty) = c$$
+
+The above condition is an alternative specification in the form of a Dirichlet boundary condition on the surface boundary $\partial S$, and turns out to be more computationally efficient as the operations are on scalars rather than vectors.
+
+### Solution
+
+Using Green&#39;s third identity, the solution on $\partial S$ is expressed in terms of sources $\sigma$ and doublets $\phi$ of varying strength in streamwise-normal ($\hat{\mathbf s}, \hat{\mathbf n}$) coordinates: 
+
+$$ \Phi^{\*}\_{\text{int}}(x,y) = \Phi_{\infty}(x,y) + \frac{1}{2\pi}\int_{\partial S} \left[\sigma \ln r - \phi \frac{\partial\ln r}{\partial n}\right]\ dS, \quad \sigma = \frac{\partial\phi}{\partial n} $$
+
+*Note*: Vortices are streamwise derivatives of doublets:
+
+$$ \vec\gamma(s) = \hat{\mathbf n} \times \hat{\mathbf s}\frac{d\phi}{ds} $$ --&gt;
+&lt;!-- ### Discretisation
+
+Discretise the equation for a foil, in which $N$ panels are assigned to the foil, and $N_w$ panels are assigned to the wake.
+
+Assign each panel on the foil a constant doublet strength $\phi$, and assign all panels constant source strengths $\sigma$, giving the following:
+
+$$ \Phi_{\infty}(x,y) + \sum_{j = 1}^N \left(\frac{\sigma}{\pi}\int_{\text{panel}}\ln r \ dS\right)_j - \sum_{j = 1}^N \left(\frac{\phi}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\right)_j = \phi_p(x,y) $$
+
+Let: 
+$$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|_j, \quad A_j \equiv -\frac{1}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\bigg|_j$$
+
+For foil panels, we get the following system of equations:
+
+$$ A \phi + \vec\Phi^{\*} = \vec\Phi_{\infty} - B\sigma $$
+
+Let $\vec U_s = \\{~\vec U \cdot ~\hat s_i \mid 1 \leq i \leq N + N_w ~\\}$.  --&gt;
+&lt;!-- ### Kutta Condition
+
+The Kutta condition ensures the flow leaves the trailing edge &#34;smoothly&#34;:
+
+$$ \Delta \phi_W = \phi_N - \phi_1 $$
+
+The Morino condition, which equates the potential difference at the upper and lower streamlines of the trailing edge, sometimes appears to be more accurate:
+
+$$ \phi_1 - \phi_2 = \phi_N - \phi_{N-1} $$ --&gt;
+&lt;!-- ### Cases
+
+Now we deal with two cases:
+
+1. Let $\Phi_{\infty}(x,y) = \Phi^{\*}\_\text{int}(x,y)$. This system is directly invertible for $\phi_j$ when $\sigma_j$ is specified as $\sigma_j = \vec U_\infty \cdot \hat n_j$.
+
+$$ \vec\phi = (-A^{-1}B)\vec\sigma \equiv P\vec\sigma$$
+
+2. Let $\sigma_j = \Phi^{\*}\_\text{int} = 0$, then the system is also directly invertible for $\vec\phi$ at a lower cost:
+
+$$ \vec\phi = A^{-1} \vec\Phi_{\infty}(x,y)$$ --&gt;
+&lt;!-- ## Real Viscous Flow
+
+### Doublet Expressions
+
+For viscous modelling, we deal with the first case using the wall transpiration model on the EIF. First, we express the edge velocities over the panels, which are the tangential derivatives of the exterior potential, expressed as the sum of the internal potential and the potential &#39;jump&#39; across the singularity distribution: $\Phi^{\*}\_\text{ext} = \Phi^{\*}\_\text{int} - \phi$. In case 1: $\Phi^{\*}\_\text{int} = c \in \mathbb R$, and $\phi = \Phi_{\infty} +???$. --&gt;
 &lt;!-- OUTLINE (author to write): kill the &#34;+???&#34; placeholder above. In case 1 the interior
      potential is held at the constant c, and the exterior (physical) potential is the interior
      minus the doublet jump:  Φ*_ext = Φ*_int − φ = c − φ. Solving the surface equation gives the
@@ -371,91 +401,112 @@ $$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|&lt;em&gt;j, \quad
      Concrete code (ViscFoil.jl): src/inviscid.jl — solve_inviscid, defect_block,
      source_mass_block!, edge_velocity_source_derivative build exactly this P σ / edge-velocity map.
 --&gt;
-&lt;p&gt;$$
+&lt;!-- $$ 
+\begin{aligned} 
+   \vec u_e = 
+   \begin{cases} 
+      \vec U_s^f - \dfrac{d\phi}{ds} &amp; \text{Airfoil} \\\\ 
+      &amp; \\\\ 
+      \vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp; \text{Wake} 
+   \end{cases} 
+\end{aligned} 
+$$
+
+Substituting the solution for $\phi$ from case 1, we obtain the following matrix expression:
+
+$$
 \begin{aligned}
-\vec u_e =
-\begin{cases}
-\vec U_s^f - \dfrac{d\phi}{ds} &amp;amp; \text{Airfoil} \\
-&amp;amp; \\
-\vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp;amp; \text{Wake}
-\end{cases}
+    \vec u_e &amp; = \vec U_s - \frac{d}{ds} 
+    \begin{bmatrix} P \\\\ 
+          \hline A^w P + B^w
+    \end{bmatrix} 
+    \vec\sigma
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Substituting the solution for $\phi$ from case 1, we obtain the following matrix expression:&lt;/p&gt;
-&lt;p&gt;$$
+$$
+
+Now express the sources in terms of the mass defect $m = u_e\delta^*$: 
+
+$$
 \begin{aligned}
-\vec u_e &amp;amp; = \vec U_s - \frac{d}{ds}
-\begin{bmatrix} P \\
-\hline A^w P + B^w
-\end{bmatrix}
-\vec\sigma
+\sigma_j &amp; = \left(\frac{dm}{ds}\right)_j \\\\ 
+\vec u_e &amp; = \vec U_s - \frac{d}{ds}
+    \begin{bmatrix}
+        P \\\\ 
+        \hline A^wP + B 
+    \end{bmatrix}
+    \frac{d\vec m}{ds}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Now express the sources in terms of the mass defect $m = u_e\delta^*$:&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\sigma_j &amp;amp; = \left(\frac{dm}{ds}\right)_j \\
-\vec u_e &amp;amp; = \vec U_s - \frac{d}{ds}
-\begin{bmatrix}
-P \\
-\hline A^wP + B
-\end{bmatrix}
-\frac{d\vec m}{ds}
-\end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;This gives a differential equation for $\vec u_e$.&lt;/p&gt;
-&lt;h3 id=&#34;difference-operators&#34;&gt;Difference Operators&lt;/h3&gt;
-&lt;p&gt;Define the following operator $\Delta^+\colon \mathbb R^n \to \mathbb R^{n-1}, n \in \mathbb N^+$ to evaluate forward differences with matrix representation:&lt;/p&gt;
-&lt;p&gt;$$
-\Delta^+ \equiv
-\begin{bmatrix}
--1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\
-0 &amp;amp; -1 &amp;amp; 1 &amp;amp; \ldots &amp;amp; 0 \\
-\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\
-0 &amp;amp; \ldots &amp;amp; -1 &amp;amp; 1 &amp;amp; 0 \\
-0 &amp;amp; \ldots &amp;amp; 0 &amp;amp; -1 &amp;amp; 1
-\end{bmatrix}
-$$&lt;/p&gt;
-&lt;p&gt;Difference operators can be used to generically compute $n$th order differences up to desired accuracy.&lt;/p&gt;
-&lt;p&gt;The following operator $\Delta^C\colon \mathbb R^n \to \mathbb R^n$ constructs central differences with forward and backward differencing at the endpoints:&lt;/p&gt;
-&lt;p&gt;$$
+$$
+
+This gives a differential equation for $\vec u_e$. --&gt;
+&lt;!-- ### Difference Operators
+
+Define the following operator $\Delta^+\colon \mathbb R^n \to \mathbb R^{n-1}, n \in \mathbb N^+$ to evaluate forward differences with matrix representation:
+
+$$ 
+\Delta^+ \equiv 
+\begin{bmatrix} 
+-1 \&amp; 1 \&amp; 0 \&amp; \ldots \&amp; 0 \\\\ 
+0 \&amp; -1 \&amp; 1 \&amp; \ldots \&amp; 0 \\\\ 
+\vdots \&amp; \ddots \&amp; \ddots \&amp; \ddots \&amp; \vdots \\\\ 
+0 \&amp; \ldots \&amp; -1 \&amp; 1 \&amp; 0 \\\\ 
+0 \&amp; \ldots \&amp; 0 \&amp; -1 \&amp; 1 
+\end{bmatrix} 
+$$
+
+Difference operators can be used to generically compute $n$th order differences up to desired accuracy.
+
+The following operator $\Delta^C\colon \mathbb R^n \to \mathbb R^n$ constructs central differences with forward and backward differencing at the endpoints:
+
+$$
 \Delta^c \equiv
 \begin{bmatrix}
--1 &amp;amp; 1 &amp;amp; 0 &amp;amp; \ldots &amp;amp; 0 \\
--1/2 &amp;amp; 0 &amp;amp; 1/2 &amp;amp; \ldots &amp;amp; 0 \\
-\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots \\
-0 &amp;amp; \ldots &amp;amp; -1/2 &amp;amp; 0 &amp;amp; 1/2 \\
-0 &amp;amp; \ldots &amp;amp; 0 &amp;amp; -1 &amp;amp; 1
+  -1 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\\\ 
+  -1/2 &amp; 0 &amp; 1/2 &amp; \ldots &amp; 0 \\\\ 
+  \vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\\\ 
+  0 &amp; \ldots &amp; -1/2 &amp; 0 &amp; 1/2 \\\\ 
+  0 &amp; \ldots &amp; 0 &amp; -1 &amp; 1
 \end{bmatrix}
-$$&lt;/p&gt;
-&lt;h2 id=&#34;boundary-layer-equations&#34;&gt;Boundary Layer Equations&lt;/h2&gt;
-&lt;p&gt;The thin shear boundary layer equations are obtained via the defect formulation and the thin shear approximations of the Navier-Stokes equations.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \quad (\textsf{Momentum}) \\
-\frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp;amp; = 0 \quad (\textsf{Kinetic Energy})
+$$ --&gt;
+&lt;!-- 
+## Boundary Layer Equations
+
+The thin shear boundary layer equations are obtained via the defect formulation and the thin shear approximations of the Navier-Stokes equations.
+
+$$ 
+\begin{aligned} 
+   \frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp; = 0 \quad (\textsf{Momentum}) \\\\ 
+   \frac{1}{\theta^\*}\frac{d\theta^\*}{ds} + \left(\frac{2H^{\*\*}}{H^\*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp; = 0 \quad (\textsf{Kinetic Energy})
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;where $H\equiv \delta^*/\theta$ is the momentum shape parameter, $c_f \equiv \tau_w/\frac{1}{2}\rho_e u_e^2$ is the shear stress coefficient normalised with respect to the freestream edge velocity, $M_e \equiv u_e/a_e$ is the local Mach number at the edge, $H^* \equiv \theta^*/\theta$ is the kinetic energy shape parameter, $H^{**} \equiv \delta^{**}/\theta$ is the density shape parameter, $c_\mathcal D \equiv \mathcal D / \rho_e u_e^3$ is the power dissipation coefficient.&lt;/p&gt;
-&lt;p&gt;$\textsf{Kinetic Energy} - H^*(\textsf{Momentum})$ gives the kinetic energy shape parameter equation:&lt;/p&gt;
-&lt;p&gt;$$
+$$
+
+where $H\equiv \delta^\*/\theta$ is the momentum shape parameter, $c_f \equiv \tau_w/\frac{1}{2}\rho_e u_e^2$ is the shear stress coefficient normalised with respect to the freestream edge velocity, $M_e \equiv u_e/a_e$ is the local Mach number at the edge, $H^\* \equiv \theta^\*/\theta$ is the kinetic energy shape parameter, $H^{\*\*} \equiv \delta^{\*\*}/\theta$ is the density shape parameter, $c_\mathcal D \equiv \mathcal D / \rho_e u_e^3$ is the power dissipation coefficient.
+
+$\textsf{Kinetic Energy} - H^\*(\textsf{Momentum})$ gives the kinetic energy shape parameter equation:
+
+$$
 \begin{aligned}
-\implies \theta\frac{dH^*}{ds} + \left[2H^{**} + H^*(1 - H)\right]\frac{\theta}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} + H^*\frac{c_f}{2} &amp;amp; = 0
+ \implies \theta\frac{dH^\*}{ds} + \left[2H^{\*\*} + H^\*(1 - H)\right]\frac{\theta}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} + H^\*\frac{c_f}{2} &amp; = 0
 \end{aligned}
-$$&lt;/p&gt;
-&lt;h3 id=&#34;closure-relations&#34;&gt;Closure Relations&lt;/h3&gt;
-&lt;p&gt;The following functional dependencies are used to close the system:&lt;/p&gt;
-&lt;p&gt;$$
+$$ --&gt;
+&lt;!-- ### Closure Relations
+
+The following functional dependencies are used to close the system:
+
+$$
 \begin{aligned}
-H^* &amp;amp; = H^*(H) \\
-C_f &amp;amp; = C_f(H, Re_\theta) \\
-C_\mathcal D &amp;amp; = C_\mathcal D(H, Re_\theta)
+    H^* &amp; = H^*(H) \\\\ 
+    C_f &amp; = C_f(H, Re_\theta) \\\\ 
+    C_\mathcal D &amp; = C_\mathcal D(H, Re_\theta)
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;where $H_k$ is the kinematic shape parameter, derived by Whitfield as:&lt;/p&gt;
-&lt;p&gt;$$ H_k = \frac{H - 0.290M_e^2}{1 + 0.113M_e^2} $$&lt;/p&gt;
-&lt;h4 id=&#34;laminar-closure&#34;&gt;Laminar Closure&lt;/h4&gt;
-&lt;p&gt;Falkner-Skan:&lt;/p&gt;
+$$
+
+where $H_k$ is the kinematic shape parameter, derived by Whitfield as:
+
+$$ H_k = \frac{H - 0.290M_e^2}{1 + 0.113M_e^2} $$ --&gt;
+&lt;!-- #### Laminar Closure
+
+Falkner-Skan: --&gt;
 &lt;!-- OUTLINE (author to write): the laminar closure set (currently just the words &#34;Falkner-Skan:&#34;).
      Give H*, Cf·Reθ and 2CD/H* as explicit functions of the kinematic shape parameter H_k, from
      the Falkner–Skan family fits used by Drela &amp; Giles (1986) — already reference [2]. Structure:
@@ -471,9 +522,11 @@ $$&lt;/p&gt;
   laminar_skin_friction_coefficient, laminar_dissipation_coefficient (+ wake variants). CONTEXT.md
   &#34;Closure Relations&#34; defines every symbol (Hk, Hs, cf, cDi, Reθ, cτ).
 --&gt;
-&lt;h4 id=&#34;turbulent-closure&#34;&gt;Turbulent Closure&lt;/h4&gt;
-&lt;h3 id=&#34;turbulent-magic&#34;&gt;Turbulent Magic&lt;/h3&gt;
-&lt;p&gt;$$ \frac{\delta}{C_\tau} \frac{dC_\tau}{ds} = 4.2\left(\sqrt{C_{\tau_{EQ}}} - \sqrt{C_\tau}\right) $$&lt;/p&gt;
+&lt;!-- #### Turbulent Closure
+
+### Turbulent Magic
+
+$$ \frac{\delta}{C_\tau} \frac{dC_\tau}{ds} = 4.2\left(\sqrt{C_{\tau_{EQ}}} - \sqrt{C_\tau}\right) $$ --&gt;
 &lt;!-- OUTLINE (author to write): finish the turbulent closure + name the transition model. The
      equation above is the shear-lag (lag-entrainment) ODE for the shear-stress coefficient Cτ —
      explain what it is, don&#39;t leave it bare. Structure:
@@ -500,44 +553,51 @@ $$&lt;/p&gt;
   the ñ_crit trip and the station-marching. The Turbulent2D/Laminar2D switch is in
   src/boundary_layer_types.jl.
 --&gt;
-&lt;h3 id=&#34;discretisation-1&#34;&gt;Discretisation&lt;/h3&gt;
-&lt;p&gt;The equations are discretised using central differencing, in which the variables are defined on the panel nodes.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Each singularity from the inviscid formulation is at the midpoint of each panel. The edge velocities from these computations are at the nodes, hence $N$ panels with $N+1$ edge velocities.&lt;/p&gt;
-&lt;p&gt;$$ \Delta x = \frac{x_{i+1} - x_{i-1}}{2}, ~x_a = \frac{x_{i+1} + x_{i-1}}{2} $$&lt;/p&gt;
-&lt;p&gt;Resulting in the following discrete BL equations:&lt;/p&gt;
-&lt;p&gt;$$
+&lt;!-- ### Discretisation
+
+The equations are discretised using central differencing, in which the variables are defined on the panel nodes. 
+
+**Note**: Each singularity from the inviscid formulation is at the midpoint of each panel. The edge velocities from these computations are at the nodes, hence $N$ panels with $N+1$ edge velocities.
+
+$$ \Delta x = \frac{x_{i+1} - x_{i-1}}{2}, ~x_a = \frac{x_{i+1} + x_{i-1}}{2} $$
+
+Resulting in the following discrete BL equations:
+
+$$
 \begin{aligned}
-\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^&lt;em&gt;}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp;amp; = 0 \\
-\frac{\Delta H^&lt;/em&gt;}{\Delta s} + H_a^&lt;em&gt;(1 - H_a)\frac{\theta_a}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - 2c_{\mathcal{D}_a} + H_a^&lt;/em&gt;\frac{c_{f_a}}{2} &amp;amp; = 0
+    \frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^*}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp; = 0 \\\\ 
+    \frac{\Delta H^*}{\Delta s} + H_a^*(1 - H_a)\frac{\theta_a}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - 2c_{\mathcal{D}_a} + H_a^*\frac{c_{f_a}}{2} &amp; = 0
 \end{aligned}
-$$&lt;/p&gt;
-&lt;h2 id=&#34;residual-equations&#34;&gt;Residual Equations&lt;/h2&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\nabla^2 \phi &amp;amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\
-\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp;amp; = 0 \\
-\frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp;amp; = 0
-\end{aligned}
-$$&lt;/p&gt;
-&lt;h3 id=&#34;discretisation-2&#34;&gt;Discretisation&lt;/h3&gt;
-&lt;p&gt;The discretised inviscid and viscous equations form the following system of equations to be solved for $m,~\theta,~\tilde n$.&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\mathbf u_e - \mathbf U_s + \frac{d}{ds}
-\begin{bmatrix}
-P \\
-\hline A^wP + B
-\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^&lt;em&gt;)}{\Delta s} &amp;amp; = \mathcal R_1(\mathbf m) \\
-\frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp;amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\
-\frac{\Delta H^&lt;/em&gt;}{H^&lt;em&gt;&lt;em&gt;a} + \left(1 - H\right)\frac{\Delta u_e}{u&lt;/em&gt;{e}} + \left(\frac{c_{f}}{2} - \frac{2C_{\mathcal D}}{H^&lt;/em&gt;} \right) \frac{\Delta s}{\theta} &amp;amp; = \mathcal R_3(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
-\end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;The previous setup is sufficient for modelling flows with laminar boundary layers. The additional equations for modelling transition and turbulence are:&lt;/p&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\frac{\Delta \tilde n}{\Delta s} - \frac{d\tilde n}{dRe_\theta}(H_{a})\frac{dRe_\theta}{ds}(H_{a}, \theta_{a}) &amp;amp; = R_{3,i}(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
-\end{aligned}
-$$&lt;/p&gt;
+$$
+
+## Residual Equations
+
+$$\begin{aligned}
+    \nabla^2 \phi &amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\\\ 
+    \frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp; = 0 \\\\ 
+       \frac{1}{\theta^\*}\frac{d\theta^\*}{ds} + \left(\frac{2H^{\*\*}}{H^\*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp; = 0
+\end{aligned}$$
+
+
+### Discretisation
+
+The discretised inviscid and viscous equations form the following system of equations to be solved for $m,~\theta,~\tilde n$.
+
+$$\begin{aligned} 
+    \mathbf u_e - \mathbf U_s + \frac{d}{ds}
+    \begin{bmatrix} 
+        P \\\\ 
+        \hline A^wP + B 
+    \end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^*)}{\Delta s} &amp; = \mathcal R_1(\mathbf m) \\\\ 
+    \frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\\\ 
+    \frac{\Delta H^*}{H^*_a} + \left(1 - H\right)\frac{\Delta u_e}{u_{e}} + \left(\frac{c_{f}}{2} - \frac{2C_{\mathcal D}}{H^*} \right) \frac{\Delta s}{\theta} &amp; = \mathcal R_3(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
+\end{aligned}$$
+
+The previous setup is sufficient for modelling flows with laminar boundary layers. The additional equations for modelling transition and turbulence are:
+
+$$\begin{aligned}
+    \frac{\Delta \tilde n}{\Delta s} - \frac{d\tilde n}{dRe_\theta}(H_{a})\frac{dRe_\theta}{ds}(H_{a}, \theta_{a}) &amp; = R_{3,i}(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
+\end{aligned}$$ --&gt;
 &lt;!-- OUTLINE (author to write): new section &#34;## Coupled Newton Solve&#34; — the residual system
      R = (R₁, R₂, R₃) is defined above but never actually solved. Show how it closes. This is the
      same direct/Newton machinery as the opt-problems post — cross-link it. (Rendered math: \_.)
@@ -586,51 +646,49 @@ $$&lt;/p&gt;
   - Code → scripts/panel-methods/generate_figures.jl (run with the ViscFoil project active:
     julia --project=$HOME/.julia/dev/ViscFoil scripts/panel-methods/generate_figures.jl).
 --&gt;
-&lt;h2 id=&#34;channel-flow&#34;&gt;Channel Flow&lt;/h2&gt;
-&lt;p&gt;Before coupling the boundary layer to the full panel solution, it helps to isolate the viscous–inviscid interaction in its simplest setting: a channel whose inviscid &amp;ldquo;outer&amp;rdquo; flow is a prescribed edge-velocity distribution $u_e(x)$ — equivalently, a prescribed half-height $h(x)$ carrying a fixed mass flow $\dot m$ — rather than the field around an airfoil. There is no panel machinery, yet the full viscous model still runs: the laminar equations, amplification, transition and the turbulent closures all march along a single line. That makes the channel both a clean warm-up and a verification case for the coupled solver.&lt;/p&gt;
-&lt;h3 id=&#34;displacement-body-coupling&#34;&gt;Displacement-body coupling&lt;/h3&gt;
-&lt;p&gt;For an inviscid core of density $\rho$, continuity relates the edge velocity and the channel height:&lt;/p&gt;
-&lt;p&gt;$$ u_e = \frac{\dot m}{\rho, h} $$&lt;/p&gt;
-&lt;p&gt;The boundary layer growing on each wall displaces the core by the displacement thickness $\delta^*$, so the &lt;em&gt;effective&lt;/em&gt; half-height is $h - \delta^*$. Enforcing continuity on this reduced area couples $u_e$ back to the boundary-layer state — this is the whole viscous–inviscid interaction, stripped to one equation:&lt;/p&gt;
-&lt;p&gt;$$ \dot m = \rho, u_e \left(h - \delta^*\right) = \text{const} \quad\Longrightarrow\quad \log u_e + \log\left(h - \delta^*\right) = \log\frac{\dot m}{\rho} $$&lt;/p&gt;
-&lt;p&gt;As the layer thickens, $h - \delta^*$ shrinks and $u_e$ accelerates above the inviscid estimate $\dot m/\rho h$ — the viscous back-reaction on the outer flow.&lt;/p&gt;
-&lt;h3 id=&#34;station-system&#34;&gt;Station system&lt;/h3&gt;
-&lt;p&gt;Marching in $x$, each station carries the state $(\theta, \delta^*, s, u_e)$, where $s$ is the amplification factor $\tilde n$ while the layer is laminar and the shear-stress coefficient $c_\tau$ once it is turbulent. Three residuals are ViscFoil&amp;rsquo;s standard station equations — momentum, kinetic-energy shape, and the amplification (or, downstream of transition, shear-lag) equation — and the fourth is the continuity closure above. While laminar, the momentum, shape and continuity rows are exactly the coupled system&lt;/p&gt;
-&lt;p&gt;$$
-\begin{bmatrix}
-1 &amp;amp; 0 &amp;amp; (H + 2)\dfrac{\theta}{u_e} \\
-\dfrac{-H}{H^*}\dfrac{dH^*}{dH} &amp;amp; \dfrac{1}{H^*}\dfrac{dH^*}{dH} &amp;amp; (1 - H)\dfrac{\theta}{u_e} \\
-0 &amp;amp; \dfrac{u_e}{\delta^* - h} &amp;amp; 1
+&lt;!-- ## Channel Flow
+
+Before coupling the boundary layer to the full panel solution, it helps to isolate the viscous–inviscid interaction in its simplest setting: a channel whose inviscid &#34;outer&#34; flow is a prescribed edge-velocity distribution $u_e(x)$ — equivalently, a prescribed half-height $h(x)$ carrying a fixed mass flow $\dot m$ — rather than the field around an airfoil. There is no panel machinery, yet the full viscous model still runs: the laminar equations, amplification, transition and the turbulent closures all march along a single line. That makes the channel both a clean warm-up and a verification case for the coupled solver.
+
+### Displacement-body coupling
+
+For an inviscid core of density $\rho$, continuity relates the edge velocity and the channel height:
+
+$$ u_e = \frac{\dot m}{\rho\, h} $$
+
+The boundary layer growing on each wall displaces the core by the displacement thickness $\delta^\*$, so the *effective* half-height is $h - \delta^\*$. Enforcing continuity on this reduced area couples $u_e$ back to the boundary-layer state — this is the whole viscous–inviscid interaction, stripped to one equation:
+
+$$ \dot m = \rho\, u_e \left(h - \delta^\*\right) = \text{const} \quad\Longrightarrow\quad \log u_e + \log\left(h - \delta^\*\right) = \log\frac{\dot m}{\rho} $$
+
+As the layer thickens, $h - \delta^\*$ shrinks and $u_e$ accelerates above the inviscid estimate $\dot m/\rho h$ — the viscous back-reaction on the outer flow.
+
+### Station system
+
+Marching in $x$, each station carries the state $(\theta, \delta^\*, s, u_e)$, where $s$ is the amplification factor $\tilde n$ while the layer is laminar and the shear-stress coefficient $c_\tau$ once it is turbulent. Three residuals are ViscFoil&#39;s standard station equations — momentum, kinetic-energy shape, and the amplification (or, downstream of transition, shear-lag) equation — and the fourth is the continuity closure above. While laminar, the momentum, shape and continuity rows are exactly the coupled system
+
+$$ 
+\begin{bmatrix} 
+    1 &amp; 0 &amp; (H + 2)\dfrac{\theta}{u_e} \\\\ 
+    \dfrac{-H}{H^\*}\dfrac{dH^\*}{dH} &amp; \dfrac{1}{H^\*}\dfrac{dH^\*}{dH} &amp; (1 - H)\dfrac{\theta}{u_e} \\\\ 
+    0 &amp; \dfrac{u_e}{\delta^\* - h} &amp; 1 
 \end{bmatrix}
-\begin{bmatrix}
-\dfrac{d\theta}{dx} \\
-\dfrac{d\delta^*}{dx} \\
-\dfrac{du_e}{dx}
-\end{bmatrix} =
-\begin{bmatrix}
-\dfrac{c_f}{2} \\
-\dfrac{2c_{\mathcal D}}{H^*} - \dfrac{c_f}{2} \\
-\dfrac{u_e}{\delta^* - h}\dfrac{dh}{dx}
+\begin{bmatrix} 
+    \dfrac{d\theta}{dx} \\\\ 
+    \dfrac{d\delta^\*}{dx} \\\\ 
+    \dfrac{du_e}{dx} 
+\end{bmatrix} = 
+\begin{bmatrix} 
+    \dfrac{c_f}{2} \\\\ 
+    \dfrac{2c_{\mathcal D}}{H^\*} - \dfrac{c_f}{2} \\\\ 
+    \dfrac{u_e}{\delta^\* - h}\dfrac{dh}{dx} 
 \end{bmatrix}
-$$&lt;/p&gt;
-&lt;p&gt;whose last row is the continuity closure ($u_e (h-\delta^*)$ held constant). Alongside these, the $e^N$ envelope equation integrates the amplification $\tilde n$; where it reaches the critical value $n_\text{crit}$, the march switches to the turbulent closures through the transition station, and the layer reattaches. Each station is a small damped-Newton solve under positivity-limited relaxation (keeping $\theta, \delta^*, u_e$ and the effective area $h-\delta^*$ positive), seeded from its converged upstream neighbour. In &lt;code&gt;ViscFoil&lt;/code&gt; this is &lt;code&gt;solve_channel&lt;/code&gt; (&lt;code&gt;src/channel_flow.jl&lt;/code&gt;); the station rows reuse the very same &lt;code&gt;residual_station!&lt;/code&gt; and &lt;code&gt;residual_transition!&lt;/code&gt; as the airfoil solver.&lt;/p&gt;
-&lt;h3 id=&#34;result&#34;&gt;Result&lt;/h3&gt;
-&lt;p&gt;Prescribing an airfoil-like edge velocity — accelerating, then adverse — and sweeping the transition threshold $n_\text{crit}$ at $Re = 5\times10^5$:&lt;/p&gt;
-&lt;p&gt;&lt;figure 
-	&gt;
-	&lt;a href=&#34;https://godot-bloggy.xyz/project/aerodynamics-vii/images/channel.svg&#34; &gt;
-		&lt;img src=&#34;https://godot-bloggy.xyz/project/aerodynamics-vii/images/channel.svg&#34;
-			
-			
-			
-			loading=&#34;lazy&#34;
-			alt=&#34;Channel flow — interacting boundary layer with e^N transition&#34;&gt;
-	&lt;/a&gt;
-	
-	&lt;figcaption&gt;Channel flow — interacting boundary layer with e^N transition&lt;/figcaption&gt;
-	
-&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;The viscous edge velocity tracks the inviscid one but sits slightly above it (the displacement effect) and kinks upward at transition, where the thinner turbulent profile displaces less. Under the adverse gradient the laminar layer separates into a short bubble — the shape-factor spikes — until amplification reaches $n_\text{crit}$ and it reattaches turbulent at $H \approx 1.5$. A larger $n_\text{crit}$ (a quieter freestream) delays transition and pushes the bubble downstream, so the transition location grows monotonically with $n_\text{crit}$. The transition-location trend and edge-velocity distribution reproduce those of an independent &lt;code&gt;aerosandbox&lt;/code&gt;-based integral boundary-layer solver to within the difference between the two closure sets — the same laminar–transition–turbulent physics the panel method resolves over an airfoil, here on a single line.&lt;/p&gt;
+$$
+
+whose last row is the continuity closure ($u_e (h-\delta^\*)$ held constant). Alongside these, the $e^N$ envelope equation integrates the amplification $\tilde n$; where it reaches the critical value $n_\text{crit}$, the march switches to the turbulent closures through the transition station, and the layer reattaches. Each station is a small damped-Newton solve under positivity-limited relaxation (keeping $\theta, \delta^\*, u_e$ and the effective area $h-\delta^\*$ positive), seeded from its converged upstream neighbour. In `ViscFoil` this is `solve_channel` (`src/channel_flow.jl`); the station rows reuse the very same `residual_station!` and `residual_transition!` as the airfoil solver. --&gt;
+&lt;!-- ### Result
+
+Prescribing an airfoil-like edge velocity — accelerating, then adverse — and sweeping the transition threshold $n_\text{crit}$ at $Re = 5\times10^5$: --&gt;
+&lt;!-- ![Channel flow — interacting boundary layer with e^N transition](images/channel.svg) --&gt;
 &lt;!-- OUTLINE (author to write): short &#34;## Conclusion&#34; — one paragraph tying the thread together:
      equivalent inviscid flow (doublets/sources + Kutta) → boundary-layer defect equations →
      closures (laminar/turbulent/transition) → the coupled Newton solve → validation vs MFOIL

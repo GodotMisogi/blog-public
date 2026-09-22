@@ -55,7 +55,7 @@ Flow field around the airfoil Boundary layer profile evaluation against referenc
       
       <guid>https://godot-bloggy.xyz/project/aerodynamics-vii/</guid>
       <description>Viscous-inviscid interacting (VII) boundary layer methods for aerodynamic analyses.
-Implemented a modular, strongly-coupled VII integral boundary layer method. Incorporated automatic differentiation for generalizations to coupled analyses (e.g. aero-structural). Researching generic optimization capabilities within various MDO architectures (MDF, SAND). The solver couples an inviscid panel solution with integral boundary layer equations over the upper surface, lower surface, and wake, resolving the pressure distribution together with boundary layer integral quantities in a single differentiable system, implemented in ViscFoil.</description>
+Implemented a modular, strongly-coupled VII integral boundary layer method. Incorporated automatic differentiation for generalizations to coupled analyses (e.g. aero-structural). Researching generic optimization capabilities within various MDO architectures (MDF, SAND). The solver strongly couples an inviscid panel solution with the integral boundary layer equations over the upper surface, lower surface, and wake, in a single differentiable system, implemented in ViscFoil.jl (currently private).</description>
     </item>
     
     <item>

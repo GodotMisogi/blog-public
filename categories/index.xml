@@ -35,15 +35,6 @@
     </item>
     
     <item>
-      <title>Mathematics</title>
-      <link>https://godot-bloggy.xyz/categories/mathematics/</link>
-      <pubDate>Thu, 01 Jun 2023 00:00:00 +0800</pubDate>
-      
-      <guid>https://godot-bloggy.xyz/categories/mathematics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Programming</title>
       <link>https://godot-bloggy.xyz/categories/programming/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0800</pubDate>
@@ -67,6 +58,15 @@
       <pubDate>Mon, 01 May 2023 00:00:00 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/categories/education/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mathematics</title>
+      <link>https://godot-bloggy.xyz/categories/mathematics/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/categories/mathematics/</guid>
       <description></description>
     </item>
     
