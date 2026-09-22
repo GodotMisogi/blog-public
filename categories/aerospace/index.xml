@@ -13,8 +13,8 @@
       <pubDate>Sun, 10 Jan 2021 00:00:00 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/project/aircraft-design/</guid>
-      <description>A computational framework for analysing and optimising amphibious aircraft designs.
-Developed a conceptual design framework for amphibious aircraft with hydrofoils. Developed surrogate models for multiphase CFD analyses of supercavitating hydrofoils and hulls. Optimised hydrofoil geometry for improved takeoff performance with these models. Multiphase CFD sweeps over speed and angle of attack produce surrogate models for the hydrodynamic coefficients of a supercavitating hydrofoil, capturing the water volume fraction around the wetted section.</description>
+      <description>This work involved performing multiphase computational fluid dynamics (CFD) analyses of supercavitating hydrofoils and hulls to compute their hydrodynamic coefficients. Multiphase computational fluid dynamics simulation of an amphibious aircraft hull The CFD sweeps were performed over speed and angle of attack to produce surrogate models for the hydrodynamic coefficients of a supercavitating hydrofoil, capturing the water volume fraction around the wetted section.
+Water volume fraction around a super-cavitating hydrofoil section Surrogate contours of hydrofoil force and moment coefficients These surrogates were used in a water-takeoff analysis that coupled the hydrofoil, hull, and aircraft aerodynamic loads, over which the hydrofoil incidence and span were optimized to minimise takeoff distance.</description>
     </item>
     
     <item>
@@ -23,8 +23,8 @@ Developed a conceptual design framework for amphibious aircraft with hydrofoils.
       <pubDate>Mon, 01 May 2023 00:00:00 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/project/aerospace-education/</guid>
-      <description>A computational framework to teach aerospace engineering with multidisciplinary design optimization.
-Developed an interactive computational platform as a teaching tool: AeroFuse. Implemented geometry, vortex-lattice (aerodynamics), beam-element (structures), blade-element momentum theory (propulsion), and rigid-body integrators (flight dynamics) for coupled analyses. Enabled adjoint-based solutions of inverse and optimization problems between disciplines with automatic differentiation. AeroFuse couples the disciplinary solvers into a single differentiable model, so lift distributions can be matched to a target and full aerostructural configurations analysed and optimised from one interface.</description>
+      <description>This work is an interactive, computational platform for aircraft design designed to be used as an instructional tool: AeroFuse.
+Used at The Hong Kong University of Science and Technology, and Imperial College London. Implemented geometry, aerodynamics (vortex-lattice), structures (beam-element), propulsion (blade-element momentum theory), and flight dynamics (rigid-body integrators) for coupled analyses. Enabled adjoint-based solutions of inverse and optimization problems between disciplines with automatic differentiation. eXtended Design Structure Matrix of features in AeroFuse AeroFuse couples the disciplinary solvers into a single differentiable model, so complete aircraft configurations can be analyzed and optimized from one interface for conceptual and preliminary design.</description>
     </item>
     
   </channel>

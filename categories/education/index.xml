@@ -13,8 +13,8 @@
       <pubDate>Mon, 01 May 2023 00:00:00 +0800</pubDate>
       
       <guid>https://godot-bloggy.xyz/project/aerospace-education/</guid>
-      <description>A computational framework to teach aerospace engineering with multidisciplinary design optimization.
-Developed an interactive computational platform as a teaching tool: AeroFuse. Implemented geometry, vortex-lattice (aerodynamics), beam-element (structures), blade-element momentum theory (propulsion), and rigid-body integrators (flight dynamics) for coupled analyses. Enabled adjoint-based solutions of inverse and optimization problems between disciplines with automatic differentiation. AeroFuse couples the disciplinary solvers into a single differentiable model, so lift distributions can be matched to a target and full aerostructural configurations analysed and optimised from one interface.</description>
+      <description>This work is an interactive, computational platform for aircraft design designed to be used as an instructional tool: AeroFuse.
+Used at The Hong Kong University of Science and Technology, and Imperial College London. Implemented geometry, aerodynamics (vortex-lattice), structures (beam-element), propulsion (blade-element momentum theory), and flight dynamics (rigid-body integrators) for coupled analyses. Enabled adjoint-based solutions of inverse and optimization problems between disciplines with automatic differentiation. eXtended Design Structure Matrix of features in AeroFuse AeroFuse couples the disciplinary solvers into a single differentiable model, so complete aircraft configurations can be analyzed and optimized from one interface for conceptual and preliminary design.</description>
     </item>
     
   </channel>

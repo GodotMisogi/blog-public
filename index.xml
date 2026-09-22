@@ -12,32 +12,28 @@
         <pubDate>Sun, 10 Jan 2021 00:00:00 +0800</pubDate>
         
         <guid>https://godot-bloggy.xyz/project/aircraft-design/</guid>
-        <description>&lt;img src="https://godot-bloggy.xyz/project/aircraft-design/surrogate-contours.png" alt="Featured image of post Aircraft Design — Amphibious Aircraft" /&gt;&lt;p&gt;&lt;strong&gt;A computational framework for analysing and optimising &lt;em&gt;amphibious aircraft&lt;/em&gt; designs.&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Developed a conceptual design framework for amphibious aircraft with hydrofoils.&lt;/li&gt;
-&lt;li&gt;Developed surrogate models for multiphase CFD analyses of supercavitating hydrofoils and hulls.&lt;/li&gt;
-&lt;li&gt;Optimised hydrofoil geometry for improved takeoff performance with these models.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Multiphase CFD sweeps over speed and angle of attack produce surrogate models for the hydrodynamic coefficients of a supercavitating hydrofoil, capturing the water volume fraction around the wetted section.&lt;/p&gt;
-&lt;p&gt;&lt;figure 
+        <description>&lt;img src="https://godot-bloggy.xyz/project/aircraft-design/hull-3d-cfd.png" alt="Featured image of post Aircraft Design — Amphibious Aircraft" /&gt;&lt;p&gt;This work involved performing multiphase computational fluid dynamics (CFD) analyses of supercavitating hydrofoils and hulls to compute their hydrodynamic coefficients.
+&lt;figure 
 	
 		class=&#34;gallery-image&#34; 
 		style=&#34;
-			flex-grow: 300; 
-			flex-basis: 720px&#34;
+			flex-grow: 164; 
+			flex-basis: 395px&#34;
 	&gt;
-	&lt;a href=&#34;https://godot-bloggy.xyz/project/aircraft-design/surrogate-contours.png&#34; data-size=&#34;2400x800&#34;&gt;
-		&lt;img src=&#34;https://godot-bloggy.xyz/project/aircraft-design/surrogate-contours.png&#34;
-			width=&#34;2400&#34;
-			height=&#34;800&#34;
-			srcset=&#34;https://godot-bloggy.xyz/project/aircraft-design/surrogate-contours_huf8ddc14a9a4799dce74f3a9e60da0a2c_779048_480x0_resize_box_3.png 480w, https://godot-bloggy.xyz/project/aircraft-design/surrogate-contours_huf8ddc14a9a4799dce74f3a9e60da0a2c_779048_1024x0_resize_box_3.png 1024w&#34;
+	&lt;a href=&#34;https://godot-bloggy.xyz/project/aircraft-design/hull-3d-cfd.png&#34; data-size=&#34;2758x1672&#34;&gt;
+		&lt;img src=&#34;https://godot-bloggy.xyz/project/aircraft-design/hull-3d-cfd.png&#34;
+			width=&#34;2758&#34;
+			height=&#34;1672&#34;
+			srcset=&#34;https://godot-bloggy.xyz/project/aircraft-design/hull-3d-cfd_hu130eb44fec18ae70e750b127c9a4ea10_458951_480x0_resize_box_3.png 480w, https://godot-bloggy.xyz/project/aircraft-design/hull-3d-cfd_hu130eb44fec18ae70e750b127c9a4ea10_458951_1024x0_resize_box_3.png 1024w&#34;
 			loading=&#34;lazy&#34;
-			alt=&#34;Surrogate contours of hydrofoil force and moment coefficients&#34;&gt;
+			alt=&#34;Multiphase computational fluid dynamics simulation of an amphibious aircraft hull&#34;&gt;
 	&lt;/a&gt;
 	
-	&lt;figcaption&gt;Surrogate contours of hydrofoil force and moment coefficients&lt;/figcaption&gt;
+	&lt;figcaption&gt;Multiphase computational fluid dynamics simulation of an amphibious aircraft hull&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/p&gt;
+&lt;!-- ![](hull-2d-cfd.svg) --&gt;
+&lt;p&gt;The CFD sweeps were performed over speed and angle of attack to produce surrogate models for the hydrodynamic coefficients of a supercavitating hydrofoil, capturing the water volume fraction around the wetted section.&lt;/p&gt;
 &lt;p&gt;&lt;figure 
 	&gt;
 	&lt;a href=&#34;https://godot-bloggy.xyz/project/aircraft-design/cavitating-hydrofoil.svg&#34; &gt;
@@ -46,25 +42,34 @@
 			
 			
 			loading=&#34;lazy&#34;
-			alt=&#34;Water volume fraction around a cavitating hydrofoil section&#34;&gt;
+			alt=&#34;Water volume fraction around a super-cavitating hydrofoil section&#34;&gt;
 	&lt;/a&gt;
 	
-	&lt;figcaption&gt;Water volume fraction around a cavitating hydrofoil section&lt;/figcaption&gt;
+	&lt;figcaption&gt;Water volume fraction around a super-cavitating hydrofoil section&lt;/figcaption&gt;
+	
+&lt;/figure&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://godot-bloggy.xyz/project/aircraft-design/surrogate-contours.svg&#34; &gt;
+		&lt;img src=&#34;https://godot-bloggy.xyz/project/aircraft-design/surrogate-contours.svg&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;Surrogate contours of hydrofoil force and moment coefficients&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;Surrogate contours of hydrofoil force and moment coefficients&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;These surrogates feed a water-takeoff analysis coupling hydrofoil, hull, and aerodynamic loads, over which the hydrofoil incidence and span are optimised to minimise takeoff distance.&lt;/p&gt;
+&lt;p&gt;These surrogates were used in a water-takeoff analysis that coupled the hydrofoil, hull, and aircraft aerodynamic loads, over which the hydrofoil incidence and span were optimized to minimise takeoff distance.&lt;/p&gt;
 &lt;p&gt;&lt;figure 
-	
-		class=&#34;gallery-image&#34; 
-		style=&#34;
-			flex-grow: 160; 
-			flex-basis: 384px&#34;
 	&gt;
-	&lt;a href=&#34;https://godot-bloggy.xyz/project/aircraft-design/incidence-span-design-space.png&#34; data-size=&#34;1600x1000&#34;&gt;
-		&lt;img src=&#34;https://godot-bloggy.xyz/project/aircraft-design/incidence-span-design-space.png&#34;
-			width=&#34;1600&#34;
-			height=&#34;1000&#34;
-			srcset=&#34;https://godot-bloggy.xyz/project/aircraft-design/incidence-span-design-space_hua427920e829ffdd4216866836eae3ebc_830211_480x0_resize_box_3.png 480w, https://godot-bloggy.xyz/project/aircraft-design/incidence-span-design-space_hua427920e829ffdd4216866836eae3ebc_830211_1024x0_resize_box_3.png 1024w&#34;
+	&lt;a href=&#34;https://godot-bloggy.xyz/project/aircraft-design/incidence-span-design-space.svg&#34; &gt;
+		&lt;img src=&#34;https://godot-bloggy.xyz/project/aircraft-design/incidence-span-design-space.svg&#34;
+			
+			
+			
 			loading=&#34;lazy&#34;
 			alt=&#34;Incidence angle and span design space for takeoff distance&#34;&gt;
 	&lt;/a&gt;
@@ -96,7 +101,7 @@
     &gt;doi:10.3390/aerospace8010010&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This work formed the basis of my MPhil thesis, &lt;a class=&#34;link&#34; href=&#34;https://repository.ust.hk/ir/Record/1783.1-109106&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;&lt;em&gt;A Computational Design Framework for Amphibious Aircraft&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+    &gt;&lt;em&gt;Development of a Computational Design Framework for Amphibious Aircraft&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -105,28 +110,30 @@
         <pubDate>Mon, 01 May 2023 00:00:00 +0800</pubDate>
         
         <guid>https://godot-bloggy.xyz/project/aerospace-education/</guid>
-        <description>&lt;img src="https://godot-bloggy.xyz/project/aerospace-education/aerostruct-wing-tail.svg" alt="Featured image of post Aerospace Engineering Education — AeroFuse" /&gt;&lt;p&gt;&lt;strong&gt;A computational framework to teach aerospace engineering with multidisciplinary design optimization.&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;img src="https://godot-bloggy.xyz/project/aerospace-education/aerostruct-wing-tail.svg" alt="Featured image of post Aerospace Engineering Education — AeroFuse" /&gt;&lt;!-- **A computational framework to teach aerospace engineering with multidisciplinary design optimization.** --&gt;
+&lt;p&gt;This work is an interactive, computational platform for aircraft design designed to be used as an instructional tool: &lt;a class=&#34;link&#34; href=&#34;https://github.com/GodotMisogi/AeroFuse.jl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AeroFuse&lt;/a&gt;.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Developed an interactive computational platform as a teaching tool: &lt;a class=&#34;link&#34; href=&#34;https://github.com/GodotMisogi/AeroFuse.jl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;AeroFuse&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Implemented geometry, vortex-lattice &lt;em&gt;(aerodynamics)&lt;/em&gt;, beam-element &lt;em&gt;(structures)&lt;/em&gt;, blade-element momentum theory &lt;em&gt;(propulsion)&lt;/em&gt;, and rigid-body integrators &lt;em&gt;(flight dynamics)&lt;/em&gt; for coupled analyses.&lt;/li&gt;
-&lt;li&gt;Enabled &lt;em&gt;adjoint-based&lt;/em&gt; solutions of inverse and optimization problems between disciplines with automatic differentiation.&lt;/li&gt;
+&lt;li&gt;Used at The Hong Kong University of Science and Technology, and Imperial College London.&lt;/li&gt;
+&lt;li&gt;Implemented geometry, aerodynamics (vortex-lattice), structures (beam-element), propulsion (blade-element momentum theory), and flight dynamics (rigid-body integrators) for coupled analyses.&lt;/li&gt;
+&lt;li&gt;Enabled adjoint-based solutions of inverse and optimization problems between disciplines with automatic differentiation.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;AeroFuse couples the disciplinary solvers into a single differentiable model, so lift distributions can be matched to a target and full aerostructural configurations analysed and optimised from one interface.&lt;/p&gt;
 &lt;p&gt;&lt;figure 
 	&gt;
-	&lt;a href=&#34;https://godot-bloggy.xyz/project/aerospace-education/spanwise-cl.svg&#34; &gt;
-		&lt;img src=&#34;https://godot-bloggy.xyz/project/aerospace-education/spanwise-cl.svg&#34;
+	&lt;a href=&#34;https://godot-bloggy.xyz/project/aerospace-education/AeroFuse.svg&#34; &gt;
+		&lt;img src=&#34;https://godot-bloggy.xyz/project/aerospace-education/AeroFuse.svg&#34;
 			
 			
 			
 			loading=&#34;lazy&#34;
-			alt=&#34;Spanwise lift distribution: initial vs. optimised wing&#34;&gt;
+			alt=&#34;eXtended Design Structure Matrix of features in AeroFuse&#34;&gt;
 	&lt;/a&gt;
 	
-	&lt;figcaption&gt;Spanwise lift distribution: initial vs. optimised wing&lt;/figcaption&gt;
+	&lt;figcaption&gt;eXtended Design Structure Matrix of features in AeroFuse&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;AeroFuse couples the disciplinary solvers into a single differentiable model, so complete aircraft configurations can be analyzed and optimized from one interface for conceptual and preliminary design.&lt;/p&gt;
+&lt;!-- ![Spanwise lift distribution: initial vs. optimized wing](spanwise-cl.svg) --&gt;
 &lt;p&gt;&lt;figure 
 	&gt;
 	&lt;a href=&#34;https://godot-bloggy.xyz/project/aerospace-education/aerostruct-wing-tail.svg&#34; &gt;
@@ -135,10 +142,10 @@
 			
 			
 			loading=&#34;lazy&#34;
-			alt=&#34;Coupled aerostructural analysis of a wing and tail configuration&#34;&gt;
+			alt=&#34;Coupled aerostructural optimization of an aircraft with a T-tail configuration&#34;&gt;
 	&lt;/a&gt;
 	
-	&lt;figcaption&gt;Coupled aerostructural analysis of a wing and tail configuration&lt;/figcaption&gt;
+	&lt;figcaption&gt;Coupled aerostructural optimization of an aircraft with a T-tail configuration&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;The platform is open source and documented for classroom use:&lt;/p&gt;
