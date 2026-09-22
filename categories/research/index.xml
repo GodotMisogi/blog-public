@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Research on ｢ALL FICTION｣</title>
+    <link>https://godot-bloggy.xyz/categories/research/</link>
+    <description>Recent content in Research on ｢ALL FICTION｣</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0800</lastBuildDate><atom:link href="https://godot-bloggy.xyz/categories/research/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aircraft Design — Amphibious Aircraft</title>
+      <link>https://godot-bloggy.xyz/project/aircraft-design/</link>
+      <pubDate>Sun, 10 Jan 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/aircraft-design/</guid>
+      <description>A computational framework for analysing and optimising amphibious aircraft designs.
+Developed a conceptual design framework for amphibious aircraft with hydrofoils. Developed surrogate models for multiphase CFD analyses of supercavitating hydrofoils and hulls. Optimised hydrofoil geometry for improved takeoff performance with these models. Multiphase CFD sweeps over speed and angle of attack produce surrogate models for the hydrodynamic coefficients of a supercavitating hydrofoil, capturing the water volume fraction around the wetted section.</description>
+    </item>
+    
+    <item>
+      <title>Aerospace Engineering Education — AeroFuse</title>
+      <link>https://godot-bloggy.xyz/project/aerospace-education/</link>
+      <pubDate>Mon, 01 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/aerospace-education/</guid>
+      <description>A computational framework to teach aerospace engineering with multidisciplinary design optimization.
+Developed an interactive computational platform as a teaching tool: AeroFuse. Implemented geometry, vortex-lattice (aerodynamics), beam-element (structures), blade-element momentum theory (propulsion), and rigid-body integrators (flight dynamics) for coupled analyses. Enabled adjoint-based solutions of inverse and optimization problems between disciplines with automatic differentiation. AeroFuse couples the disciplinary solvers into a single differentiable model, so lift distributions can be matched to a target and full aerostructural configurations analysed and optimised from one interface.</description>
+    </item>
+    
+    <item>
+      <title>Flight Performance Analysis — Data-Enhanced Simulations</title>
+      <link>https://godot-bloggy.xyz/project/flight-performance/</link>
+      <pubDate>Tue, 01 Mar 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/flight-performance/</guid>
+      <description>Data-enhanced flight simulations with machine learning for performance analysis.
+Derived nonlinear formulations for incorporating airline data into a flight simulation framework. Performed analyses of short, medium, and long-haul flights with validation against airline data from Cathay Pacific Airways. Prepared visualization and reporting tools for post-processing. The framework simulates each flight phase — takeoff, climb, cruise, descent, and landing — and blends recorded Quick Access Recorder (QAR) data into the dynamics to correct fuel and time predictions against real operations.</description>
+    </item>
+    
+    <item>
+      <title>Aeroacoustics — Airfoil Shape Optimization</title>
+      <link>https://godot-bloggy.xyz/project/aeroacoustics/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/aeroacoustics/</guid>
+      <description>Shape optimization of airfoils with multi-fidelity CFD and noise prediction models.
+Implemented differentiable boundary layer data extraction from the CFD solvers ADflow and CMPLXFOIL. Developed components of semi-empirical noise models for constructing coupled analyses with MPhys. Currently researching multi-objective gradient-based constrained optimization. Boundary layer quantities are extracted differentiably from the flow field, validated against reference CFD and experiment, then fed into semi-empirical wall-pressure-spectrum models that predict trailing-edge noise.
+Flow field around the airfoil Boundary layer profile evaluation against reference data Wall pressure spectrum predictions Related publications Yuan Lyu, Arjit Seth, and Rhea P.</description>
+    </item>
+    
+    <item>
+      <title>Aerodynamics Modeling — Viscous-Inviscid Methods</title>
+      <link>https://godot-bloggy.xyz/project/aerodynamics-vii/</link>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/aerodynamics-vii/</guid>
+      <description>Viscous-inviscid interacting (VII) boundary layer methods for aerodynamic analyses.
+Implemented a modular, strongly-coupled VII integral boundary layer method. Incorporated automatic differentiation for generalizations to coupled analyses (e.g. aero-structural). Researching generic optimization capabilities within various MDO architectures (MDF, SAND). The solver couples an inviscid panel solution with integral boundary layer equations over the upper surface, lower surface, and wake, resolving the pressure distribution together with boundary layer integral quantities in a single differentiable system, implemented in ViscFoil.</description>
+    </item>
+    
+    <item>
+      <title>Abstract Algebra — Descending Endomorphisms</title>
+      <link>https://godot-bloggy.xyz/project/abstract-algebra/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/abstract-algebra/</guid>
+      <description>New constructs for mappings between group and graph theory.
+Investigated a new definition for certain types of endomorphisms of groups called &amp;ldquo;descending&amp;rdquo; endomorphisms. Implemented programs in SageMath to compute descending endomorphisms of groups for proof validation. Analyzed representations of descending endomorphisms in graph theory. A descending endomorphism $\delta$ of a group $G$ is one that descends to every quotient: for each normal subgroup $N \trianglelefteq G$, the quotient map $\varphi : G \to G/N$ satisfies $\varphi \circ \delta = \bar{\delta} \circ \varphi$ for a well-defined induced map $\bar{\delta}$ on $G/N$.</description>
+    </item>
+    
+  </channel>
+</rss>

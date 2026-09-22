@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en-uk">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Viscous-inviscid interacting (VII) boundary layer and panel methods for aerodynamic analyses.'><title>Aerodynamics Modeling — Viscous-Inviscid Methods</title>
+
+<link rel='canonical' href='https://godot-bloggy.xyz/project/aerodynamics-vii/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Aerodynamics Modeling — Viscous-Inviscid Methods'>
+<meta property='og:description' content='Viscous-inviscid interacting (VII) boundary layer and panel methods for aerodynamic analyses.'>
+<meta property='og:url' content='https://godot-bloggy.xyz/project/aerodynamics-vii/'>
+<meta property='og:site_name' content='｢ALL FICTION｣'>
+<meta property='og:type' content='article'><meta property='article:section' content='Project' /><meta property='article:published_time' content='2023-06-01T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2023-06-01T00:00:00&#43;08:00'/><meta property='og:image' content='https://godot-bloggy.xyz/project/aerodynamics-vii/ibl-2d.svg' />
+<meta name="twitter:site" content="@GodotMisogi">
+    <meta name="twitter:creator" content="@GodotMisogi"><meta name="twitter:title" content="Aerodynamics Modeling — Viscous-Inviscid Methods">
+<meta name="twitter:description" content="Viscous-inviscid interacting (VII) boundary layer and panel methods for aerodynamic analyses."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://godot-bloggy.xyz/project/aerodynamics-vii/ibl-2d.svg' />
+    <link rel="shortcut icon" href="/punpun1.jpg" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2L24FYKGR8"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-2L24FYKGR8', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page 
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column compact
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/punpun1_huab25ab071e0e366f9d0ed5a1d3b49099_44920_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🎓</span>
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://godot-bloggy.xyz/">｢ALL FICTION｣</a></h1>
+        <h2 class="site-description">Arjit Seth</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/project' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M15 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" />
+  <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />
+</svg>
+                
+                <span>Projects</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/music' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-headphones" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="13" rx="2" width="5" height="7" />
+  <rect x="15" y="13" rx="2" width="5" height="7" />
+  <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
+</svg>
+                
+                <span>Music</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/cv' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Curriculum Vitae</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='https://github.com/GodotMisogi' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+                
+                <span>GitHub</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+    
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/project/aerodynamics-vii/">
+                
+                    <img src="/project/aerodynamics-vii/ibl-2d.svg" loading="lazy" alt="Featured image of post Aerodynamics Modeling — Viscous-Inviscid Methods" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/research/" >
+                Research
+            </a>
+        
+            <a href="/categories/aerodynamics/" >
+                Aerodynamics
+            </a>
+        
+            <a href="/categories/computational-fluid-dynamics/" >
+                Computational Fluid Dynamics
+            </a>
+        
+            <a href="/categories/programming/" >
+                Programming
+            </a>
+        
+            <a href="/categories/mathematics/" >
+                Mathematics
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/project/aerodynamics-vii/">Aerodynamics Modeling — Viscous-Inviscid Methods</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        Viscous-inviscid interacting (VII) boundary layer and panel methods for aerodynamic analyses.
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 01, 2023</time>
+            </div>
+        
+
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <p><strong>Viscous-inviscid interacting (VII) boundary layer methods for aerodynamic analyses.</strong></p>
+<ul>
+<li>Implemented a <em>modular</em>, strongly-coupled VII integral boundary layer method.</li>
+<li>Incorporated <em>automatic differentiation</em> for generalizations to coupled analyses (e.g. aero-structural).</li>
+<li>Researching generic optimization capabilities within various MDO architectures (MDF, SAND).</li>
+</ul>
+<p>The solver couples an inviscid panel solution with integral boundary layer equations over the upper surface, lower surface, and wake, resolving the pressure distribution together with boundary layer integral quantities in a single differentiable system, implemented in <a class="link" href="https://github.com/GodotMisogi/ViscFoil.jl"  target="_blank" rel="noopener"
+    >ViscFoil.jl</a> (currently private).</p>
+<p><figure 
+	>
+	<a href="/project/aerodynamics-vii/ibl-2d.svg" >
+		<img src="/project/aerodynamics-vii/ibl-2d.svg"
+			
+			
+			
+			loading="lazy"
+			alt="Strongly-coupled viscous-inviscid integral boundary layer analysis">
+	</a>
+	
+	<figcaption>Strongly-coupled viscous-inviscid integral boundary layer analysis</figcaption>
+	
+</figure></p>
+<p>The formulation is developed in detail below.</p>
+<hr>
+<h4 id="references">References</h4>
+<ol>
+<li>Drela, Mark. <em>Flight Vehicle Aerodynamics</em>. The MIT Press, 2014.</li>
+<li>Drela, Mark and Giles, M. B. <em>Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils</em>. AIAA Journal, 1986.</li>
+<li>Katz, Joseph and Plotkin, Allen. <em>Low-Speed Aerodynamics - 2nd Edition.</em> Cambridge University Press, 2001.</li>
+</ol>
+<h1 id="viscous-inviscid-panel-methods">Viscous-Inviscid Panel Methods</h1>
+<p>Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.</p>
+<h2 id="equivalent-inviscid-flow">Equivalent Inviscid Flow</h2>
+<h3 id="governing-equation">Governing equation</h3>
+<p>The governing equation for this problem is Laplace&rsquo;s equation in 2 dimensions:
+$$ \nabla^2 \phi = \nabla^2\left(\Phi + \Phi_\infty\right) = 0 $$</p>
+<p>Note that the Laplace equation is an elliptic PDE, hence boundary conditions specified at any point in the domain affect the solution at all other points in the domain.</p>
+<p>The &ldquo;physically&rdquo; motivated formulation for a closed, non-porous foil is the specification of Neumann boundary conditions, which state that the normal velocity through the foil is zero and the velocity vanishes at infinity:</p>
+<p>$$\nabla \Phi^* \cdot \hat{\mathbf n} = \nabla (\Phi + \Phi_\infty) \cdot \hat{\mathbf n} = 0, \quad \lim_{n \to \infty} \nabla \Phi = \mathbf 0$$</p>
+<p>This implies that the potential of the interior of the body is equal to some constant $c$:</p>
+<p>$$ \Phi_\text{int}^* = (\Phi + \Phi_\infty) = c$$</p>
+<p>The above condition is an alternative specification in the form of a Dirichlet boundary condition on the surface boundary $\partial S$, and turns out to be more computationally efficient as the operations are on scalars rather than vectors.</p>
+<h3 id="solution">Solution</h3>
+<p>Using Green&rsquo;s third identity, the solution on $\partial S$ is expressed in terms of sources $\sigma$ and doublets $\phi$ of varying strength in streamwise-normal ($\hat{\mathbf s}, \hat{\mathbf n}$) coordinates:</p>
+<p>$$ \Phi^{*}_{\text{int}}(x,y) = \Phi_{\infty}(x,y) + \frac{1}{2\pi}\int_{\partial S} \left[\sigma \ln r - \phi \frac{\partial\ln r}{\partial n}\right]\ dS, \quad \sigma = \frac{\partial\phi}{\partial n} $$</p>
+<p><em>Note</em>: Vortices are streamwise derivatives of doublets:</p>
+<p>$$ \vec\gamma(s) = \hat{\mathbf n} \times \hat{\mathbf s}\frac{d\phi}{ds} $$</p>
+<h3 id="discretisation">Discretisation</h3>
+<p>Discretise the equation for a foil, in which $N$ panels are assigned to the foil, and $N_w$ panels are assigned to the wake.</p>
+<p>Assign each panel on the foil a constant doublet strength $\phi$, and assign all panels constant source strengths $\sigma$, giving the following:</p>
+<p>$$ \Phi_{\infty}(x,y) + \sum_{j = 1}^N \left(\frac{\sigma}{\pi}\int_{\text{panel}}\ln r \ dS\right)<em>j - \sum</em>{j = 1}^N \left(\frac{\phi}{\pi}\int_{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\right)_j = \phi_p(x,y) $$</p>
+<p>Let:
+$$ B_j \equiv \frac{1}{\pi}\int_{\text{panel}}\ln r \ dS\bigg|<em>j, \quad A_j \equiv -\frac{1}{\pi}\int</em>{\text{panel}}\frac{\partial\ln r}{\partial n} \ dS\bigg|_j$$</p>
+<p>For foil panels, we get the following system of equations:</p>
+<p>$$ A \phi + \vec\Phi^{*} = \vec\Phi_{\infty} - B\sigma $$</p>
+<p>Let $\vec U_s = \{~\vec U \cdot ~\hat s_i \mid 1 \leq i \leq N + N_w ~\}$.</p>
+<h3 id="kutta-condition">Kutta Condition</h3>
+<p>The Kutta condition ensures the flow leaves the trailing edge &ldquo;smoothly&rdquo;:</p>
+<p>$$ \Delta \phi_W = \phi_N - \phi_1 $$</p>
+<p>The Morino condition, which equates the potential difference at the upper and lower streamlines of the trailing edge, sometimes appears to be more accurate:</p>
+<p>$$ \phi_1 - \phi_2 = \phi_N - \phi_{N-1} $$</p>
+<h3 id="cases">Cases</h3>
+<p>Now we deal with two cases:</p>
+<ol>
+<li>Let $\Phi_{\infty}(x,y) = \Phi^{*}_\text{int}(x,y)$. This system is directly invertible for $\phi_j$ when $\sigma_j$ is specified as $\sigma_j = \vec U_\infty \cdot \hat n_j$.</li>
+</ol>
+<p>$$ \vec\phi = (-A^{-1}B)\vec\sigma \equiv P\vec\sigma$$</p>
+<ol start="2">
+<li>Let $\sigma_j = \Phi^{*}_\text{int} = 0$, then the system is also directly invertible for $\vec\phi$ at a lower cost:</li>
+</ol>
+<p>$$ \vec\phi = A^{-1} \vec\Phi_{\infty}(x,y)$$</p>
+<h2 id="real-viscous-flow">Real Viscous Flow</h2>
+<h3 id="doublet-expressions">Doublet Expressions</h3>
+<p>For viscous modelling, we deal with the first case using the wall transpiration model on the EIF. First, we express the edge velocities over the panels, which are the tangential derivatives of the exterior potential, expressed as the sum of the internal potential and the potential &lsquo;jump&rsquo; across the singularity distribution: $\Phi^{*}_\text{ext} = \Phi^{*}_\text{int} - \phi$. In case 1: $\Phi^{*}_\text{int} = c \in \mathbb R$, and $\phi = \Phi_{\infty} +???$.</p>
+<!-- OUTLINE (author to write): kill the "+???" placeholder above. In case 1 the interior
+     potential is held at the constant c, and the exterior (physical) potential is the interior
+     minus the doublet jump:  Φ*_ext = Φ*_int − φ = c − φ. Solving the surface equation gives the
+     doublet distribution φ in terms of the known freestream + source contribution; write φ
+     explicitly as  φ = Φ_∞ + (the source/geometry term B·σ carried through case 1, i.e. −P·σ
+     from the earlier  φ = (−A⁻¹B) σ ≡ P σ  relation). State the finished expression and delete
+     the "+???". One clean line replacing the placeholder; the matrix form is already below.
+     (Rendered math: keep the \_ subscript escaping used throughout this post.)
+     Concrete code (ViscFoil.jl): src/inviscid.jl — solve_inviscid, defect_block,
+     source_mass_block!, edge_velocity_source_derivative build exactly this P σ / edge-velocity map.
+-->
+<p>$$
+\begin{aligned}
+\vec u_e =
+\begin{cases}
+\vec U_s^f - \dfrac{d\phi}{ds} &amp; \text{Airfoil} \\
+&amp; \\
+\vec U_s^w - \dfrac{d}{ds}\left(A^w \phi + B^w \sigma \right) &amp; \text{Wake}
+\end{cases}
+\end{aligned}
+$$</p>
+<p>Substituting the solution for $\phi$ from case 1, we obtain the following matrix expression:</p>
+<p>$$
+\begin{aligned}
+\vec u_e &amp; = \vec U_s - \frac{d}{ds}
+\begin{bmatrix} P \\
+\hline A^w P + B^w
+\end{bmatrix}
+\vec\sigma
+\end{aligned}
+$$</p>
+<p>Now express the sources in terms of the mass defect $m = u_e\delta^*$:</p>
+<p>$$
+\begin{aligned}
+\sigma_j &amp; = \left(\frac{dm}{ds}\right)_j \\
+\vec u_e &amp; = \vec U_s - \frac{d}{ds}
+\begin{bmatrix}
+P \\
+\hline A^wP + B
+\end{bmatrix}
+\frac{d\vec m}{ds}
+\end{aligned}
+$$</p>
+<p>This gives a differential equation for $\vec u_e$.</p>
+<h3 id="difference-operators">Difference Operators</h3>
+<p>Define the following operator $\Delta^+\colon \mathbb R^n \to \mathbb R^{n-1}, n \in \mathbb N^+$ to evaluate forward differences with matrix representation:</p>
+<p>$$
+\Delta^+ \equiv
+\begin{bmatrix}
+-1 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; -1 &amp; 1 &amp; \ldots &amp; 0 \\
+\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+0 &amp; \ldots &amp; -1 &amp; 1 &amp; 0 \\
+0 &amp; \ldots &amp; 0 &amp; -1 &amp; 1
+\end{bmatrix}
+$$</p>
+<p>Difference operators can be used to generically compute $n$th order differences up to desired accuracy.</p>
+<p>The following operator $\Delta^C\colon \mathbb R^n \to \mathbb R^n$ constructs central differences with forward and backward differencing at the endpoints:</p>
+<p>$$
+\Delta^c \equiv
+\begin{bmatrix}
+-1 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\
+-1/2 &amp; 0 &amp; 1/2 &amp; \ldots &amp; 0 \\
+\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+0 &amp; \ldots &amp; -1/2 &amp; 0 &amp; 1/2 \\
+0 &amp; \ldots &amp; 0 &amp; -1 &amp; 1
+\end{bmatrix}
+$$</p>
+<h2 id="boundary-layer-equations">Boundary Layer Equations</h2>
+<p>The thin shear boundary layer equations are obtained via the defect formulation and the thin shear approximations of the Navier-Stokes equations.</p>
+<p>$$
+\begin{aligned}
+\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp; = 0 \quad (\textsf{Momentum}) \\
+\frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp; = 0 \quad (\textsf{Kinetic Energy})
+\end{aligned}
+$$</p>
+<p>where $H\equiv \delta^*/\theta$ is the momentum shape parameter, $c_f \equiv \tau_w/\frac{1}{2}\rho_e u_e^2$ is the shear stress coefficient normalised with respect to the freestream edge velocity, $M_e \equiv u_e/a_e$ is the local Mach number at the edge, $H^* \equiv \theta^*/\theta$ is the kinetic energy shape parameter, $H^{**} \equiv \delta^{**}/\theta$ is the density shape parameter, $c_\mathcal D \equiv \mathcal D / \rho_e u_e^3$ is the power dissipation coefficient.</p>
+<p>$\textsf{Kinetic Energy} - H^*(\textsf{Momentum})$ gives the kinetic energy shape parameter equation:</p>
+<p>$$
+\begin{aligned}
+\implies \theta\frac{dH^*}{ds} + \left[2H^{**} + H^*(1 - H)\right]\frac{\theta}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} + H^*\frac{c_f}{2} &amp; = 0
+\end{aligned}
+$$</p>
+<h3 id="closure-relations">Closure Relations</h3>
+<p>The following functional dependencies are used to close the system:</p>
+<p>$$
+\begin{aligned}
+H^* &amp; = H^*(H) \\
+C_f &amp; = C_f(H, Re_\theta) \\
+C_\mathcal D &amp; = C_\mathcal D(H, Re_\theta)
+\end{aligned}
+$$</p>
+<p>where $H_k$ is the kinematic shape parameter, derived by Whitfield as:</p>
+<p>$$ H_k = \frac{H - 0.290M_e^2}{1 + 0.113M_e^2} $$</p>
+<h4 id="laminar-closure">Laminar Closure</h4>
+<p>Falkner-Skan:</p>
+<!-- OUTLINE (author to write): the laminar closure set (currently just the words "Falkner-Skan:").
+     Give H*, Cf·Reθ and 2CD/H* as explicit functions of the kinematic shape parameter H_k, from
+     the Falkner–Skan family fits used by Drela & Giles (1986) — already reference [2]. Structure:
+
+  - Kinetic-energy shape parameter:  H* = H*(H_k)  — two-branch rational fit (H_k < 4 vs ≥ 4).
+  - Skin friction:  (Re_θ) Cf/2 = f(H_k)          — piecewise fit, sign change past separation.
+  - Dissipation:    2 CD / H* = g(H_k)             — energy-equation closure.
+  Write the actual correlation formulas (with their coefficients) from the paper, and note each
+  is a curve fit to the Falkner–Skan similarity solutions — connect back to the Falkner–Skan
+  section in the nonlinear-dynamics post. State the validity range and the separation value of H_k.
+  (Rendered math: \_ subscript escaping.)
+  Concrete code (ViscFoil.jl): src/closure_relations.jl — laminar_kinetic_energy_shape_parameter,
+  laminar_skin_friction_coefficient, laminar_dissipation_coefficient (+ wake variants). CONTEXT.md
+  "Closure Relations" defines every symbol (Hk, Hs, cf, cDi, Reθ, cτ).
+-->
+<h4 id="turbulent-closure">Turbulent Closure</h4>
+<h3 id="turbulent-magic">Turbulent Magic</h3>
+<p>$$ \frac{\delta}{C_\tau} \frac{dC_\tau}{ds} = 4.2\left(\sqrt{C_{\tau_{EQ}}} - \sqrt{C_\tau}\right) $$</p>
+<!-- OUTLINE (author to write): finish the turbulent closure + name the transition model. The
+     equation above is the shear-lag (lag-entrainment) ODE for the shear-stress coefficient Cτ —
+     explain what it is, don't leave it bare. Structure:
+
+  Turbulent closure (Drela & Giles 1986 / Swafford correlations):
+  - Skin friction Cf(H_k, Re_θ, M_e): give the compressible turbulent Cf fit.
+  - H* = H*(H_k, Re_θ): kinetic-energy shape-parameter fit (turbulent branch).
+  - Dissipation CD split into wall + wake parts; CD = Cf/2 · U_s + Cτ (1 − U_s), tie to Cτ below.
+  - The "Turbulent Magic" ODE: this is a NON-equilibrium closure — Cτ relaxes toward its local
+    equilibrium value C_{τ,EQ} over a lag length ∝ δ. Give C_{τ,EQ}(H_k) and the constant 4.2
+    (Drela's value), and one sentence on WHY a lag equation (history effects the algebraic
+    closures miss). This is the "magic" — say what it buys.
+
+  Transition (the e^n / amplification model, already used in the residual eqns as dñ/dRe_θ):
+  - Envelope e^n method: integrate the amplitude ratio ñ; transition trips where ñ = n_crit
+    (n_crit ≈ 9 for smooth/low-turbulence, tie to ambient turbulence level).
+  - Give the dñ/dRe_θ(H_k) and dRe_θ/ds correlations that close R_{3,i}. State one clean sentence
+    on how transition switches the closures from the laminar set to the turbulent set.
+  (Rendered math: \_ subscript escaping.)
+  Concrete code (ViscFoil.jl): turbulent closure in src/closure_relations.jl
+  (turbulent_skin_friction_coefficient, turbulent_dissipation_coefficient,
+  equilibrium_shear_stress_coefficient, shear_stress_coefficient); transition in src/transition.jl
+  (amplification_rate, march_amplification, update_transition). CONTEXT.md "Transition" documents
+  the ñ_crit trip and the station-marching. The Turbulent2D/Laminar2D switch is in
+  src/boundary_layer_types.jl.
+-->
+<h3 id="discretisation-1">Discretisation</h3>
+<p>The equations are discretised using central differencing, in which the variables are defined on the panel nodes.</p>
+<p><strong>Note</strong>: Each singularity from the inviscid formulation is at the midpoint of each panel. The edge velocities from these computations are at the nodes, hence $N$ panels with $N+1$ edge velocities.</p>
+<p>$$ \Delta x = \frac{x_{i+1} - x_{i-1}}{2}, ~x_a = \frac{x_{i+1} + x_{i-1}}{2} $$</p>
+<p>Resulting in the following discrete BL equations:</p>
+<p>$$
+\begin{aligned}
+\frac{\Delta\theta}{\Delta s} + \left(\frac{\delta_a^<em>}{\theta_a} + 2 - M_e^2\right)\frac{1}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - \frac{c_{f_a}}{2} &amp; = 0 \\
+\frac{\Delta H^</em>}{\Delta s} + H_a^<em>(1 - H_a)\frac{\theta_a}{u_{e_a}}\frac{\Delta u_e}{\Delta s} - 2c_{\mathcal{D}_a} + H_a^</em>\frac{c_{f_a}}{2} &amp; = 0
+\end{aligned}
+$$</p>
+<h2 id="residual-equations">Residual Equations</h2>
+<p>$$
+\begin{aligned}
+\nabla^2 \phi &amp; = 0, \quad \rho_e \mathbf u_e \cdot \mathbf n = \Lambda\\
+\frac{d\theta}{ds} + (H + 2 - M_e^2)\frac{1}{u_e}\frac{du_e}{ds} - \frac{c_f}{2} &amp; = 0 \\
+\frac{1}{\theta^*}\frac{d\theta^*}{ds} + \left(\frac{2H^{**}}{H^*} + 3 - M_e^2\right)\frac{1}{u_e}\frac{du_e}{ds} - 2c_\mathcal{D} &amp; = 0
+\end{aligned}
+$$</p>
+<h3 id="discretisation-2">Discretisation</h3>
+<p>The discretised inviscid and viscous equations form the following system of equations to be solved for $m,~\theta,~\tilde n$.</p>
+<p>$$
+\begin{aligned}
+\mathbf u_e - \mathbf U_s + \frac{d}{ds}
+\begin{bmatrix}
+P \\
+\hline A^wP + B
+\end{bmatrix} \frac{\Delta (\mathbf u_e \boldsymbol\delta^<em>)}{\Delta s} &amp; = \mathcal R_1(\mathbf m) \\
+\frac{\Delta\theta}{\theta} + \left(H + 2\right)\frac{\Delta u_e}{u_{e_a}} - \frac{c_{f_a}\Delta s}{2} &amp; = \mathcal R_2(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n}) \\
+\frac{\Delta H^</em>}{H^<em><em>a} + \left(1 - H\right)\frac{\Delta u_e}{u</em>{e}} + \left(\frac{c_{f}}{2} - \frac{2C_{\mathcal D}}{H^</em>} \right) \frac{\Delta s}{\theta} &amp; = \mathcal R_3(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
+\end{aligned}
+$$</p>
+<p>The previous setup is sufficient for modelling flows with laminar boundary layers. The additional equations for modelling transition and turbulence are:</p>
+<p>$$
+\begin{aligned}
+\frac{\Delta \tilde n}{\Delta s} - \frac{d\tilde n}{dRe_\theta}(H_{a})\frac{dRe_\theta}{ds}(H_{a}, \theta_{a}) &amp; = R_{3,i}(\mathbf m, \boldsymbol \theta, \tilde{\mathbf n})
+\end{aligned}
+$$</p>
+<!-- OUTLINE (author to write): new section "## Coupled Newton Solve" — the residual system
+     R = (R₁, R₂, R₃) is defined above but never actually solved. Show how it closes. This is the
+     same direct/Newton machinery as the opt-problems post — cross-link it. (Rendered math: \_.)
+
+  1. Unknowns per node: the mass defect m (inviscid/transpiration coupling), θ, and the
+     amplification/shear variable ñ (or Cτ once turbulent). Stack into one global vector U.
+  2. Global Jacobian ∂R/∂U is block-structured:
+       - inviscid block: the dense doublet-influence matrix A (from the EIF) — couples all panels;
+       - viscous blocks: the BL equations R₂, R₃ are LOCAL/banded (node i couples to i±1);
+       - coupling blocks: transpiration ties u_e to m (∂R₁/∂m via P and Aᵂ), and the BL residuals
+         depend on u_e — this two-way coupling is what "viscous–inviscid interacting" means.
+  3. Solve R(U) = 0 by Newton: (∂R/∂U) ΔU = −R, updating U each step. Note the standard
+     robustness aids — under-relaxation / the pseudo-transient term from the opt-problems post,
+     since the closures are stiff near separation/transition.
+  4. Output per iteration: u_e, θ, δ*, Cf, then Cp = 1 − (u_e/U_∞)² and integrated Cl, Cd.
+
+  Concrete implementation to cite (ViscFoil.jl): src/residual.jl — residual_coupled!,
+  solve_coupled!, newton_step!, update_state; the global Jacobian is assembled with
+  ForwardDiff.jacobian! on solve_coupled! (see CONTEXT.md "Solver Structure"). The stagnation
+  segregation and transpiration coupling live in src/stagnation_point.jl and src/inviscid.jl
+  (edge_velocity_source_derivative). system.rnorm holds the residual-norm history — plotted in
+  the validation figure below to SHOW this converging.
+-->
+<!-- OUTLINE (author to write): new section "## Results and Validation" — the post shows no
+     computed results. This whole formulation is implemented in the author's ViscFoil.jl, so the
+     figures ARE ViscFoil runs, validated against the bundled MFOIL reference (Fidkowski's MATLAB
+     code, the implementation ViscFoil is derived from). Prose beats: state the case, say the
+     "computed" curve is ViscFoil, the reference is MFOIL, and read off the agreement + where the
+     BL story (transition, separation) shows up.
+
+  - Case: NACA 2412 at Re = 1e5, Ma = 0, n_crit = 9 (matches the examples/mfoil_n2412 reference
+    data), over an α sweep (e.g. −10°…10°). This is examples/airfoil_analysis.jl.
+  - Figures (mixed backend — see the two generating scripts):
+      * Cp vs x/c at one α: viscous cpv vs inviscid cpi, overlaid with the MFOIL mfoil_n2412
+        reference → CairoMakie SVG. Point out the viscous pressure recovery / trailing-edge
+        thickening vs the inviscid curve.
+      * Boundary-layer dashboard (δ*, θ, cf, Hk, Reθ, ñ, cτ) via ViscFoil's own plot_data! →
+        CairoMakie SVG. Mark the transition station (where ñ hits n_crit and cf jumps).
+      * Drag polar (Cl vs Cd) and Newton convergence (system.rnorm, log scale) → PlotlyJS JSON,
+        interactive. The polar validates against MFOIL; the convergence plot demonstrates the
+        coupled Newton solve from the section above.
+  - Embed: the CairoMakie SVGs as plain markdown images (images/panel-cp.svg,
+    images/panel-bl-dashboard.svg); the Plotly figures like the wabbitsfoxes plots in
+    nonlinear-dynamics, json = /post/panel-methods/images/{panel-polar,panel-convergence}.json.
+    (Do NOT paste the {{ shortcode }} tokens inside this comment — Hugo runs them even in comments.)
+  - Code → scripts/panel-methods/generate_figures.jl (run with the ViscFoil project active:
+    julia --project=$HOME/.julia/dev/ViscFoil scripts/panel-methods/generate_figures.jl).
+-->
+<h2 id="channel-flow">Channel Flow</h2>
+<p>Before coupling the boundary layer to the full panel solution, it helps to isolate the viscous–inviscid interaction in its simplest setting: a channel whose inviscid &ldquo;outer&rdquo; flow is a prescribed edge-velocity distribution $u_e(x)$ — equivalently, a prescribed half-height $h(x)$ carrying a fixed mass flow $\dot m$ — rather than the field around an airfoil. There is no panel machinery, yet the full viscous model still runs: the laminar equations, amplification, transition and the turbulent closures all march along a single line. That makes the channel both a clean warm-up and a verification case for the coupled solver.</p>
+<h3 id="displacement-body-coupling">Displacement-body coupling</h3>
+<p>For an inviscid core of density $\rho$, continuity relates the edge velocity and the channel height:</p>
+<p>$$ u_e = \frac{\dot m}{\rho, h} $$</p>
+<p>The boundary layer growing on each wall displaces the core by the displacement thickness $\delta^*$, so the <em>effective</em> half-height is $h - \delta^*$. Enforcing continuity on this reduced area couples $u_e$ back to the boundary-layer state — this is the whole viscous–inviscid interaction, stripped to one equation:</p>
+<p>$$ \dot m = \rho, u_e \left(h - \delta^*\right) = \text{const} \quad\Longrightarrow\quad \log u_e + \log\left(h - \delta^*\right) = \log\frac{\dot m}{\rho} $$</p>
+<p>As the layer thickens, $h - \delta^*$ shrinks and $u_e$ accelerates above the inviscid estimate $\dot m/\rho h$ — the viscous back-reaction on the outer flow.</p>
+<h3 id="station-system">Station system</h3>
+<p>Marching in $x$, each station carries the state $(\theta, \delta^*, s, u_e)$, where $s$ is the amplification factor $\tilde n$ while the layer is laminar and the shear-stress coefficient $c_\tau$ once it is turbulent. Three residuals are ViscFoil&rsquo;s standard station equations — momentum, kinetic-energy shape, and the amplification (or, downstream of transition, shear-lag) equation — and the fourth is the continuity closure above. While laminar, the momentum, shape and continuity rows are exactly the coupled system</p>
+<p>$$
+\begin{bmatrix}
+1 &amp; 0 &amp; (H + 2)\dfrac{\theta}{u_e} \\
+\dfrac{-H}{H^*}\dfrac{dH^*}{dH} &amp; \dfrac{1}{H^*}\dfrac{dH^*}{dH} &amp; (1 - H)\dfrac{\theta}{u_e} \\
+0 &amp; \dfrac{u_e}{\delta^* - h} &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+\dfrac{d\theta}{dx} \\
+\dfrac{d\delta^*}{dx} \\
+\dfrac{du_e}{dx}
+\end{bmatrix} =
+\begin{bmatrix}
+\dfrac{c_f}{2} \\
+\dfrac{2c_{\mathcal D}}{H^*} - \dfrac{c_f}{2} \\
+\dfrac{u_e}{\delta^* - h}\dfrac{dh}{dx}
+\end{bmatrix}
+$$</p>
+<p>whose last row is the continuity closure ($u_e (h-\delta^*)$ held constant). Alongside these, the $e^N$ envelope equation integrates the amplification $\tilde n$; where it reaches the critical value $n_\text{crit}$, the march switches to the turbulent closures through the transition station, and the layer reattaches. Each station is a small damped-Newton solve under positivity-limited relaxation (keeping $\theta, \delta^*, u_e$ and the effective area $h-\delta^*$ positive), seeded from its converged upstream neighbour. In <code>ViscFoil</code> this is <code>solve_channel</code> (<code>src/channel_flow.jl</code>); the station rows reuse the very same <code>residual_station!</code> and <code>residual_transition!</code> as the airfoil solver.</p>
+<h3 id="result">Result</h3>
+<p>Prescribing an airfoil-like edge velocity — accelerating, then adverse — and sweeping the transition threshold $n_\text{crit}$ at $Re = 5\times10^5$:</p>
+<p><figure 
+	>
+	<a href="/project/aerodynamics-vii/images/channel.svg" >
+		<img src="/project/aerodynamics-vii/images/channel.svg"
+			
+			
+			
+			loading="lazy"
+			alt="Channel flow — interacting boundary layer with e^N transition">
+	</a>
+	
+	<figcaption>Channel flow — interacting boundary layer with e^N transition</figcaption>
+	
+</figure></p>
+<p>The viscous edge velocity tracks the inviscid one but sits slightly above it (the displacement effect) and kinks upward at transition, where the thinner turbulent profile displaces less. Under the adverse gradient the laminar layer separates into a short bubble — the shape-factor spikes — until amplification reaches $n_\text{crit}$ and it reattaches turbulent at $H \approx 1.5$. A larger $n_\text{crit}$ (a quieter freestream) delays transition and pushes the bubble downstream, so the transition location grows monotonically with $n_\text{crit}$. The transition-location trend and edge-velocity distribution reproduce those of an independent <code>aerosandbox</code>-based integral boundary-layer solver to within the difference between the two closure sets — the same laminar–transition–turbulent physics the panel method resolves over an airfoil, here on a single line.</p>
+<!-- OUTLINE (author to write): short "## Conclusion" — one paragraph tying the thread together:
+     equivalent inviscid flow (doublets/sources + Kutta) → boundary-layer defect equations →
+     closures (laminar/turbulent/transition) → the coupled Newton solve → validation vs MFOIL
+     (via ViscFoil.jl) → the channel-flow warm-up. Forward-pointer to using ViscFoil inside an
+     aircraft-design/optimisation loop (AeroFuse/AeroMDAO), enabled by the AD-friendly Julia
+     implementation. Then drop "(In Progress)" from the title in the front matter. -->
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/post/opt-problems/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/opt-problems/XDSM.svg" loading="lazy" data-key="opt-problems" data-hash="/post/opt-problems/XDSM.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Gradient-Based Optimisation — Discrete Direct and Adjoint Methods (In Progress)</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/post/cfd-python/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/cfd-python/images/2DPoissonSurfStud.svg" loading="lazy" data-key="cfd-python" data-hash="/post/cfd-python/images/2DPoissonSurfStud.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computational Fluid Dynamics — CFDPython</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/project/aeroacoustics/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/project/aeroacoustics/boundary-layer.svg" loading="lazy" data-key="" data-hash="/project/aeroacoustics/boundary-layer.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Aeroacoustics — Airfoil Shape Optimization</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/project/abstract-algebra/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/project/abstract-algebra/descending-graph.svg" loading="lazy" data-key="" data-hash="/project/abstract-algebra/descending-graph.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Abstract Algebra — Descending Endomorphisms</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/post/nonlinear-dynamics/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/nonlinear-dynamics/images/wabbitsfoxes.svg" loading="lazy" data-key="nonlinear-dynamics" data-hash="/post/nonlinear-dynamics/images/wabbitsfoxes.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Nonlinear Dynamics — A Game of Computation (In Progress)</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "godotmisogi" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2016 - 
+        
+        2026 ｢ALL FICTION｣
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

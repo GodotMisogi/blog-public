@@ -2,32 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://godot-bloggy.xyz/</loc>
-    <lastmod>2021-04-06T21:53:06+05:30</lastmod>
+    <loc>https://godot-bloggy.xyz/project/aircraft-design/</loc>
+    <lastmod>2021-01-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/project/aerospace-education/</loc>
+    <lastmod>2023-05-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/project/flight-performance/</loc>
+    <lastmod>2022-03-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/project/aeroacoustics/</loc>
+    <lastmod>2024-01-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/project/aerodynamics-vii/</loc>
+    <lastmod>2023-06-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/project/abstract-algebra/</loc>
+    <lastmod>2023-01-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/categories/aerodynamics/</loc>
+    <lastmod>2024-01-01T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://godot-bloggy.xyz/categories/</loc>
-    <lastmod>2021-04-06T21:53:06+05:30</lastmod>
+    <lastmod>2024-01-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/</loc>
+    <lastmod>2024-01-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/project/</loc>
+    <lastmod>2024-01-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/categories/research/</loc>
+    <lastmod>2024-01-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/categories/computational-fluid-dynamics/</loc>
+    <lastmod>2023-06-01T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://godot-bloggy.xyz/categories/mathematics/</loc>
-    <lastmod>2021-04-06T21:53:06+05:30</lastmod>
+    <lastmod>2023-06-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/categories/programming/</loc>
+    <lastmod>2023-06-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/categories/aerospace/</loc>
+    <lastmod>2023-05-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/categories/education/</loc>
+    <lastmod>2023-05-01T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://godot-bloggy.xyz/categories/machine-learning/</loc>
+    <lastmod>2022-03-01T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://godot-bloggy.xyz/post/nonlinear-dynamics/</loc>
     <lastmod>2021-04-06T21:53:06+05:30</lastmod>
   </url><url>
     <loc>https://godot-bloggy.xyz/post/</loc>
     <lastmod>2021-04-06T21:53:06+05:30</lastmod>
-  </url><url>
-    <loc>https://godot-bloggy.xyz/categories/programming/</loc>
-    <lastmod>2021-04-06T21:53:06+05:30</lastmod>
-  </url><url>
-    <loc>https://godot-bloggy.xyz/categories/aerodynamics/</loc>
-    <lastmod>2021-02-24T22:55:27+08:00</lastmod>
-  </url><url>
-    <loc>https://godot-bloggy.xyz/post/panel-methods/</loc>
-    <lastmod>2021-02-24T22:55:27+08:00</lastmod>
-  </url><url>
-    <loc>https://godot-bloggy.xyz/categories/computational-fluid-dynamics/</loc>
-    <lastmod>2021-02-24T22:55:27+08:00</lastmod>
   </url><url>
     <loc>https://godot-bloggy.xyz/post/opt-problems/</loc>
     <lastmod>2020-08-30T22:55:27+08:00</lastmod>
@@ -42,9 +72,6 @@
     <lastmod>2018-05-05T16:54:58+05:30</lastmod>
   </url><url>
     <loc>https://godot-bloggy.xyz/project/academics/</loc>
-    <lastmod>2017-08-27T01:26:50+05:30</lastmod>
-  </url><url>
-    <loc>https://godot-bloggy.xyz/project/</loc>
     <lastmod>2017-08-27T01:26:50+05:30</lastmod>
   </url><url>
     <loc>https://godot-bloggy.xyz/categories/music/</loc>

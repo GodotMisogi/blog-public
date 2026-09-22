@@ -281,7 +281,10 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
-    <p><em>Note:</em> The code presented over here is available on my repository <a class="link" href="https://github.com/GodotMisogi/NonlinearDynamics"  target="_blank" rel="noopener"
+    <blockquote>
+<p><strong>This article has been revised with AI assistance.</strong></p>
+</blockquote>
+<p><em>Note:</em> The code presented over here is available on my repository <a class="link" href="https://github.com/GodotMisogi/NonlinearDynamics"  target="_blank" rel="noopener"
     ><code>NonlinearDynamics</code></a>, with the additional code that was used to generate the plots shown here.</p>
 <h2 id="lotka-volterra-equation">Lotka-Volterra Equation</h2>
 <h3 id="introduction">Introduction</h3>
@@ -301,6 +304,29 @@ y(\lambda x - \beta) &amp; = 0
 <h4 id="stability">Stability</h4>
 <p>At $(x_c, y_c) = (0, 0)$, any perturbation in $x$ while keeping $y$ fixed results in an increase in $\dot x$, hence it is unstable in this direction, and vice versa for $y$ and $\dot y$.</p>
 <p>At $(x_c, y_c) = \left(\dfrac{\beta}{\lambda}, \dfrac{\alpha}{\eta}\right)$, we must evaluate the system by linearisation.</p>
+<!-- OUTLINE (author to write): Lotka-Volterra linearisation & the "slow divergence" payoff.
+     Substantial depth: finish the stability argument, then close the loop with the numerical
+     observation flagged later ("slowly diverging as expected").
+
+  1. Form the Jacobian of the RHS  f = (αx − ηxy, −βy + λxy):
+         J(x,y) = [ α − ηy      −ηx      ]
+                  [  λy       −β + λx     ]
+  2. Evaluate at the non-trivial critical point (β/λ, α/η):
+         J* = [   0        −ηβ/λ ]
+              [ λα/η          0  ]
+     → trace = 0, det = αβ > 0.
+  3. Characteristic eqn  s² + αβ = 0  ⇒  eigenvalues  s = ± i√(αβ)  (purely imaginary).
+     State the conclusion plainly: a CENTRE. Linearisation is INCONCLUSIVE for the nonlinear
+     system here (Hartman–Grobman needs hyperbolic fixed points; a centre is non-hyperbolic).
+  4. Rescue it with the conserved quantity (first integral). Show dH/dt = 0 for
+         H(x,y) = λx − β ln x + ηy − α ln y.
+     Its level sets are closed curves around (β/λ, α/η) ⇒ genuine periodic orbits, so the
+     centre is real, not a linearisation artefact.
+  5. PAYOFF: connect forward to the second experiment. The true orbits are closed (H conserved),
+     so the "slowly diverging" spiral seen numerically near this point is a NUMERICAL artefact
+     (energy drift of the integrator), NOT physics. One sentence here; it makes the later plot
+     land. Optional: mention a symplectic/geometric integrator would preserve H.
+-->
 <h3 id="computation">Computation</h3>
 <p>Let&rsquo;s do it <del>to</del> in Julia. The <a class="link" href="https://diffeq.sciml.ai/stable/"  target="_blank" rel="noopener"
     ><code>DifferentialEquations.jl</code></a> package in Julia makes the setup and integration of this system very easy. The syntax of the code using the <code>@ode_def</code> macro from <a class="link" href="https://github.com/SciML/ParameterizedFunctions.jl"  target="_blank" rel="noopener"
@@ -325,7 +351,7 @@ y(\lambda x - \beta) &amp; = 0
 </span></span><span class="line"><span class="cl"><span class="n">run</span>   <span class="o">=</span> <span class="n">ODEFunction</span><span class="p">(</span><span class="n">lotka_volterra</span><span class="p">,</span> <span class="n">syms</span> <span class="o">=</span> <span class="p">[</span><span class="ss">:Wabbits</span><span class="p">,</span> <span class="ss">:Foxes</span><span class="p">])</span>
 </span></span><span class="line"><span class="cl"><span class="n">prob</span>  <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">ps</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">sol</span>   <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
-</span></span></code></pre></div><p>This setup is sufficient to run the problem. Very short code!  (<em>My second personality</em>: But probably not shorter than the Haskell equivalent.) (<em>My third personality to the second</em>: Weird flex, but ok.) Let&rsquo;s plot the results.</p>
+</span></span></code></pre></div><p>This setup is sufficient to run the problem. Very short code! (<em>My second personality</em>: But probably not shorter than the Haskell equivalent.) (<em>My third personality to the second</em>: Weird flex, but ok.) Let&rsquo;s plot the results.</p>
 <center>
 
   
@@ -356,7 +382,7 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/wabbitsfoxes-critical.json", fun
 });
 </script>
 </center>
-<p>Here we observe a periodic solution with low amplitude which appears to be slowly diverging as expected.</p>
+<p>Here, we observe a periodic solution with low amplitude, which appears to be slowly diverging as expected.</p>
 <h2 id="falkner-skan-boundary-layer-equations">Falkner-Skan Boundary Layer Equations</h2>
 <p>The Falkner-Skan transformation of the thin shear layer equations governing boundary layers is given by the following third-order differential equation:</p>
 <p>$$ F&rsquo;&rsquo;&rsquo; + \left(\frac{1 + a}{2}\right) F F&rsquo;&rsquo; + a\left[1 - (F&rsquo;)^2\right] = 0 $$</p>
@@ -379,11 +405,11 @@ S \\
 </span></span><span class="line"><span class="cl">    <span class="n">dU</span>  <span class="o">=</span> <span class="n">S</span>                                   
 </span></span><span class="line"><span class="cl">    <span class="n">dS</span>  <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">F</span> <span class="o">*</span> <span class="n">S</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">U</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="n">a</span>
-</span></span></code></pre></div><p>As this is a boundary value problem, in contrast to the previous initial value problem, another function is required to specify the boundary conditions. Note that the distinction between initial value and boundary value problems is &ldquo;superficial&rdquo;, and the mathematical treatment is generally identical as the formulation of &lsquo;space&rsquo; curves passing through specified points.</p>
+</span></span></code></pre></div><p>As this is a boundary value problem, in contrast to the previous initial value problem, another function is required to specify the boundary conditions. Note that the distinction between initial value and boundary value problems is &ldquo;superficial&rdquo;, and the mathematical treatment is generally identical, amounting to the formulation of &lsquo;space&rsquo; curves passing through specified points.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">function</span> <span class="n">falkner_skan_BC!</span><span class="p">(</span><span class="n">bcs</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">η</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">bcs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>        <span class="c"># η = 0,  F  = 0</span>
-</span></span><span class="line"><span class="cl">    <span class="n">bcs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>        <span class="c"># η = 0,  F&#39; = 0</span>
-</span></span><span class="line"><span class="cl">    <span class="n">bcs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="k">end</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c"># η = ηₑ, F&#39; = 1</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bcs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>        <span class="c"># η = 0,  F&#39; = 0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bcs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="k">end</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c"># η = ηₑ, F&#39; = 1</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nb">nothing</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
@@ -405,13 +431,67 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/falknerskan.json", function(err,
 });
 </script>
 </center>
-<p>Here we can observe the incepient separation point at a specific value of $a \approx -0.0904$. Can this be figured out analytically?</p>
+<p>Here we can observe the incipient separation point at a specific value of $a \approx -0.0904$. This can be found numerically by solving a root-finding problem. Incipient separation is defined as the condition $S(0) = 0$; the point below which reversed flow begins.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">function</span> <span class="n">wall_shear</span><span class="p">(</span><span class="n">a</span><span class="p">;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mf">1e-1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x0</span>   <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span> <span class="c"># Collocation initial guess</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prob</span> <span class="o">=</span> <span class="n">BVProblem</span><span class="p">(</span><span class="n">falkner_skan!</span><span class="p">,</span> <span class="n">falkner_skan_bc!</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">ΗSPAN</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="c"># Define BVP with current guess &#39;a&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sol</span>  <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">MIRK4</span><span class="p">(),</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="p">)</span> <span class="c"># Solve BVP</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sol</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="c"># S at η = 0</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Sweep and locate the zero crossing.</span>
+</span></span><span class="line"><span class="cl"><span class="n">as</span> <span class="o">=</span> <span class="n">range</span><span class="p">(</span><span class="o">-</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sw</span> <span class="o">=</span> <span class="p">[</span><span class="n">wall_shear</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="k">in</span> <span class="n">as</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">a_sep</span> <span class="o">=</span> <span class="n">find_zero</span><span class="p">(</span><span class="n">wall_shear</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.12</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="s">&#34;Incipient separation at a ≈ &#34;</span><span class="p">,</span> <span class="n">round</span><span class="p">(</span><span class="n">a_sep</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">))</span>
+</span></span></code></pre></div><!-- OUTLINE (author to write): characterise incipient separation, then locate it numerically.
+     Substantial depth: a short analysis subsection + a worked root-find with a new plot.
+
+  Analysis:
+  1. Define separation. Wall shear ∝ F''(0) = S(0). Incipient separation ⇔ S(0) = 0: the
+     velocity profile has zero slope at the wall, below which reversed flow (separation) begins.
+  2. So the critical a solves  g(a) ≡ S(0; a) = 0, where S(0; a) comes from the BVP solution.
+     Argue there is NO closed form: g(a) is defined implicitly through a nonlinear BVP
+     (transcendental). The value is a well-known constant — in the standard Falkner–Skan
+     normalisation the separation pressure-gradient parameter is β_s ≈ −0.19884; reconcile the
+     sign/normalisation with THIS post's parameter a (note the (1+a)/2 vs β convention so the
+     numbers line up with the observed a ≈ −0.0904).
+  3. Therefore "analytically" = reduce to a single scalar root-finding problem on g(a); that is
+     the best one can do. Good place for one honest sentence on why closed forms don't exist.
+
+  Worked example + code  →  scripts/nonlinear-dynamics/falknerskan_separation.jl :
+  - Reuse the existing BVProblem/GeneralMIRK4 setup from this post.
+  - Wrap it as g(a) = solution's S at η=0 (i.e. F''(0)); sweep a over ~[-0.12, 0.0].
+  - Root-find g(a)=0 (bisection/Roots.jl) to pin the critical a; compare to the eyeballed −0.0904.
+  - Export a Plotly figure of F''(0) vs a with the zero-crossing marked.
+  - Embed it the same way the wabbitsfoxes plots are embedded above: the load-plotly shortcode
+    followed by the plotly shortcode with json = /post/nonlinear-dynamics/images/falknerskan-separation.json
+    (do NOT paste the {{ shortcode }} tokens inside this comment — Hugo runs them even in comments).
+-->
 <h2 id="double-pendulum">Double Pendulum</h2>
 <p>Refer to <a class="link" href="../../post/dubby-pendy/" >my previous post on the double pendulum</a> for a review of the theory and equations. Julia&rsquo;s various libraries and their compositions allow me to set up the differential equations, choose the integration solver, and set up plots with layouts <em>very</em> easily. This is much simpler than writing different differential equation solver algorithms and plotting tools manually for experimentation.</p>
-<p>The double pendulum is a famous example of a chaotic system, and is very sensitive to time-step sizes, initial conditions, and even the solver algorithm itself due to compounding numerical noise.</p>
+<p>The double pendulum is a famous example of a chaotic system. These systems are very sensitive to time-step sizes, initial conditions, and even the solver algorithm itself due to compounding numerical error. In continuous dynamical systems, this is attributed to the high Lipschitz constant of a vector field.</p>
 <h3 id="stability-and-fixed-points">Stability and Fixed Points</h3>
 <p>The Lagrangian of the system is:</p>
 <p>$$ \mathcal{L} = T - V  \quad \mathrm{where} \quad \begin{aligned} T &amp; = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2\left[l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)\right] \\ V &amp; = -(m_1 + m_2)gl_1\cos \theta_1 - m_2gl_2\cos\theta_2 \end{aligned} $$</p>
+<!-- OUTLINE (author to write): actually do the fixed-point & stability analysis promised by
+     this heading (currently it states the Lagrangian and jumps to code).
+
+  1. Fixed points. With both bobs at rest (p₁ = p₂ = 0), equilibria need sin θ₁ = sin θ₂ = 0,
+     i.e. each angle ∈ {0, π}. Four fixed points:
+         (θ₁,θ₂) = (0,0)  down–down   |  (π,0), (0,π)  mixed  |  (π,π)  up–up.
+  2. Linearise about down–down (0,0). Small-angle → coupled linear oscillator
+         M θ̈ = −K θ,  with
+         M = [ (m₁+m₂)l₁²   m₂l₁l₂ ;  m₂l₁l₂   m₂l₂² ],
+         K = [ (m₁+m₂)g l₁     0    ;      0      m₂ g l₂ ].
+     Solve det(K − ω²M) = 0 for the two normal-mode frequencies ω±; give the closed form
+     (in-phase / out-of-phase modes). This is the stable, oscillatory point (real ω²>0).
+  3. The other three: linearising about any point with a bob "up" (θ=π) flips a sign in K
+     ⇒ a positive real eigenvalue ⇒ SADDLE (exponentially unstable). One line each.
+  4. Segue: down–down is a centre in the linearisation, BUT the full nonlinear system is
+     chaotic at finite amplitude — motivates the sensitivity experiment added at the end.
+-->
 <h3 id="computation-2">Computation</h3>
 <p>Here the expressions are complicated and would benefit from temporary variables in the function, which are not supported in the domain-specific-language of <code>ParametrizedFunctions.jl</code>, so a regular function is prepared instead of using the <code>@ode_def</code> macro.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c">## ODE definition</span>
@@ -453,6 +533,34 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/falknerskan.json", function(err,
   Your browser does not support the video tag.
 </video>
 </center>
+<!-- OUTLINE (author to write): new subsection "### Sensitivity to Initial Conditions" — the
+     substantial chaos payoff. Show, don't just assert, the sensitive dependence.
+
+  Prose beats:
+  - The trajectory above looks smooth, but that smoothness hides extreme sensitivity: a
+    minuscule change in the initial state diverges to a totally different motion.
+  - Method: integrate two copies from x0 and x0 + ε (perturb one angle by, say, ε = 1e-8).
+    Track the phase-space separation δ(t) = ‖x_a(t) − x_b(t)‖. On a log axis δ(t) grows
+    ~exponentially (slope ≈ largest Lyapunov exponent λ) until it saturates at O(system size).
+  - Interpret: positive λ ⇒ chaos; the saturation time sets a practical prediction horizon.
+    Tie back to the opening line about sensitivity to timestep/solver/IC — same mechanism.
+  - Caveat (honest, on-brand): the measured λ is polluted by integrator error; a symplectic
+    method + smaller tol tightens it, but the qualitative exponential divergence is robust.
+
+  Worked example + code  →  scripts/nonlinear-dynamics/chaos_sensitivity.jl :
+  - Reuse dubby_pendy! and the same ps as above; two ODEProblems, x0 and x0 .+ [0,0,0,1e-8].
+  - Solve on a common dense time grid; compute δ(t) = norm(diff); optional linear fit of
+    log δ vs t over the pre-saturation window to estimate λ.
+  - Export a Plotly figure: log-scale δ(t) vs t (mark the fitted slope / saturation).
+  - Embed it like the wabbitsfoxes plots above: the load-plotly shortcode then the plotly
+    shortcode with json = /post/nonlinear-dynamics/images/chaos-sensitivity.json
+    (do NOT paste the {{ shortcode }} tokens inside this comment — Hugo runs them even in comments).
+-->
+<!-- OUTLINE (author to write): short "## Conclusion" — one paragraph. Thread the three
+     systems together: linear-stability tools (Jacobian/eigenvalues) classify fixed points, a
+     conserved quantity rescues the non-hyperbolic Lotka–Volterra centre, a scalar root-find
+     pins Falkner–Skan separation, and the double pendulum shows where linearisation ends and
+     chaos begins. Then drop "(In Progress)" from the title in the front matter. -->
 
 </section>
 
@@ -510,22 +618,18 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/falknerskan.json", function(err,
                 
                     
 <article class="has-image">
-    <a href="/post/panel-methods/">
+    <a href="/project/aerodynamics-vii/">
         
         
             <div class="article-image">
-                <img src="/post/panel-methods/images/aeropython.ef8537f0e4805c93f164a1b955fe5faf_hu9407da34f33fa1ef28ea754b1f43ea28_133965_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="panel-methods" 
-                        data-hash="md5-74U38OSAXJPxZKG5Vf5frw==">
+                
+                    <img src="/project/aerodynamics-vii/ibl-2d.svg" loading="lazy" data-key="" data-hash="/project/aerodynamics-vii/ibl-2d.svg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Aerodynamics — Viscous-Inviscid Interacting Panel Methods (In Progress)</h2>
+            <h2 class="article-title">Aerodynamics Modeling — Viscous-Inviscid Methods</h2>
         </div>
     </a>
 </article>
@@ -567,6 +671,24 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/falknerskan.json", function(err,
 </article>
                 
                     
+<article class="has-image">
+    <a href="/project/abstract-algebra/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/project/abstract-algebra/descending-graph.svg" loading="lazy" data-key="" data-hash="/project/abstract-algebra/descending-graph.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Abstract Algebra — Descending Endomorphisms</h2>
+        </div>
+    </a>
+</article>
+                
+                    
 <article class="">
     <a href="/post/fluid-dynamics/">
         
@@ -574,24 +696,6 @@ Plotly.d3.json("/post/nonlinear-dynamics/images/falknerskan.json", function(err,
 
         <div class="article-details">
             <h2 class="article-title">Fluid Dynamics — A Flurry of Theory (In Progress)</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
-    <a href="/project/academics/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/project/academics/SES.svg" loading="lazy" data-key="" data-hash="/project/academics/SES.svg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Academic Notes — Physics and Mathematics</h2>
         </div>
     </a>
 </article>

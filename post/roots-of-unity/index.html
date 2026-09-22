@@ -277,7 +277,10 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
-    <p>During my second year of the International Baccalaureate: Diploma Programme, we were assigned the task of making a portfolio for a problem statement in Mathematics HL. While I don&rsquo;t have the problem statement anymore, I&rsquo;ll outline the major points of the task:</p>
+    <blockquote>
+<p><strong>This is not AI-generated.</strong></p>
+</blockquote>
+<p>During my second year of the International Baccalaureate Diploma Programme, we were assigned the task of making a portfolio for a problem statement in Mathematics HL. While I don&rsquo;t have the problem statement anymore, I&rsquo;ll outline the major points of the task:</p>
 <ul>
 <li>
 <p>Find the solutions to $z^n - 1 = 0,~ z \in \mathbb{C}$.</p>
@@ -292,7 +295,7 @@ if (!doNotTrack) {
 <p>Investigate the exercise, devise a conjecture and prove it.</p>
 </li>
 </ul>
-<p>When I first read through this exercise, I didn&rsquo;t really expect anything interesting to show up. Well, I was horribly wrong; something really cool showed up which made me learn about a lot of little things in complex analysis as a result. I&rsquo;ll start by solving the above points sequentially &ndash;</p>
+<p>When I first read through this exercise, I didn&rsquo;t really expect anything interesting to show up. Well, I was horribly wrong; something really cool showed up that made me learn a lot of little things in complex analysis along the way. I&rsquo;ll start by solving the above points sequentially &ndash;</p>
 <ul>
 <li>
 <p>The solutions to $z^n - 1 = 0$ are obtained most easily through Euler&rsquo;s form:
@@ -317,11 +320,11 @@ $$ z^n - 1 = \prod_{k=0}^{n-1}(z-z_k) = (z-1)\prod_{k=1}^{n-1}(z-z_k) $$</p>
 <li>
 <p>A conjecture based on trial and error is:
 $$ \prod_{k=1}^{n-1}|z_k - z_0| = \prod_{k=1}^{n-1}|1-z_k| = n$$
-This states that the product of the distances between each root from a selected root is equal to the number of roots. To prove this, notice that:
+This states that the product of the distances from a selected root to every other root is equal to the number of roots. To prove this, notice that:
 $$\sum^{n-1}_{i = 0} z^i = \prod_{k=1}^{n-1}(z-z_k) = \frac{z^n - 1}{z-1}$$
 For the equalities to be sensible at $z=1$, one must perform analytic continuation:
 $$\sum^{n-1}_{i = 0} 1^i = \prod_{k=1}^{n-1}|1-z_k| = \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1}$$
-The first equality proves the conjecture. The last equality is evaluated using L&rsquo;Hôpital&rsquo;s rule, also  proving the conjecture:
+The first equality proves the conjecture. The last equality is evaluated using L&rsquo;Hôpital&rsquo;s rule, also proving the conjecture:
 $$ \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1} = \lim_{z\rightarrow 1} nz^{n-1} = n $$</p>
 </li>
 </ul>
@@ -382,6 +385,42 @@ $$ \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1} = \lim_{z\rightarrow 1} nz^{n-1} = 
                 
                     
 <article class="has-image">
+    <a href="/project/aerodynamics-vii/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/project/aerodynamics-vii/ibl-2d.svg" loading="lazy" data-key="" data-hash="/project/aerodynamics-vii/ibl-2d.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Aerodynamics Modeling — Viscous-Inviscid Methods</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/project/abstract-algebra/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/project/abstract-algebra/descending-graph.svg" loading="lazy" data-key="" data-hash="/project/abstract-algebra/descending-graph.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Abstract Algebra — Descending Endomorphisms</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
     <a href="/post/nonlinear-dynamics/">
         
         
@@ -394,28 +433,6 @@ $$ \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1} = \lim_{z\rightarrow 1} nz^{n-1} = 
 
         <div class="article-details">
             <h2 class="article-title">Nonlinear Dynamics — A Game of Computation (In Progress)</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
-    <a href="/post/panel-methods/">
-        
-        
-            <div class="article-image">
-                <img src="/post/panel-methods/images/aeropython.ef8537f0e4805c93f164a1b955fe5faf_hu9407da34f33fa1ef28ea754b1f43ea28_133965_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="panel-methods" 
-                        data-hash="md5-74U38OSAXJPxZKG5Vf5frw==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Aerodynamics — Viscous-Inviscid Interacting Panel Methods (In Progress)</h2>
         </div>
     </a>
 </article>
@@ -446,24 +463,6 @@ $$ \lim_{z\rightarrow 1} \frac{z^n - 1}{z-1} = \lim_{z\rightarrow 1} nz^{n-1} = 
 
         <div class="article-details">
             <h2 class="article-title">Fluid Dynamics — A Flurry of Theory (In Progress)</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
-    <a href="/post/cfd-python/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/post/cfd-python/images/2DPoissonSurfStud.svg" loading="lazy" data-key="cfd-python" data-hash="/post/cfd-python/images/2DPoissonSurfStud.svg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Computational Fluid Dynamics — CFDPython</h2>
         </div>
     </a>
 </article>

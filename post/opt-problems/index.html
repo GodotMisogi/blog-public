@@ -291,14 +291,14 @@ if (!doNotTrack) {
     <section class="article-content">
     <p>Optimisation problems are becoming a big meme, so let&rsquo;s address some of the general ideas and how to compute them for discretised systems of equations.</p>
 <h2 id="problem-description">Problem Description</h2>
-<p>Let the vector $\mathbf p_i \in \mathbb R^n$ be the state variable at the $i$th iteration, and the function as a matrix $\mathbf R \in \mathbb R^m \times \mathbb R^n$ which needs to be solved.</p>
+<p>Let the vector $\mathbf p_i \in \mathbb R^n$ be the state variable at the $i$th iteration, and let the function be a matrix $\mathbf R \in \mathbb R^m \times \mathbb R^n$ that needs to be solved.</p>
 <p>$$ \mathbf R(\mathbf p) = \mathbf 0 $$</p>
-<p>Now say you want to know the values of $\mathbf p$, i.e. a root, which solves the system $\mathbf R = \mathbf 0$. The first step would be to consider some point close to the root $\mathbf p + \Delta \mathbf p$, then the system can be expanded in a Taylor series.</p>
+<p>Now say you want to know the values of $\mathbf p$, i.e. a root, which solves the system $\mathbf R = \mathbf 0$. The first step would be to consider some point close to the root, $\mathbf p + \Delta \mathbf p$, after which the system can be expanded in a Taylor series.</p>
 <p>$$ \mathbf R(\mathbf p) \approx \mathbf R(\Delta \mathbf p) + \frac{\partial \mathbf R}{\partial \mathbf p}(\Delta \mathbf p) + \mathcal O(\Delta \mathbf p^2)$$</p>
 <h2 id="newton-method">Newton Method</h2>
 <p>The Newton method with a line-search performs the following algorithm:</p>
 <p>$$ \mathbf p_{i+1} = \mathbf p_i - \alpha_i\mathbf J_i^{-1} \mathbf R(\mathbf p_i), \quad \mathbf J_i = \frac{\partial \mathbf R(\mathbf p_i)}{\partial \mathbf p_i} $$</p>
-<p>assuming the existence of the inverse of the Jacobian $\mathbf J_i$, which is usually the case for physical problems (if not, re-evaluate your setup!). We would like $\mathbf p_{i+1} = 0$ in the fewest number of iterations or at the lowest speed. Hence $\mathbf p_i = \alpha_i\mathbf J_i^{-1} \mathbf R(\mathbf p_i)$. Evaluating the inverse of the Jacobian is impractical, but the required step $d\mathbf p_i$ can be determined by solving the following linear equation instead, which is simply multiplying both sides by $\mathbf J_i$.</p>
+<p>assuming the existence of the inverse of the Jacobian $\mathbf J_i$, which is usually the case for physical problems (if not, re-evaluate your setup!). We would like $\mathbf p_{i+1} = 0$ in the fewest iterations, or at the lowest computational cost. Hence $\mathbf p_i = \alpha_i\mathbf J_i^{-1} \mathbf R(\mathbf p_i)$. Evaluating the inverse of the Jacobian is impractical, but the required step $d\mathbf p_i$ can be determined by solving the following linear equation instead, which simply amounts to multiplying both sides by $\mathbf J_i$.</p>
 <p>$$ \beta_i \mathbf J_i d\mathbf p_i = -\mathbf R_i, \quad \text{where} \quad \beta_i = \frac{1}{\alpha_i} $$</p>
 <p>The dimensionality of the problems could get confusing, so index notation with summation convention comes in handy:</p>
 <p>$$ \frac{\partial R^{ijk}}{\partial p^{lmn}} = \ldots$$</p>
@@ -329,7 +329,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></div><p>There are various numerical methods dedicated to solving linear systems, depending on the structure of the matrices. Special methods depending on the case can be applied, for example using Jacobian-vector products instead of constructing the matrices directly. In the case of computational fluid dynamics with structured grids, the matrix is usually regular, banded, and sparse. This is due to the adjacencies between elements being specified up to a given level of &ldquo;depth&rdquo;, which is called a stencil. So certain algorithms speed up the computations by taking advantage of this structure.</p>
 <h2 id="optimisations">Optimisations</h2>
-<p>The objective function for a gradient-based optimisation problem with an equality constraint (read holonomic, <code>bollu</code>) $\mathbf R(\mathbf x, \mathbf p(\mathbf x)) = \mathbf 0$ requires evaluation of its total derivative. The total derivative can be expanded it in two ways via the chain rule:</p>
+<p>The objective function for a gradient-based optimisation problem with an equality constraint (read holonomic, <code>bollu</code>) $\mathbf R(\mathbf x, \mathbf p(\mathbf x)) = \mathbf 0$ requires evaluation of its total derivative. The total derivative can be expanded in two ways via the chain rule:</p>
 <p>$$ \frac{d\mathbf f}{d\mathbf x} = \frac{\partial \mathbf f}{\partial \mathbf x} + \frac{\partial \mathbf f}{\partial \mathbf R}\frac{\partial\mathbf R}{\partial\mathbf x} = \frac{\partial \mathbf f}{\partial \mathbf x} + \frac{\partial \mathbf f}{\partial \mathbf p}\frac{d\mathbf p}{d\mathbf x} $$</p>
 <p>The equality constraint trivially satisfies the following identity:</p>
 <p>$$ \frac{d\mathbf R}{d\mathbf x} = \frac{\partial \mathbf R}{\partial \mathbf x} + \frac{\partial \mathbf R}{\partial \mathbf p}\frac{d\mathbf p}{d\mathbf x} = 0 $$</p>
@@ -370,13 +370,68 @@ $$ \frac{\partial \mathbf R}{\partial \mathbf p}\boldsymbol \psi = -\frac{\parti
 <p>So the main idea is that depending on the numbers of inputs and outputs, you choose the appropriate method which reduces the dimensionality of the linear system. When the number of outputs is larger than the number of inputs, use the direct method, and conversely use the adjoint method. The complicated parts (read headaches) are actually the evaluations and constructions of the different Jacobians and their reshapings, all of which are needed regardless of whether the direct or adjoint method is used. You picks your linear system and you takes your computational cost.</p>
 <p>Notice that we didn&rsquo;t specify any restriction on the constraints. You could identically apply the same setup to a system of nonlinear equations:</p>
 <p>$$\mathbf R(\mathbf x, \mathbf p_1, \mathbf p_2, \ldots, \mathbf p_n) = \begin{bmatrix} \mathbf R_1(\mathbf x, \mathbf p_1) \\ \mathbf R_2(\mathbf x, \mathbf p_2) \\ \vdots \\ \mathbf R_n(\mathbf x, \mathbf p_n) \end{bmatrix} = \mathbf 0$$</p>
-<p>This setup is called a <em>coupled</em> system, and the entire system is solved simultaneously for robustness and efficiency, either using the direct or adjoint methods. The &ldquo;off-diagonal&rdquo; block terms correspond to connections between different residual equations, and usually make the system sparse as many variables are not connected between different residual equations in physical models. The complexity of such systems is much greater, and is better left for another post.</p>
-<h2 id="stability">Stability</h2>
-<p>Even the order of accuracy of the Jacobians is not as important, as the point of the optimisation is to get a converged optimum, with converged residuals for the constraint. So you could spend less time doing more iterations with a greatly reduced cost for evaluating less accurate Jacobians and solving the linear system, if the residual constraint is the most time-consuming part. However, robustness of the solver for the residual equations becomes problematic.</p>
-<!-- ### Pseudo-Transient Continuation
+<p>This setup is called a <em>coupled</em> system, and the entire system is solved simultaneously for robustness and efficiency, using either the direct or adjoint method. The &ldquo;off-diagonal&rdquo; block terms correspond to connections between different residual equations, and usually make the system sparse as many variables are not connected between different residual equations in physical models. The complexity of such systems is much greater, and is better left for another post.</p>
+<!-- OUTLINE (author to write): new section "## Worked Example: Direct vs Adjoint" — the concrete
+     payoff the post is missing. The snippets above (newton_solver!, solve_direct, solve_adjoint)
+     call undefined helpers (compute_residuals!, compute_grad_fwd, newton_update!); the script
+     below supplies them for one small problem so the whole pipeline actually runs and is verified.
+     (Rendered math: use the post's \_ subscript escaping.)
 
-$$ \left(\frac{I}{\Delta t} + 1\right)? \mathbf J_i d\mathbf x_i = -\mathbf f_i $$ -->
-<!-- ## Unsteady Problems -->
+  Problem (recommended — small, nonlinear, has a design parameter):
+    1-D Bratu on a grid of n interior nodes, R_i(p; x) = (p_{i-1} − 2p_i + p_{i+1})/h² + x e^{p_i} = 0,
+    with design variable x (the reaction strength) and scalar objective, e.g. f(p) = Σ p_i · h
+    (a discrete integral of the state). Everything is differentiable → ForwardDiff gives all blocks.
+
+  Narrative beats:
+  1. Solve R(p; x)=0 with the Newton loop (reuse newton_solver!), reporting quadratic convergence.
+  2. Assemble the four pieces with ForwardDiff: ∂R/∂p (the Newton Jacobian, reused), ∂R/∂x,
+     ∂f/∂p, ∂f/∂x.
+  3. Compute df/dx TWO ways:
+       - direct:  solve (∂R/∂p) ψ = −∂R/∂x, then df/dx = ∂f/∂x + (∂f/∂p)·ψ
+       - adjoint: solve (∂R/∂p)ᵀ φ = (∂f/∂p)ᵀ, then df/dx = ∂f/∂x − φᵀ (∂R/∂x)
+  4. VERIFY: both agree to machine precision, and both match a central finite difference
+     df/dx ≈ [f(x+δ) − f(x−δ)]/2δ. Show the three numbers in a small table.
+  5. Cost punchline (ties back to "### Concept"): here n_outputs = 1 (scalar f), so the ADJOINT
+     is one linear solve regardless of the number of design variables, whereas the DIRECT method
+     is one solve PER design variable. Make the n_inputs-vs-n_outputs tradeoff concrete.
+
+  Code  →  scripts/opt-problems/direct_adjoint_demo.jl  (Julia + ForwardDiff + LinearAlgebra).
+  Optional figure: Newton residual vs iteration (quadratic convergence). If plotted, use the
+  load-plotly + plotly shortcodes with json = /post/opt-problems/images/newton-convergence.json
+  (NEW images/ dir; do NOT write the {{ shortcode }} tokens inside this comment — Hugo runs them).
+-->
+<h2 id="stability">Stability</h2>
+<p>Even the order of accuracy of the Jacobians is not that important, since the point of the optimisation is to get a converged optimum with converged residuals for the constraint. So you could spend less time doing more iterations with a greatly reduced cost for evaluating less accurate Jacobians and solving the linear system, if the residual constraint is the most time-consuming part. However, robustness of the solver for the residual equations becomes problematic.</p>
+<!-- OUTLINE (author to write): "### Pseudo-Transient Continuation" — the robustness fix the
+     Stability section sets up ("robustness of the solver ... becomes problematic"). This is the
+     original stub, now with a roadmap. (Rendered math: \_ subscript escaping.)
+
+  1. Problem: plain Newton has a small basin of convergence for stiff/nonlinear R; a bad initial
+     guess diverges. PTC globalises it by adding a pseudo-time term and marching R to steady state.
+  2. Modified system (fix the "?" in the old stub — the identity is scaled by 1/Δt):
+         ( I/Δtₙ + Jₙ ) Δpₙ = −Rₙ.
+     Small Δt ⇒ nearly explicit/gradient-descent-like (robust, slow); Δt → ∞ ⇒ recovers Newton
+     (fast, local). So it continuously interpolates between the two.
+  3. Δt update — Switched Evolution Relaxation (SER): Δtₙ = Δt₀ · ‖R₀‖ / ‖Rₙ‖, i.e. grow the step
+     as the residual falls, automatically sharpening into full Newton near the solution.
+  4. Tie-in: the same regularisation reappears as the physical time term in unsteady problems
+     (next), and the shifted matrix (I/Δt + J) is better conditioned — cheaper linear solves.
+  5. Optional tiny demo: a scalar/2-DOF R where plain Newton diverges from some p₀ but PTC
+     converges; one convergence-history line. (Can reuse the Bratu example at a stiff x.)
+-->
+<!-- OUTLINE (author to write): "## Unsteady Problems" — keep this BRIEF and conceptual (the plan
+     scopes a full treatment out). One short section:
+  - The state constraint becomes time-dependent: R(p(t), ṗ(t), x, t) = 0 over [0, T].
+  - The sensitivity/adjoint runs BACKWARD in time (terminal condition), integrating the adjoint
+    ODE against the stored forward trajectory.
+  - The catch is memory: you need the forward state at every step → CHECKPOINTING (store a subset,
+    recompute the rest) trades compute for memory; name it and give one sentence of intuition.
+  - Explicit forward-pointer: "a full unsteady/time-accurate adjoint deserves its own post."
+-->
+<!-- OUTLINE (author to write): short "## Conclusion" — one paragraph. Newton → the direct/adjoint
+     duality → choose by n_inputs vs n_outputs → PTC for robustness. Then drop "(In Progress)" from
+     the title in the front matter. -->
+
 </section>
 
 
@@ -433,22 +488,18 @@ $$ \left(\frac{I}{\Delta t} + 1\right)? \mathbf J_i d\mathbf x_i = -\mathbf f_i 
                 
                     
 <article class="has-image">
-    <a href="/post/panel-methods/">
+    <a href="/project/aerodynamics-vii/">
         
         
             <div class="article-image">
-                <img src="/post/panel-methods/images/aeropython.ef8537f0e4805c93f164a1b955fe5faf_hu9407da34f33fa1ef28ea754b1f43ea28_133965_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="panel-methods" 
-                        data-hash="md5-74U38OSAXJPxZKG5Vf5frw==">
+                
+                    <img src="/project/aerodynamics-vii/ibl-2d.svg" loading="lazy" data-key="" data-hash="/project/aerodynamics-vii/ibl-2d.svg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Aerodynamics — Viscous-Inviscid Interacting Panel Methods (In Progress)</h2>
+            <h2 class="article-title">Aerodynamics Modeling — Viscous-Inviscid Methods</h2>
         </div>
     </a>
 </article>

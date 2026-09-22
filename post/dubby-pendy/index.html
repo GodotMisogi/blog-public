@@ -282,7 +282,7 @@ if (!doNotTrack) {
 
     <section class="article-content">
     <p>Learning about Lagrangian and Hamiltonian mechanics introduced me to an entirely new way of solving physics problems. The first time I&rsquo;d read about this topic was in <a class="link" href="http://www.feynmanlectures.caltech.edu/II_19.html"  target="_blank" rel="noopener"
-    >The Principle of Least Action</a> chapter in <a class="link" href="http://www.feynmanlectures.caltech.edu/II_toc.html"  target="_blank" rel="noopener"
+    >The Principle of Least Action</a> chapter of <a class="link" href="http://www.feynmanlectures.caltech.edu/II_toc.html"  target="_blank" rel="noopener"
     >Vol. 2 of The Feynman Lectures on Physics</a>. I was introduced to a different perspective of viewing the physical world, perhaps a more general one than Newton&rsquo;s laws.</p>
 <p>A famous example of a system whose equations of motion can be more easily attained using Lagrangian or Hamiltonian mechanics is the double pendulum. I saw a <a class="link" href="http://scienceworld.wolfram.com/physics/DoublePendulum.html"  target="_blank" rel="noopener"
     >Wolfram Science animation</a> of the system, but it didn&rsquo;t have the right <code>a e s t h e t i c</code> for me, and I wanted to write one of my own to investigate the system for various initial conditions and its chaotic behaviour.</p>
@@ -300,7 +300,7 @@ if (!doNotTrack) {
 C_1 &amp; = \frac{p_{\theta_1}p_{\theta_2}\sin(\theta_1-\theta_2)}{l_1 l_2[m_1 + m_2\sin^2(\theta_1-\theta_2)]} \\
 C_2 &amp; = \frac{l_2^2 m_2 p_{\theta_1}^2 + l_1^2(m_1 + m_2)p_{\theta_2}^2 - l_1 l_2 m_2 p_{\theta_1} p_{\theta_2} \cos(\theta_1 - \theta_2)}{2l_1^2 l_2^2 [m_1 + m_2\sin^2(\theta_1-\theta_2)]^2}\sin[2(\theta_1 - \theta_2)]
 \end{aligned} $$</p>
-<p>These are very formidable-looking equations, and it is almost impossible to determine the particle trajectories by solving these equations analytically! So how does one solve it for practical purposes? Numerical methods and programming. I used Lua to program the simulator, including the <a class="link" href="https://love2d.org"  target="_blank" rel="noopener"
+<p>These are very formidable-looking equations, and it is almost impossible to determine the particle trajectories analytically! So how does one solve it for practical purposes? Numerical methods and programming. I used Lua to program the simulator, including the <a class="link" href="https://love2d.org"  target="_blank" rel="noopener"
     >LÖVE</a> framework for the graphics.</p>
 <p>Since the only data structure in Lua is a table, I decided to see how I could make use of that property for this program. Lua doesn&rsquo;t have functions to perform scalar multiplication or addition between tables, so I wrote some:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kr">function</span> <span class="nf">directSum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -318,8 +318,8 @@ C_2 &amp; = \frac{l_2^2 m_2 p_{\theta_1}^2 + l_1^2(m_1 + m_2)p_{\theta_2}^2 - l_
 </span></span><span class="line"><span class="cl">    <span class="kr">end</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="n">output</span>
 </span></span><span class="line"><span class="cl"><span class="kr">end</span>
-</span></span></code></pre></div><p>So now I can store values, such as the initial conditions and parameters of the system in a table and perform basic arithmetic operations between tables to change values. Now to implement the physics of the problem.</p>
-<p>First, I defined a generator that randomly generates initial values (within a given range) of the masses of the bobs, the lengths of the rods, their angles with respect to the vertical, their initial angular velocities and calculated the momenta of the bobs. This is fed into a table called <code>data</code>:</p>
+</span></span></code></pre></div><p>So now I can store values, such as the initial conditions and parameters of the system, in a table and perform basic arithmetic operations between tables to change values. Now to implement the physics of the problem.</p>
+<p>First, I defined a generator that randomly generates initial values (within a given range) of the masses of the bobs, the lengths of the rods, their angles with respect to the vertical, their initial angular velocities, and calculates the momenta of the bobs. This is fed into a table called <code>data</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kr">function</span> <span class="nf">Generator</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">self</span> <span class="o">=</span> <span class="p">{}</span>
@@ -365,7 +365,7 @@ C_2 &amp; = \frac{l_2^2 m_2 p_{\theta_1}^2 + l_1^2(m_1 + m_2)p_{\theta_2}^2 - l_
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="n">update</span>
 </span></span><span class="line"><span class="cl"><span class="kr">end</span>
-</span></span></code></pre></div><p>All the required information with regard to the physics are now processed. To solve the differential equations, I implemented the Runge-Kutta method of order 4, performing operations on the tables using <code>directSum</code> and <code>scalarMultiply</code>. These operations take place in <code>Solver</code>, which takes the time input <code>dt</code> from LÖVE in <code>love.update()</code>.</p>
+</span></span></code></pre></div><p>All the required information regarding the physics is now processed. To solve the differential equations, I implemented the Runge-Kutta method of order 4, performing operations on the tables using <code>directSum</code> and <code>scalarMultiply</code>. These operations take place in <code>Solver</code>, which takes the time input <code>dt</code> from LÖVE in <code>love.update()</code>.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kr">function</span> <span class="nf">Solver</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">phase</span> <span class="o">=</span> <span class="p">{</span><span class="n">data.t1</span><span class="p">,</span> <span class="n">data.t2</span><span class="p">,</span> <span class="n">data.p1</span><span class="p">,</span> <span class="n">data.p2</span><span class="p">}</span>
@@ -468,6 +468,24 @@ Your browser does not support the video tag.
                 
                     
 <article class="has-image">
+    <a href="/project/aerodynamics-vii/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/project/aerodynamics-vii/ibl-2d.svg" loading="lazy" data-key="" data-hash="/project/aerodynamics-vii/ibl-2d.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Aerodynamics Modeling — Viscous-Inviscid Methods</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
     <a href="/post/nonlinear-dynamics/">
         
         
@@ -480,28 +498,6 @@ Your browser does not support the video tag.
 
         <div class="article-details">
             <h2 class="article-title">Nonlinear Dynamics — A Game of Computation (In Progress)</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
-    <a href="/post/panel-methods/">
-        
-        
-            <div class="article-image">
-                <img src="/post/panel-methods/images/aeropython.ef8537f0e4805c93f164a1b955fe5faf_hu9407da34f33fa1ef28ea754b1f43ea28_133965_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="panel-methods" 
-                        data-hash="md5-74U38OSAXJPxZKG5Vf5frw==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Aerodynamics — Viscous-Inviscid Interacting Panel Methods (In Progress)</h2>
         </div>
     </a>
 </article>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aerospace on ｢ALL FICTION｣</title>
+    <link>https://godot-bloggy.xyz/categories/aerospace/</link>
+    <description>Recent content in Aerospace on ｢ALL FICTION｣</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Mon, 01 May 2023 00:00:00 +0800</lastBuildDate><atom:link href="https://godot-bloggy.xyz/categories/aerospace/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aircraft Design — Amphibious Aircraft</title>
+      <link>https://godot-bloggy.xyz/project/aircraft-design/</link>
+      <pubDate>Sun, 10 Jan 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/aircraft-design/</guid>
+      <description>A computational framework for analysing and optimising amphibious aircraft designs.
+Developed a conceptual design framework for amphibious aircraft with hydrofoils. Developed surrogate models for multiphase CFD analyses of supercavitating hydrofoils and hulls. Optimised hydrofoil geometry for improved takeoff performance with these models. Multiphase CFD sweeps over speed and angle of attack produce surrogate models for the hydrodynamic coefficients of a supercavitating hydrofoil, capturing the water volume fraction around the wetted section.</description>
+    </item>
+    
+    <item>
+      <title>Aerospace Engineering Education — AeroFuse</title>
+      <link>https://godot-bloggy.xyz/project/aerospace-education/</link>
+      <pubDate>Mon, 01 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/aerospace-education/</guid>
+      <description>A computational framework to teach aerospace engineering with multidisciplinary design optimization.
+Developed an interactive computational platform as a teaching tool: AeroFuse. Implemented geometry, vortex-lattice (aerodynamics), beam-element (structures), blade-element momentum theory (propulsion), and rigid-body integrators (flight dynamics) for coupled analyses. Enabled adjoint-based solutions of inverse and optimization problems between disciplines with automatic differentiation. AeroFuse couples the disciplinary solvers into a single differentiable model, so lift distributions can be matched to a target and full aerostructural configurations analysed and optimised from one interface.</description>
+    </item>
+    
+  </channel>
+</rss>

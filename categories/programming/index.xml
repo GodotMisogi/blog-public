@@ -6,24 +6,26 @@
     <description>Recent content in Programming on ｢ALL FICTION｣</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Tue, 06 Apr 2021 21:53:06 +0530</lastBuildDate><atom:link href="https://godot-bloggy.xyz/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Jun 2023 00:00:00 +0800</lastBuildDate><atom:link href="https://godot-bloggy.xyz/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aerodynamics Modeling — Viscous-Inviscid Methods</title>
+      <link>https://godot-bloggy.xyz/project/aerodynamics-vii/</link>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0800</pubDate>
+      
+      <guid>https://godot-bloggy.xyz/project/aerodynamics-vii/</guid>
+      <description>Viscous-inviscid interacting (VII) boundary layer methods for aerodynamic analyses.
+Implemented a modular, strongly-coupled VII integral boundary layer method. Incorporated automatic differentiation for generalizations to coupled analyses (e.g. aero-structural). Researching generic optimization capabilities within various MDO architectures (MDF, SAND). The solver couples an inviscid panel solution with integral boundary layer equations over the upper surface, lower surface, and wake, resolving the pressure distribution together with boundary layer integral quantities in a single differentiable system, implemented in ViscFoil.</description>
+    </item>
+    
     <item>
       <title>Nonlinear Dynamics — A Game of Computation (In Progress)</title>
       <link>https://godot-bloggy.xyz/post/nonlinear-dynamics/</link>
       <pubDate>Tue, 06 Apr 2021 21:53:06 +0530</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/nonlinear-dynamics/</guid>
-      <description>Note: The code presented over here is available on my repository NonlinearDynamics, with the additional code that was used to generate the plots shown here.
+      <description>This article has been revised with AI assistance.
+Note: The code presented over here is available on my repository NonlinearDynamics, with the additional code that was used to generate the plots shown here.
 Lotka-Volterra Equation Introduction The Lotka-Volterra equation governs coupled population dynamics between two species under a predator-prey relationship in a given environment. Here we will play with the populations of wabbits and foxes. Consider $x$ as the number of wabbits, and $y$ as the number of foxes.</description>
-    </item>
-    
-    <item>
-      <title>Aerodynamics — Viscous-Inviscid Interacting Panel Methods (In Progress)</title>
-      <link>https://godot-bloggy.xyz/post/panel-methods/</link>
-      <pubDate>Wed, 24 Feb 2021 22:55:27 +0800</pubDate>
-      
-      <guid>https://godot-bloggy.xyz/post/panel-methods/</guid>
-      <description>References Drela, Mark. Flight Vehicle Aerodynamics. The MIT Press, 2014. Drela, Mark and Giles, M. B. Viscous-Inviscid Analysis of Transonic and Low Reynolds Number Airfoils. AIAA Journal, 1986. Katz, Joseph and Plotkin, Allen. Low-Speed Aerodynamics - 2nd Edition. Cambridge University Press, 2001. Viscous-Inviscid Panel Methods Boundary element methods express the solution of some PDE on a volume by reducing it to the specification on a surface. Panel methods in aerodynamics are special cases of such expressions, in which the governing equation is Laplace&amp;rsquo;s equation in a uniform flow in the case of a steady, inviscid, incompressible fluid.</description>
     </item>
     
     <item>
@@ -33,7 +35,7 @@ Lotka-Volterra Equation Introduction The Lotka-Volterra equation governs coupled
       
       <guid>https://godot-bloggy.xyz/post/opt-problems/</guid>
       <description>Optimisation problems are becoming a big meme, so let&amp;rsquo;s address some of the general ideas and how to compute them for discretised systems of equations.
-Problem Description Let the vector $\mathbf p_i \in \mathbb R^n$ be the state variable at the $i$th iteration, and the function as a matrix $\mathbf R \in \mathbb R^m \times \mathbb R^n$ which needs to be solved.
+Problem Description Let the vector $\mathbf p_i \in \mathbb R^n$ be the state variable at the $i$th iteration, and let the function be a matrix $\mathbf R \in \mathbb R^m \times \mathbb R^n$ that needs to be solved.
 $$ \mathbf R(\mathbf p) = \mathbf 0 $$</description>
     </item>
     
@@ -54,7 +56,7 @@ $$ \frac{\partial (\rho\vec V)}{\partial t} + \nabla \cdot \left(\rho ~\vec V \o
       <pubDate>Tue, 27 Dec 2016 16:54:58 +0530</pubDate>
       
       <guid>https://godot-bloggy.xyz/post/dubby-pendy/</guid>
-      <description>Learning about Lagrangian and Hamiltonian mechanics introduced me to an entirely new way of solving physics problems. The first time I&amp;rsquo;d read about this topic was in The Principle of Least Action chapter in Vol. 2 of The Feynman Lectures on Physics. I was introduced to a different perspective of viewing the physical world, perhaps a more general one than Newton&amp;rsquo;s laws.
+      <description>Learning about Lagrangian and Hamiltonian mechanics introduced me to an entirely new way of solving physics problems. The first time I&amp;rsquo;d read about this topic was in The Principle of Least Action chapter of Vol. 2 of The Feynman Lectures on Physics. I was introduced to a different perspective of viewing the physical world, perhaps a more general one than Newton&amp;rsquo;s laws.
 A famous example of a system whose equations of motion can be more easily attained using Lagrangian or Hamiltonian mechanics is the double pendulum.</description>
     </item>
     
